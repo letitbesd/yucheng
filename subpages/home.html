@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link rel="stylesheet" href="../css/mui.css">
+		<link rel="stylesheet" href="../css/home/style.css" />
+		<style>
+			html,body {
+				background-color: #efeff4;
+			}
+			.title{
+				margin: 20px 15px 10px;
+				color: #6d6d72;
+				font-size: 15px;
+			}
+		</style>
+		<link rel="stylesheet" href="../css/home/swiper.min.css" />
+		<script type="text/javascript" src="../js/home/swiper.min.js" ></script>
+	</head>
+	<body>
+	<div class="in_header">
+		<div class="in_head">
+			<p><img src="../images/yucheng/icon1.png"></p><p>JADECHINA玉城</p>
+			<p><img src="../images/yucheng/icon2.png"></p>
+		</div>
+	  </div>
+	<div>
+		<div class="swiper-container slide_1" style="background:#080403;">
+	        <div class="swiper-wrapper  slide_ad"> 
+				<div class="swiper-slide"><img src="../images/in_1.jpg"></div> 
+	        </div>
+	        <!-- Add Pagination -->
+	        <div class="swiper-pagination swiper_1"></div>
+	    </div>		
+	</div> 
+			
+	<div class="in_blo2" style="margin:0;">
+		<p>精品推荐</p>
+		<p>RECOMMEND</p>
+	</div>
+			<div class="in_blo1">
+				<a href="home/goods_list.html"><p><img src="../images/yucheng/icon3.png"><i>新品推荐</i></p></a>
+				<a href="home/shoplist.html"><p><img src="../images/yucheng/icon4.png"><i>商家推荐</i></p></a>
+				<a href="home/goods_list.html?act=time"><p><img src="../images/yucheng/icon5.png"><i>限时抢购</i></p></a>
+				<a href="home/goods_list.html?act=bought"><p><img src="../images/yucheng/icon6.png"><i>已卖鉴赏</i></p></a>
+			</div>
+			<div class="in_blo3">
+			    <div class="swiper-container slide_2 swiper-container-horizontal">
+			       <div class="swiper-wrapper" style="transform: translate3d(-657.391px, 0px, 0px); transition-duration: 0ms;">
+				       	<div class="swiper-slide to_goods_detail swiper-slide-duplicate" data="251" data-swiper-slide-index="1" style="width: 161.348px; margin-right: 3px;"><a href="251"><img src="../images/in_5.jpg"></a></div>
+				       	<div class="swiper-slide to_goods_detail swiper-slide-duplicate" data="250" data-swiper-slide-index="2" style="width: 161.348px; margin-right: 3px;"><a href="250"><img src="../images/in_5.jpg"></a></div>
+				       	<div class="swiper-slide to_goods_detail swiper-slide-duplicate" data="248" data-swiper-slide-index="3" style="width: 161.348px; margin-right: 3px;"><a href="250"><img src="../images/in_5.jpg"></a></div>
+						<div class="swiper-slide to_goods_detail swiper-slide-prev" data="249" data-swiper-slide-index="0" style="width: 161.348px; margin-right: 3px;"><a href="248"><img src="../images/in_5.jpg"></a></div>							
+				    </div>
+				</div>
+			</div>
+			<div class="in_blo4">
+				<img src="../images//yc-53.jpg" class="to_goods_detail" data="242">
+			</div>
+			<div class="in_blo5">
+					<p class="to_goods_detail" data="243">
+					<img src="../images//yc-53.jpg">
+					<b>测试商品字段</b>
+					<b>￥600000.00</b>
+					</p>
+				<p class="to_goods_detail" data="244">
+					<img src="../images//yc-53.jpg">
+					<b>测试商品1</b>
+					<b>￥30000.00</b>
+					</p>
+				<p class="to_goods_detail" data="245">
+					<img src="../images//yc-53.jpg">
+					<b>即将开始1</b>
+					<b>￥80000.00</b>
+					</p>
+				<p class="to_goods_detail" data="246">
+					<img src="../images//yc-53.jpg">
+					<b>即将开始21</b>
+					<b>￥50000.00</b>
+					</p>
+			</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/zepto.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				swipeBack:true //启用右滑关闭功能
+			});
+			var templates = {};
+			var preload_template = function(name, header, content) {//default, example/template.html, null;
+				var template = templates[name];
+				if (!template) {
+					//预加载共用父模板；
+					var headerWebview = mui.preload({
+						url: header,
+						id: name + "-main",
+						styles: {
+							popGesture: "hide",
+						},
+						extras: {
+							mType: 'main'
+						}
+					});
+					//预加载共用子webview
+					var subWebview = mui.preload({
+						url: !content ? "" : content,
+						id: name + "-sub",
+						styles: {
+							top: '45px',
+							bottom: '0px',
+						},
+						extras: {
+							mType: 'sub'
+						}
+					});
+					subWebview.addEventListener('loaded', function() {
+						setTimeout(function() {
+							subWebview.show();
+						}, 50);
+					});
+					subWebview.hide();
+					headerWebview.append(subWebview);
+					//iOS平台支持侧滑关闭，父窗体侧滑隐藏后，同时需要隐藏子窗体；
+					if (mui.os.ios) { //5+父窗体隐藏，子窗体还可以看到？不符合逻辑吧？
+						headerWebview.addEventListener('hide', function() {
+							subWebview.hide("none");
+						});
+					}
+					templates[name] = template = {
+						name: name,
+						header: headerWebview,
+						content: subWebview,
+					};
+				}				
+			};
+			 
+			mui.plusReady(function(){
+				 
+//				 preload_template('default', '../template.html');
+				//ajaxq请求数据
+				console.log("ajax");
+				var url = 'http://yucheng.chebank.com/mapi/index.php';			 	
+				mui.ajax(url,{
+					data:{					 
+					},
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型
+					timeout:10000,//超时时间设置为10秒；
+					headers:{'Content-Type':'application/json'},        
+					success:function(data){
+					//服务器返回响应，根据响应结果，分析是否登录成功；
+//					console.log(data.wap_index_ads);
+//					console.log(data.is_best);
+//					console.log(data.is_best_suppliers);
+					var baseurl = 'http://yucheng.chebank.com/';
+					if (data.wap_index_ads)
+					{
+						var list = $('.slide_ad');
+						var tpl = list.children()[0];
+						//console.log(tpl);
+						list.empty(); 
+						
+						for (var idx in data.wap_index_ads)
+						{
+							var obj = data.wap_index_ads[idx];
+							var newItem = $(tpl).clone();
+							newItem.find('img').attr('src', baseurl + obj.image);
+							newItem.appendTo(list);
+//							console.log(baseurl + obj.image);							
+						}
+						var swiper1 = new Swiper('.slide_1', {
+					        pagination: '.swiper_1',
+							loop : true,
+							loopAdditionalSlides : 1,
+					        paginationClickable: true,
+					        spaceBetween: 30,
+							loop:true,
+							autoplay:2000,
+					    });
+					}
+					if (data.is_best)
+					{
+						var list = $('.slide_2').children().eq(0);
+						var tpl = list.children().eq(0);
+//						console.log(tpl[0]);
+						list.empty();
+						for (var i in data.is_best)
+						{
+							var obj = data.is_best[i];
+							var newItem = tpl.clone(); 
+							//newItem.find('a').attr('href',baseurl + obj.goods_thumb)
+//							console.log(baseurl + obj.goods_thumb);
+							newItem.find('a').attr('href', obj.goods_id);
+							newItem.find('img').attr('src', baseurl + obj.goods_thumb); 
+							newItem.find('.swiper-slide').attr('data', obj.goods_id);
+							newItem.appendTo(list);
+						}
+						
+					    
+					}
+					
+					if (data.is_best_suppliers)
+					{						
+						var goods = data.is_best_suppliers[0].goods_list;
+						 
+						var base = 'http://yucheng.chebank.com/';
+						$(".in_blo4").find('img').attr('src', base +goods[0].original_img);
+						var str = ''; 
+						console.log(goods.length);
+						for (var i = 1; i < goods.length; i ++)
+						{
+							str += '<p class="to_goods_detail" data='+ goods[i].goods_id + '">';
+							str += '<img src="' + base + goods[i].goods_thumb + '">';
+							str += '<b>' + goods[i].goods_name + '</b>';
+							str += '<b>￥' + goods[i].shop_price + '</b></p>';
+						}
+						$('.in_blo5').html(str);
+					}
+				},
+				error:function(xhr,ptype,errorThrown){
+					//异常处理；
+					console.log(ptype);
+				}
+			});//end of ajax
+			preload_template('default', '../template.html');
+			var tpl = templates['default']; 
+			mui('.in_blo1').on('tap', 'a', function() {
+				var id = this.getAttribute('href');
+				var href = this.href; 
+				console.log($(this).find('i')[0].innerText);
+				$(this).find('i')[0].innerText.trim();
+				mui.fire(tpl.header, 'updateHeader', {
+						title: '111', 
+						showMenu: false,
+						target:href,
+						aniShow: 'none'
+				});
+			});
+			
+			mui(".in_blo3").on('tap', 'a', function(){
+				var id = this.href;
+				mui.fire(tpl.header, 'updateHeader', {
+					title:'商品详情',
+					id:id,
+					showMenu:false,
+					target:'home/goods_detail.html',
+					aniShow:'none'
+				})
+			});
+		});//end of plusReady 
+		var swiper2 = new Swiper('.slide_2', {
+							effect : 'slide',
+							slidesPerView : 3,		
+					        paginationClickable: true,
+					        spaceBetween: 3,
+							loop:true,
+							loopAdditionalSlides : 1,
+					    });		
+		</script>
+	</body>  
+</html>

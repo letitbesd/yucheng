@@ -1,0 +1,119 @@
+{
+	"index.html": {
+		"resources": [
+			"subpages/home.html",
+			"fonts/mui.ttf",
+			"js/mui.js",
+			"css/mui.css"
+		],
+		"refer": [
+			"subpages/home.html",
+			"subpages/.html",
+			"guide.html",
+			"subpages/user.html",
+			"template.html",
+			"subpages/home/goods_list.html",
+			"subpages/home/shoplist.html",
+			"subpages/goods_attr.html"
+		]
+	},
+	"subpages/home.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.css",
+			"images/cbd.jpg",
+			"images/muwu.jpg",
+			"images/yuantiao.jpg",
+			"images/shuijiao.jpg",
+			"images/home/icon6.png",
+			"images/home/icon4.png",
+			"images/home/icon5.png",
+			"images/home/icon3.png",
+			"css/home/swiper.min.css",
+			"js/home/swiper.min.js",
+			"images/yucheng/icon6.png",
+			"images/yucheng/icon1.png",
+			"images/yucheng/icon5.png",
+			"css/home/style.css",
+			"images/yucheng/icon2.png",
+			"images/yucheng/icon4.png",
+			"images/yucheng/icon3.png",
+			"images//in_2.jpg",
+			"js/zepto.min.js",
+			"images//in_1.jpg",
+			"images//in_5.jpg",
+			"js/mui.js",
+			"images//yc-53.jpg",
+			"images/in_1.jpg",
+			"images/in_5.jpg"
+		],
+		"refer": [
+			"guide.html",
+			"template.html",
+			"subpages/home/goods_list.html",
+			"subpages/home/shoplist.html"
+		]
+	},
+	"subpages/.html": {
+		"resources": [
+			"images//yc-81.jpg",
+			"images//yc-80.jpg",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"images//yc-78.jpg",
+			"css/mui.min.css",
+			"images//yc-77.jpg",
+			"images//yc-79.jpg",
+			"css/home/style.css"
+		],
+		"refer": []
+	},
+	"guide.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.css"
+		],
+		"refer": []
+	},
+	"subpages/user.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/home/style.css",
+			"images/yucheng/uc_icon6.png",
+			"images/yucheng/uc_logo.png",
+			"images/yucheng/uc_icon4.png",
+			"images/yucheng/uc_icon1.png",
+			"images/yucheng/uc_icon2.png",
+			"images/yucheng/uc_icon5.png",
+			"images/yucheng/uc_icon3.png"
+		],
+		"refer": []
+	},
+	"template.html": {
+		"resources": [
+			"js/mui.min.js",
+			"js/mui.js"
+		]
+	},
+	"subpages/goods_attr.html": {
+		"resources": [
+			"images//yc-79.jpg",
+			"images//yc-78.jpg",
+			"js/zepto.min.js",
+			"images//yc-80.jpg",
+			"images//yc-77.jpg",
+			"images//yc-81.jpg"
+		]
+	},
+	"subpages/home/goods_list.html": {
+		"resources": [
+			"images/in_3.jpg",
+			"images/in_2.jpg",
+			"css/home/reset.css",
+			"images/yucheng/yc-18.png",
+			"css/home/style.css",
+			"js/mui.js"
+		]
+	}
+}
