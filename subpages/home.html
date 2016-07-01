@@ -232,9 +232,9 @@
 				var id = this.getAttribute('href');
 				var href = this.href; 
 				console.log($(this).find('i')[0].innerText);
-				$(this).find('i')[0].innerText.trim();
+				var title = $(this).find('i')[0].innerText.trim();
 				mui.fire(tpl.header, 'updateHeader', {
-						title: '111', 
+						title: title,
 						showMenu: false,
 						target:href,
 						aniShow: 'none'

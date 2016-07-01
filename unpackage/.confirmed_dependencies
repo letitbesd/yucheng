@@ -103,7 +103,10 @@
 			"js/zepto.min.js",
 			"images//yc-80.jpg",
 			"images//yc-77.jpg",
-			"images//yc-81.jpg"
+			"images//yc-81.jpg",
+			"js/mui.min.js",
+			"css/home/style.css",
+			"css/mui.min.css"
 		]
 	},
 	"subpages/home/goods_list.html": {

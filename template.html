@@ -127,6 +127,9 @@
 				setTimeout(function () {
 					self.show(aniShow);
 				},10); 
+				mui.fire(contentWebview, "updateID", {
+					id:100
+				})
 			}
 			
 		});
