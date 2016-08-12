@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+	</head>
+
+	<body>
+		<div class="my_yc">
+			<div class="mc_back"><img src="../../images/yucheng/yc-22.png" class="mc_bk"></div>
+			<div class="mc_tab">
+				<p onclick="switchTab(1);">待付款</p>
+				<p class="mc_select">待收货</p>
+				<p onclick="switchTab(3);">退款商品</p>
+				<p onclick="switchTab(4);">所有订单</p>
+			</div>
+			<div class="mc_con">
+				<div class="tpl">
+					<div class="mc_list">
+						<div class="mc_shop"><img src="../../images/yucheng/cart_1.png" class="mc_sp"><span class="goods_name">夜星翡翠2</span>
+							<img src="../../images/yucheng/mc_order.png" class="mc_ord" data="100" onclick="showOrder(this);">
+						</div>
+						<div class="mc_li">
+							<p class="mc_li_pic"><img class="goods_img" src="../../images/in_4.jpg"></p>
+							<p class="mc_li_con"><b class="mc_li_name">糯冰种淡晴水/浓绿鼻烟壶</b><b class="mc_li_price">￥7000</b></p>
+						</div>
+						<div class="mc_blank"></div>
+					</div>
+					<div class="mc_all">
+						<p class="mc_all_price">￥7015.00</p>
+						<p class="mc_order_num">订单号：2016070765784</p>
+					</div>
+					<div class="mc_type"> 
+						<div class="mc_good">
+							<div class="mc_goods">
+								<p class="mc_styz">已发货</p>
+								<p onclick="extendReceive(this);" class="mc_good_cpay" data="120">延长收货</p>
+								<p onclick="confirmReceive(this);"  class="mc_good_gpay" data="120">确认收货</p>
+							</div>
+							<div class="mc_good_style">待发货</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/order_status.js" ></script>
+		<script type="text/javascript">
+			//mui.init();
+			mui.plusReady(function(){
+				mui.init();
+				var baseurl = 'http://yucheng.chebank.com/';
+				mui.web_query('userOrderList.php', {
+					type: 2
+				}, function(data) {
+					
+					var tpl = $(".mc_con")[0].innerHTML; 
+					var div = $(".my_yc");
+					$(".mc_con").remove();
+					$.each(data.orders, function(idx, item) {
+						var newnode = $(tpl);
+						var goods = item.goods_list[0];
+						//console.log(baseurl + goods.goods_thumb);
+						newnode.find('.goods_img').attr('src', baseurl + goods.goods_thumb);
+						newnode.find('.shop_name').html(item.shopname);
+						newnode.find('.mc_li_name').html(goods.goods_name);
+						//newnode.find('i').eq(3).html(item.order_status1);
+						newnode.find('.mc_all_price').html(item.total_fee);
+						newnode.find('.mc_order_num').html('订单号:' + item.order_sn);
+						newnode.find('.mc_ord').attr("data", item.order_id);
+						newnode.find(".mc_good_cpay").attr("data", item.order_id);
+						newnode.find(".mc_good_gpay").attr("data", item.order_id);
+						newnode.appendTo(div); 
+						newnode.find(".mc_goods").hide();
+						newnode.find(".mc_good_style").show();
+						
+						var r = order_status.waitReceive(item.order_status1, item.pay_status, item.shipping_status);
+//						console.log(JSON.stringify(r));
+//						return false;
+						if (r['已发货'])
+						{
+							//mc_goods
+							//mc_good_style
+							newnode.find(".mc_goods").show();
+							newnode.find(".mc_good_style").hide();
+						}
+						if (r['待发货'])
+						{
+							newnode.find(".mc_goods").hide();
+							newnode.find(".mc_good_style").show();
+						}
+					});
+				});
+			});
+			
+			function switchTab(index) //index 1 2 3 4 
+			{
+				console.log("clicked");
+				var webview = mui.openWindow({
+					url: './orderlist'+index+'.html',
+					show:{
+					    autoShow:true,
+					    aniShow:"none",//页面显示动画，默认为”slide-in-right“；
+	  					duration:600//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+					} 
+				});
+			}
+			
+			function extendReceive(ele)
+			{
+				var order_id = $(ele).attr('data'); 
+				console.log("order_id " + order_id);
+				mui.web_query('userOrderOpera.php?act=extend_receive', {order_id:order_id}, function(data){
+					mui.toast(data.info);
+				});
+			}
+			
+			function confirmReceive(ele)
+			{
+				var order_id = $(ele).attr('data');
+				console.log("order_id " + order_id);
+				mui.web_query('userOrderOpera.php?act=receive_confirm', {order_id:order_id}, function(data){
+					mui.toast(data.info);
+					if (data.status == 1){
+						$(ele).parents(".tpl").remove();
+					}
+				});
+			}
+			
+			function showOrder(ele)
+			{
+				var order_id = $(ele).attr('data');
+				console.log("order_id " + order_id);
+				var w = plus.webview.open('./order_detail.html');
+				mui.fire(w, "show_order", {order_id:order_id});
+			}
+		</script>
+	</body>
+
+</html>

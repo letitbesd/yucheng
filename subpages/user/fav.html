@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<style>
+			/*收藏*/
+			
+			.col_list {
+				width: 100%;
+				float: left;
+				margin-top: 60px;
+			}
+			
+			.col_li_all {
+				width: 100%;
+				float: left;
+			}
+			
+			.col_con {
+				width: 90%;
+				margin-right: 5%;
+				background: #e5e6e6;
+				float: right;
+			}
+			
+			.col_c1 {
+				width: 30%;
+				height: 124px;
+				float: left;
+				overflow: hidden;
+			}
+			
+			.col_c1 img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.col_c2 {
+				width: 65%;
+				float: left;
+				margin-left: 3%;
+			}
+			
+			.col_c2 b {
+				width: 100%;
+				float: left;
+				line-height: 35px;
+			}
+			
+			.col_c2 i {
+				width: 100%;
+				float: left;
+			}
+			
+			.col_c3 {
+				width: 67px;
+				height: 124px;
+				background: #792b34;
+				float: right;
+				text-align: center;
+				display: none;
+			}
+			
+			.col_c3 img {
+				width: 60%;
+				margin: 45px auto;
+			}
+			
+			.col_name {
+				color: #000;
+				font-size: 16px;
+				margin-top: 5px;
+			}
+			
+			.col_red {
+				color: #7B2B35;
+				font-size: 15px;
+			}
+			
+			.col_shop {
+				font-size: 14px;
+				color: #909090;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="sc_head">
+		</div>
+		<div class="col_list">
+			<div class="col_li_all">
+				<div class="col_con">
+					<p class="col_c1" style="margin-left: 0px;"><img src="../../images/in_4.jpg"></p>
+					<p class="col_c2">
+						<b><i class="col_name">冰玻种墨翠镶黄色金戒指</i><i class="col_red">￥0</i></b>
+						<b><i class="col_shop">夜星翡翠</i></b>
+					</p>
+					<p class="col_c3" style="display: none;"><img src="../../images/yucheng/cart_2.png"></p>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				gestureConfig: {
+					tap: true, //默认为true
+					doubletap: true, //默认为false
+					longtap: true, //默认为false
+					swipe: true, //默认为true
+					drag: true, //默认为true
+					hold: false, //默认为false，不监听
+					release: false //默认为false，不监听
+				}
+			});
+
+			function refresh() {
+				var str = '<div class="col_li_all">\
+								<div class="col_con">\
+									<p class="col_c1"><img src="../../images/in_3.jpg"></p>\
+									<p class="col_c2">\
+										<b><i class="col_name">黄皮福猪手链</i><i class="col_red">￥0</i></b>\
+										<b><i class="col_shop">翡翠庄园</i></b>\
+									</p>\
+									<p class="col_c3" style="display: none;"><img src="../../images/yucheng/cart_2.png"></p>\
+								</div>\
+							</div>';
+
+				mui.web_query('userCollect.php?act=list', {}, function(data) {
+					if(data.goods_list) {
+						console.log('dddddd')
+						$(".col_list").empty();
+						$.each(data.goods_list, function(idx, item) {
+							var newnode = $(str);
+							newnode.appendTo($(".col_list"));
+							newnode.find(".col_c1 img").attr('src', 'http://yucheng.chebank.com/' + item.thumb);
+							newnode.find('.col_name').html(item.goods_name);
+							newnode.find('.col_shop').html(item.supplier_name);
+							newnode.find('.col_red').html(item.shop_price);
+							newnode.attr("data", item.goods_id);
+						});
+					}
+				})
+			}
+
+			mui.plusReady(function() {
+				
+			});
+			window.addEventListener('refresh',function(e){
+				refresh();
+			})
+			//todo : only first time show.
+		</script>
+		<script type="text/javascript">
+			//$(".sc_list").find(".sc_li_all:first-child").find(".sc_c1").css("margin-left","-67px");
+			//$(".sc_list").find(".sc_li_all:first-child").find(".sc_c3").css("display","block");
+
+			//左滑删除
+			function move() {
+				var windowHeight = $(window).height(),
+					$body = $("body");
+				$body.css("height", windowHeight);
+				var startX, startY, moveEndX, moveEndY, X, Y;
+
+				$(document).on("touchstart", ".col_con", function(e) {
+					//console.log("touchstart");
+					//e.preventDefault();
+					startX = e.originalEvent.changedTouches[0].pageX,
+						startY = e.originalEvent.changedTouches[0].pageY;
+				});
+				$(document).on("touchmove", ".col_con", function(e) {
+					//e.preventDefault();
+					moveEndX = e.originalEvent.changedTouches[0].pageX,
+						moveEndY = e.originalEvent.changedTouches[0].pageY,
+						X = moveEndX - startX,
+						Y = moveEndY - startY;
+
+					if(Math.abs(X) > Math.abs(Y) && X > 0) {
+						$(this).children(".col_c1").css("margin-left", "0");
+						$(this).children(".col_c3").hide();
+					} else if(Math.abs(X) > Math.abs(Y) && X < 0) {
+						$(this).children(".col_c1").css("margin-left", "-67px");
+						$(this).children(".col_c3").show();
+						$(this).children(".col_c3 img").show();
+					}
+				});
+
+			}
+			move();
+
+			$(document).on("click", ".col_c3", function() {
+				//删除内容
+				//alert("删除内容");
+				var self = this;
+				var id = $(self).parents(".col_li_all").attr('data');
+				console.log(id)
+				mui.web_query('userCollect.php?act=delete', {
+					goods_id: id
+				}, function(data) {
+					if(data.status == 1) {
+						$(self).parents('.col_li_all').remove();
+					}
+					mui.toast(data.info);
+				})
+			});
+			
+		</script>
+	</body>
+
+</html>

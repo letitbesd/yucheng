@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" /><link rel="stylesheet" href="../../css/home/reset.css" />
+<link rel="stylesheet" href="../../css/home/style.css" />
+	</head>
+
+	<body>
+		<div class="yhq_all">
+	<div class="yhq_back"><img src="../../images/yucheng/yc-17.png"></div>
+			<div class="hd">
+				<ul>
+					<li class="yhq_selected">未使用</li>
+					<li class="">已使用</li>
+					<li class="">已过期</li>
+				</ul>
+			</div>
+			<div class="bd">
+			<div class="mud" style="display: block;">
+				<div class="yhq_list tpl1">
+					<img src="../../images/yucheng/yhq_use.png" class="yhq_bg">
+					<div class="yhq_left">
+						<p></p>
+						<p class="yhq_title">1满10000减500</p>
+						<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>
+					</div>
+					<div class="yhq_right">
+						<p class="yhq_al">消费满10000.00元可用</p>
+						<p class="yhq_mo">￥500.00</p>
+						<p class="yhq_type"></p>				
+					</div>
+				</div>
+			</div>
+			<div class="mud" style="display: none;">
+				<div class="yhq_list tpl2">
+					<img src="../../images/yucheng/yhq_useles.png" class="yhq_bg">
+					<img src="../../images/yucheng/user.png" class="yhq_style">
+					<div class="yhq_left">
+						<p></p>
+						<p class="yhq_title">1满30000减2000</p>
+						<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>
+					</div>
+					<div class="yhq_right">
+						<p class="yhq_al">消费满30000.00元可用</p>
+						<p class="yhq_mo">￥2000.00</p>
+						<p class="yhq_type"></p>
+					</div>
+				</div>
+			</div>
+			<div class="mud" style="display: none;">
+				<div class="yhq_list tpl3">
+					<img src="../../images/yucheng/yhq_useles.png" class="yhq_bg">
+					<img src="../../images/yucheng/user.png" class="yhq_style">
+					<div class="yhq_left">
+						<p></p>
+						<p class="yhq_title">1满30000减2000</p>
+						<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>
+					</div>
+					<div class="yhq_right">
+						<p class="yhq_al">消费满30000.00元可用</p>
+						<p class="yhq_mo">￥2000.00</p>
+						<p class="yhq_type"></p>
+					</div>
+				</div>
+			</div>
+			</div>	
+	</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function(){
+				
+			})
+			window.addEventListener('refresh', refresh);
+			function refresh(){
+				mui.web_query('userbonus.php',{}, function(data){					
+					if (data){
+						if(data.bonus_unuse_list){
+							var div = $(".tpl1").parent();
+							div.empty();
+							$.each(data.bonus_unuse_list, function(idx, item){
+								var newnode = $('<div class="yhq_list tpl1">\
+												<img src="../../images/yucheng/yhq_use.png" class="yhq_bg">\
+												<div class="yhq_left">\
+													<p></p>\
+													<p class="yhq_title">1满10000减500</p>\
+													<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>\
+												</div>\
+												<div class="yhq_right">\
+													<p class="yhq_al">消费满10000.00元可用</p>\
+													<p class="yhq_mo">￥500.00</p>\
+													<p class="yhq_type"></p>\
+												</div>\
+											</div>');
+								newnode.find('.yhq_title').html(item.type_name);
+								newnode.find('.yhq_time').html('有效期：'+item.use_startdate + ' -' + item.use_enddate);
+								newnode.find('.yhq_al').html('消费满'+item.min_goods_amount +'可用');
+								newnode.find('.yhq_mo').html(item.type_money);
+								newnode.appendTo(div);
+								console.log(item.type_name);
+							}) 
+						}
+						if (data.bonus_used_list)
+						{
+							var div = $(".tpl2").parent();
+							div.empty();
+							$.each(data.bonus_used_list, function(idx, item){
+								var newnode = $('<div class="yhq_list tpl2">\
+									<img src="../../images/yucheng/yhq_useles.png" class="yhq_bg">\
+									<img src="../../images/yucheng/user.png" class="yhq_style">\
+									<div class="yhq_left">\
+										<p></p>\
+										<p class="yhq_title">1满30000减2000</p>\
+										<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>\
+									</div>\
+									<div class="yhq_right">\
+										<p class="yhq_al">消费满30000.00元可用</p>\
+										<p class="yhq_mo">￥2000.00</p>\
+										<p class="yhq_type"></p>\
+									</div>\
+								</div>');
+								newnode.find('.yhq_title').html(item.type_name);
+								newnode.find('.yhq_time').html('有效期：'+item.use_startdate + ' -' + item.use_enddate);
+								newnode.find('.yhq_al').html('消费满'+item.min_goods_amount +'可用');
+								newnode.find('.yhq_mo').html(item.type_money);
+								newnode.appendTo(div);
+							}) 
+						}
+						if (data.bonus_expired_list){
+							var div = $(".tpl3").parent();
+							div.empty();
+							$.each(data.bonus_expired_list, function(idx, item){
+								var newnode = $('<div class="yhq_list tpl3">\
+									<img src="../../images/yucheng/yhq_useles.png" class="yhq_bg">\
+									<img src="../../images/yucheng/user.png" class="yhq_style">\
+									<div class="yhq_left">\
+										<p></p>\
+										<p class="yhq_title">1满30000减2000</p>\
+										<p class="yhq_time">有效期：2016-07-07-2016-08-07</p>\
+									</div>\
+									<div class="yhq_right">\
+										<p class="yhq_al">消费满30000.00元可用</p>\
+										<p class="yhq_mo">￥2000.00</p>\
+										<p class="yhq_type"></p>\
+									</div>\
+								</div>');
+								newnode.find('.yhq_title').html(item.type_name);
+								newnode.find('.yhq_time').html('有效期：'+item.use_startdate + ' -' + item.use_enddate);
+								newnode.find('.yhq_al').html('消费满'+item.min_goods_amount +'可用'); 
+								newnode.find('.yhq_mo').html(item.type_money);
+								newnode.appendTo(div);
+							}) 
+						}
+					}
+				})
+			}
+		</script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var $lis = $(".hd li");
+			var $divs = $(".bd .mud");
+			var index;
+		
+		    $lis.on("click", function() {
+				index=$(this).index();
+				console.log(index);
+			    $(this).addClass("yhq_selected").siblings().removeClass("yhq_selected");
+			    $divs.eq(index).show().siblings().hide();
+			});
+		 });
+</script>
+	</body>
+
+</html>

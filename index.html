@@ -6,101 +6,159 @@
     <title>index</title>
     <script src="js/mui.js"></script>
     <link href="css/mui.css" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="css/home/style.css" />-->
     <style type="text/css">
+    
+    .in_bottom{
+		width:100%;
+		height:65px;
+		display: -webkit-box;
+		-webkit-box-orient: horizontal;
+		background:#2d2f30;
+		position:fixed;
+		bottom:0;
+		left:0;
+		z-index:999;
+	}
+	.in_bottom p{
+		-webkit-box-flex: 1;text-align:center;
+	}
+	.in_bottom img{
+	    width: 35%;
+	    margin-top: 20px;
+	}
+	.mui-bar{
+    	background-color: #000000;
+    }
+	
+	html, body{
+		width:100%;
+		height:100%;
+	}
+	.loadingcover{
+		    position: absolute;
+    background: #010101;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+	}
+	.loadingcover img{
+		width:100%;
+	}
     </style>
     
 </head>
 <body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 id="title" class="mui-title">微商城</h1>
+			<h1 id="title" class="mui-title" style="color:white">微商城</h1>
 		</header>
-		<nav class="mui-bar mui-bar-tab">
+		<nav class="mui-bar mui-bar-tab in_bottom">
 			<a id="defaultTab" class="mui-tab-item mui-active" href="subpages/home.html">
-				<span class="mui-icon mui-icon-home"></span>
-				<span class="mui-tab-label">微商城</span>
+				<p><img src="images/yucheng/icon7.png" /></p>
+				<p style='display:none' class="mui-tab-label">微商城</p>
 			</a>
 			<a class="mui-tab-item" href="subpages/goods_attr.html">
-				<span class="mui-icon mui-icon-email"><span class="mui-badge">9</span></span>
-				<span class="mui-tab-label">商品筛选</span>
+				<p><img src="images/yucheng/icon8.png" /></p>
+				<p style='display:none' class="mui-tab-label">商品筛选</p>
 			</a>
-			<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
-				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">购物车</span>
+			<a class="mui-tab-item" href="subpages/shopping_cart.html">
+				<p><img src="images/yucheng/icon9.png" /></p>
+				<p style='display:none' class="mui-tab-label">购物车</p>
 			</a>
 			<a class="mui-tab-item" href="subpages/user.html">
-				<span class="mui-icon mui-icon-gear"></span>
-				<span class="mui-tab-label">用户中心</span>
+				<p><img src="images/yucheng/icon10.png" /></p>
+				<p style='display:none' class="mui-tab-label">个人中心</p>
 			</a>
 		</nav>
+		<div class="loadingcover" style="background:#010101; width:100%;height:100%">
+			<img src="images/640x960.png" />
+		</div>
 </body>
+<script type="text/javascript" src="js/zepto.min.js" ></script>
+<script type="text/javascript" src="js/update.js" ></script>
 <script type="text/javascript" charset="utf-8">
       mui.init({
-			//swipeBack:true //启用右滑关闭功能
+			swipeBack:true, //启用右滑关闭功能
+			preloadPages:[
+						    {
+						      url:"guide.html",
+						      id:"guide.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+			]
 		});
-      var subpages = ['subpages/home.html', 'subpages/goods_attr.html', 'tab-webview-subpage-contact.html', 'subpages/user.html'];
-			var subpage_style = {
-				top: '45px',
-				bottom: '51px'
-			};
+		
+		
+      	var subpages = ['subpages/home.html', 'subpages/goods_attr.html', 'subpages/shopping_cart.html', 'subpages/user.html'];
+		var subpage_style = {
+			top: '45px',
+			bottom: '51px'
+		};
 			
-			var aniShow = {};//记录子页面是否首次显示
-			
-			
-			
+			//var aniShow = {};//记录子页面是否首次显示			
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			var currentView = null;
+			var homeTabWV = null;
 			mui.plusReady(function() {
-				//preload template
-				
-				
 				var self = plus.webview.currentWebview();
-//				self.hide();
 				currentView = self;
 				for (var i = 0; i < 4; i++) {
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);//预加载子页面
-					if (i > 0) {
-						sub.hide();
-					}else{
-						temp[subpages[i]] = "true";
-						mui.extend(aniShow,temp);
-					}
+					if (i >= 0) {
+						sub.hide(); 
+					} 
+					if (i == 0)
+						homeTabWV = sub;
 					self.append(sub);
 				}
 				
-				
-				
-				
 				//读取本地存储，检查是否为首次启动
 				var showGuide = plus.storage.getItem("lauchFlag");
+				showGuide = true;
 				if(showGuide){
 					//有值，说明已经显示过了，无需显示；
 					//关闭splash页面；					
 					plus.navigator.closeSplashscreen();
 					plus.navigator.setFullscreen(false);
 					//display first page.
-//					currentView.show();
-					
+		//			currentView.show();
 					var defaultTab = document.getElementById("defaultTab");
 					//模拟首页点击
 					mui.trigger(defaultTab, 'tap');
-
+					plus.nativeUI.showWaiting();//首页还未加载完成，显示等待框
+		
 				}else{
 					//显示启动导航
-					mui.openWindow({
-						id:'guide',
-						url:'guide.html',
-						show:{
-							aniShow:'none'
-						},
-						waiting:{
-							autoShow:false
-						}
-					});
-					 
+					
+					plus.nativeUI.closeWaiting();//首页还未加载完成，显示等待框
+					var guidev = plus.webview.getWebviewById('guide.html');
+					if (guidev)
+						guidev.show();
+					else
+					{
+						var wv = mui.openWindow({
+							id:'guide.html',
+							url:'guide.html',
+							show:{
+								aniShow:'none'
+							},
+							waiting:{
+								autoShow:false
+							}
+						}); 
+					}					
 				}
-			});
+				mui.later(function() {
+					$('.loadingcover').remove();
+					homeTabWV.show();//
+				}, 350); 
+				//preload_template('default', '../template.html');//why i load here will fail??
+				
+			});//end of plus ready
 			 //当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");
@@ -114,16 +172,19 @@
 				title.innerHTML = this.querySelector('.mui-tab-label').innerHTML;
 				//显示目标选项卡
 				//若为iOS平台或非首次显示，则直接显示
-				if(mui.os.ios||aniShow[targetTab]){
-					plus.webview.show(targetTab);
+				if(mui.os.ios){
+					plus.webview.show(targetTab,"slide-in-right");
+					console.log('showing tab ' + targetTab);
 				}else{
 					//否则，使用fade-in动画，且保存变量
-					var temp = {};
-					temp[targetTab] = "true";
-					mui.extend(aniShow,temp);
-					plus.webview.show(targetTab,"fade-in",300);
-//					console.log('showing ' + targetTab);
+					//var temp = {};
+					//temp[targetTab] = "true";
+					//mui.extend(aniShow,temp);
+					plus.webview.show(targetTab,"slide-in-right",300);
+					console.log('showing ...' + targetTab);					
 				}
+				var wv = plus.webview.getWebviewById(targetTab);
+				mui.fire(wv, 'refresh');
 				//隐藏当前;
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡
@@ -141,5 +202,7 @@
 					defaultTab.classList.add('mui-active');
 				}
 			});
+					
+
     </script>
 </html>

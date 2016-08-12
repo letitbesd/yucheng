@@ -1,0 +1,294 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<style>
+			.ser_tou {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				z-index: 3;
+			}
+			
+			.ser_head {
+				width: 100%;
+				height: 55px;
+				background: #fff;
+				margin-bottom: 2px;
+				position: relative;
+				padding-top: 5px;
+			}
+			
+			.ser_back {
+				width: 4%;
+				float: left;
+				padding-left: 3%;
+				padding-top: 7px;
+			}
+			
+			.ser_back img {
+				width: 100%;
+			}
+			
+			.ser_search {
+				position: absolute;
+				top: 12px;
+				left: 11%;
+				width: 6%;
+			}
+			
+			.ser_search img {
+				width: 100%;
+			}
+			
+			.ser_input {
+				width: 70%;
+				float: left;
+				background: #ececec;
+				height: 45px;
+				overflow: hidden;
+			}
+			
+			.ser_input input {
+				width: 100%;
+				border: none;
+				outline: none;
+				background: none;
+				height: 25px;
+				padding-left: 14%;
+				line-height: 25px;
+				margin-top: 10px;
+			}
+			
+			.ser_bun {
+				width: 15%;
+				margin-left: 2%;
+				float: left;
+				text-align: center;
+				color: #fff;
+				line-height: 45px;
+				background: #68c5da;
+				height: 45px;
+			}
+			
+			.ser_input input::-webkit-input-placeholder {
+				font-size: 16px;
+				height: 25px;
+				line-height: 25px;
+			}
+			
+			.hot_search {
+				width: 100%;
+				background: #fff;
+				float: left;
+			}
+			
+			.hot_con {
+				width: 90%;
+				margin-left: 5%;
+				float: left;
+				background: #fff;
+			}
+			
+			.hot_title {
+				width: 100%;
+				font-size: 15px;
+				text-align: left;
+				color: #4a4a4a;
+				line-height: 35px;
+			}
+			
+			.hot_con p {
+				background: #efeff4;
+				font-size: 14px;
+				float: left;
+				text-align: center;
+				margin-left: 8%;
+				line-height: 30px;
+				margin-bottom: 15px;
+				color: #8f8e94;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			
+			.gd_odd{
+				width: 47%;
+			    margin-left: 2%;
+			    float: left;
+			    margin-bottom: 10px;
+			    position: relative;
+			    background: #FF0000;
+			}
+			
+			.gd_even{
+				width: 47%;
+			    margin-right: 2%;
+			    float: right;
+			    margin-bottom: 10px;
+			    position: relative;
+			    background: #FFFFFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="ser_tou">
+			<div class="ser_head">
+				<p class="ser_back"><img src="../../images/yucheng/left.png"></p>
+				<p class="ser_search"><img src="../../images/yucheng/search.png"></p>
+				<p class="ser_input"><input id="search_word_input" type="text" placeholder="请输入商品，分类等"></p>
+				<p class="ser_bun" id="do_search">搜索</p>
+			</div>
+		</div>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="margin-top:58px">
+			<div class="mui-scroll">
+				<ul style="float:left;">
+					<li>
+						<div class="hot_search">
+							<div class="hot_con">
+								<div class="hot_title">热搜：</div>
+								<p onclick="toUrl('冰种');">冰种</p>
+								<p onclick="toUrl('玉佛');">玉佛</p>
+								<p onclick="toUrl('玻璃种');">玻璃种</p>
+								<p onclick="toUrl('红黄翡');">红黄翡</p>
+								<p onclick="toUrl('福豆');">福豆</p>
+								<p onclick="toUrl('平安扣');">平安扣</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="sl_con">
+							<div class="sl_list to_goods_detail " data="263">
+								<p><img src="../../images/in_2.jpg"></p>
+								<p>冰种褐黄翡镶18k金玉佛胸坠</p>
+								<p>￥43200.00</p>
+								<p>翠钻宫</p>
+								<p><img src="../../images/yucheng/yc-18.png"></p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						contentrefresh: '正在加载...',
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					},
+					 down : {
+				      height:50,//可选,默认50.触发下拉刷新拖动距离,
+				      auto: true,//可选,默认false.自动下拉刷新一次
+				      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+				      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+				      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+				      callback :function(){
+				      	setTimeout(function(){
+				      		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				      		
+				      	}, 1000);
+
+				      } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				    }
+				}
+			});
+			
+		 
+			
+			var page = 1;
+			var search_content = "玉佛";
+			function pullupRefresh() {
+				console.log("doing pulluploading.page = " + page);
+				var is_ajax = 0; 
+				mui.web_query('goodsList.php?act=search',  {search_content: search_content, page:page, is_ajax:is_ajax},function(data) {
+						if (data.word_list)
+						{
+							var str = '<div class="hot_title">热搜：</div>';
+							$.each(data.word_list, function(idx, item){
+								str += '<p>'+ item.search_word + '</p>'; 
+							});
+							$(".hot_con").html(str);
+						}
+						if(data.goods_list && data.goods_list.length > 0) {
+							
+							if (page == 1)
+								$(".sl_con").empty();
+							//add_list2(data.goods_list);
+							page ++;
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+							//console.log("");
+							$.each(data.goods_list, function(idx, goods){
+								var newnode = $('<div class="sl_list to_goods_detail" data="263">\
+									<p><img src="../../images/in_5.jpg"></p>\
+									<p>冰种褐黄翡镶18k金玉佛胸坠</p>\
+									<p>￥43200.00</p>\
+									<p>翠钻宫</p>\
+									<p><img src="../../images/yucheng/yc-18.png"></p>\
+								</div>');
+								//console.log(mui.web_sever + goods.goods_thumb);
+								newnode.find('img').eq(0).attr('src', mui.web_sever + goods.goods_thumb);
+								newnode.find("p").eq(1).html(mui_utils.trimString(goods.goods_name, 10));
+								newnode.find('p').eq(2).html('￥' + goods.shop_price);
+								newnode.find('p').eq(3).html(goods.shop_name);
+								newnode.attr('data', goods.goods_id);
+								newnode.appendTo($(".sl_con"));
+							});
+							
+						} else {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						}
+					}
+				);
+			}
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 10);
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+			
+			$(".hot_con").on("click", 'p', function(){
+				var c = $(this).html();
+				console.log("ddd " + c );
+				search_content = c;
+				page = 1; 
+				mui('#pullrefresh').pullRefresh().enablePullupToRefresh();//重新开始下拉刷新
+//				mui('#pullup-container').pullRefresh().enablePullupToRefresh();
+				pullupRefresh();
+			})
+			
+			$("#do_search").click(function(){
+				var search_word = $("#search_word_input").val();
+				if(!search_word){
+					mui.toast("请输入搜索关键字");
+				}else{
+					search_content = search_word;
+					page = 1; 
+					mui('#pullrefresh').pullRefresh().enablePullupToRefresh();//重新开始下拉刷新 
+					pullupRefresh();
+				}
+			});
+		</script>
+	</body>
+
+</html>

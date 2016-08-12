@@ -5,32 +5,398 @@
 		<meta charset="UTF-8">
 		<title>个人中心</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link href="../css/home/style.css" rel="stylesheet" />
+		<link href="../css/home/style.css" rel="stylesheet" /> 
+		<link rel="stylesheet" href="../css/home/reset.css" />
+		<link rel="stylesheet" href="../css/cropper.min.css" /> 
+		<link href="../css/mui.min.css" rel="stylesheet" /> 
 	</head>
 
 	<body>
-		<div class="uc_all">
-		<div class="uc_head">
-			<p class="uc_sz"><img src="../images/yucheng/uc_icon6.png"></p>
-			<p class="uc_logo"><img src="../images/yucheng/uc_logo.png"></p>
+		<div class="uc_all" style="display:block">
+			<div class="uc_head">
+				<p class="uc_sz"><img src="../images/yucheng/uc_icon6.png"></p>
+				<p class="uc_logo"><img src="../images/yucheng/uc_logo.png"></p>
+			</div>
+			<div class="uc_con">
+				<p class="uc_name"><b><img class="user_head" src="../images/yucheng/uc_icon5.png"></b><i>guest</i></p>
+				<!--<button onclick="galleryImg();">选择单张图片</button>-->
+				<p class="uc_choose">
+					<b><img src="../images/yucheng/uc_icon2.png" target="./user/orderlist1.html" data-type='1' style="width:26px;"><i>待付款</i></b>
+					<b><img src="../images/yucheng/uc_icon3.png" target="./user/orderlist2.html" data-type='2'  style="width:37px;"><i>待收货</i></b>
+					<b><img src="../images/yucheng/uc_icon1.png" target="./user/orderlist3.html" data-type='3'  style="width:24px;"><i>退款商品</i></b>
+					<b><img src="../images/yucheng/uc_icon4.png" target="./user/orderlist4.html" data-type='0'  style="width:19px;"><i>全部订单</i></b>
+				</p>
+				<p class="uc_style" target="./user/fav.html">我的收藏</p>
+				<p class="uc_style" target="./user/addresslist.html">收货地址</p>
+				<p class="uc_style" target="./user/coupon.html">我的优惠券</p>
+				<p class="uc_style" target="./user/comments.html">我的评价</p>
+				<p class="uc_style" target="./user/support.html">玉城客服</p>
+				<p class="uc_style" id="logout" target="">退出登录</p>
+			</div>
 		</div>
-		<div class="uc_con">
-			<p class="uc_name"><b><img src="../images/yucheng/uc_icon5.png"></b><i>u187FKUG2732</i></p>
-			<p class="uc_choose">
-			<b><img src="../images/yucheng/uc_icon2.png" style="width:26px;"><i>待付款</i></b>
-			<b><img src="../images/yucheng/uc_icon3.png" style="width:37px;"><i>待收货</i></b>
-			<b><img src="../images/yucheng/uc_icon1.png" style="width:24px;"><i>退款商品</i></b>
-			<b><img src="../images/yucheng/uc_icon4.png" style="width:19px;"><i>全部订单</i></b>
-			</p>
-			<p class="uc_style" onclick="toUrl('/mobile/user.php?act=address_list');">收货地址</p>
-			<p class="uc_style">玉城客服</p>
+		<div class="lg_all login" style="display:none">
+			<div class="lg_logo"><img src="../images/yucheng/register1.png"></div>
+			<div class="lg_con">
+				<p><i><img src="../images/yucheng/register2.png"></i>
+					<input type="text" placeholder="手机号" id="mobile">
+					
+					<!--<p contenteditable="true">这是一段可编辑的段落。请试着编辑该文本。</p>-->
+				</p>
+				<p><i><img src="../images/yucheng/register3.png"></i>
+					<input type="text" placeholder="验证码" id="code">
+					<b onclick="sendSMS();" class="fs_yzm" id="get_code">发送验证码</b><b id="time_count" class="ds" style="display:none;"><i id="CountdownElem"></i>重新发送</b></p>
+			</div>
+			<!--<div class="lg_reg" onclick="close();">返回</div>-->
+			<div class="lg_go" onclick="do_login();">登录</div> 
 		</div>
-	
-	</div>
-		<script src="../js/mui.min.js"></script>
+		<div id="showEdit" style="display: none; width:100%;height: 100%;position: absolute;top:0;left: 0;z-index: 9;">
+	        <div style="width:100%;position: absolute;top:0px;left:0px;">
+	            <button class="mui-btn" data-mui-style="fab" id="cancleBtn" style="margin-left: 10px;">取消</button>
+	            <button class="mui-btn" data-mui-style="fab" data-mui-color="primary" id="confirmBtn" style="float:right;margin-right: 10px;">确定</button>
+	        </div>
+	        <div id="report" style="margin-top: 40px">
+	          <img src="" style="width: 100%;height:500px"> 
+	      </div>
+	        
+	    </div>
+	    <script type="text/javascript" src="../css/jquery-1.7.1.js" ></script>
+	    <script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+    	<script type="text/javascript" src="../js/cropper.min.js" ></script>
+		<script type="text/javascript" src="../js/user_info.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../js/mui_ajax.js" ></script>
+
 		<script type="text/javascript">
-			mui.init()
+			mui.plusReady(function(){
+				console.log('plus ready');//only do once when first create page.
+				mui.init(
+					{
+						swipeBack:true, //启用右滑关闭功能
+						preloadPages:[
+						    {
+						      url:"./user/fav.html",
+						      id:"./user/fav.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+						     {
+						      url:"./user/addresslist.html",
+						      id:"./user/addresslist.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+						     {
+						      url:"./user/coupon.html",
+						      id:"./user/coupon.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+						     {
+						      url:"./user/comments.html",
+						      id:"./user/comments.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+						     {
+						      url:"./user/support.html",
+						      id:"./user/support.html",
+						      styles:{},//窗口参数
+						      extras:{},//自定义扩展参数
+						      subpages:[{},{}]//预加载页面的子页面
+						    },
+						]});	
+			}); 	
+			
+			window.addEventListener('refresh', refresh);
+			
+			function refresh(){
+				mui.web_query('userCenter.php', {}, function(data){
+					if (data.login_status == 1)
+					{
+						$(".uc_all").show();
+						$(".login").hide();
+						$(".uc_name").find('i').html(data.user_info.user_name);
+						if (data.user_info.head_img)
+						{
+							$(".uc_name").find('img').attr('src', mui.web_sever+data.user_info.head_img);							
+						}
+						UserInfo.extra(data.user_info.user_name + "@" + data.user_info.head_img);
+					}
+					else
+					{
+						//未登录,调出登陆界面
+						if (UserInfo.username())
+						{
+							//如果曾经登陆过，实现自动登录
+							autoLogin();
+						}
+						else
+						{
+							onlogout();
+						}
+						
+					}
+				}, null,null);
+			}
+			var retry_count = 3;//todo: 最多进行三次请求userCenter.php 接口，如果还是拿不到用户信息，必须让用户手动登陆
+			function autoLogin(){ 
+				var ds = "ER21Ha26jIu89SHI02sa45Shou11MEI";
+				var mb = UserInfo.mb();
+				var ui = UserInfo.username();
+				var autocode = UserInfo.autocode();
+				console.log(mb + '/' + ui + '/' + autocode);
+				//console.log(UserInfo.test());
+				var str = $.md5(ds+mb+ui+autocode);
+				
+				console.log('autologin:auto_code:' + str);
+				mui.web_query("mobileAutoLogin.php", {auto_code:str}, function(data){
+						if (data.status == 1)
+						{
+							UserInfo.autocode(String(data.auto_code));
+							mui.toast('autologin success!'); 
+							var extra = UserInfo.extra();
+							$(".uc_name").find('i').html(extra.split('@')[0]);							 
+							$(".uc_name").find('img').attr('src', mui.web_sever+extra.split('@')[1]); 
+							$(".uc_all").show();
+							$(".login").hide();
+						}else
+						{
+							mui.toast('autologin fail!');
+							onlogout();
+						}
+				})
+			}
+			
+			function sendSMS(){
+				var num  = $('#mobile').val();
+				console.log(num);
+				mui.web_query('sendLoginSms.php', {mobile_phone:num}, function(data){
+					if (data.status == 1)
+					{
+						mui.toast("发送成功");
+					}
+					else
+					{
+						mui.toast(data.info);
+					}
+				})
+			} 
+			 
+			function do_login(){
+				var num  = $('#mobile').val();
+				var code  = $('#code').val();
+				//var url ="http://yucheng.chebank.com/mobile/user.php?ajax_act=login";//wechat
+				var url =  "userLogin.php"; //jieko
+				mui.web_query(url, {mobile:num, code:code}, function(data){
+					if (data.status == 1)
+					{						
+						
+						UserInfo.username(data.user_id);
+						UserInfo.mb(num);
+						UserInfo.autocode(String(data.auto_code));
+						
+						refresh();
+						//mui.toast('登陆成功');
+						//console.log(JSON.stringify(document.cookie))
+						//plus.webview.currentWebview().hide(); 
+						//console.log(JSON.stringify(data));
+					}
+					else
+					{
+						
+						mui.toast(data.info);
+					}
+				})
+			}
+			
+			//document.querySelector('#mobile').addEventListener('focus', )
+			$(document).on('focus', "#mobile", mobilefocus);
+			function mobilefocus(evt){
+				console.log("dldldjklfs");
+				evt.preventDefault();
+				plus.nativeUI.prompt("请输入", function(e) //prompt 第一个参数必须不为空，否则不显示
+				{
+					console.log( ((e.index==0)?"确认":"取消")+e.value );
+					if (e.index == 0)
+					{
+						$('#mobile').val(e.value);
+						$('#mobile')[0].blur();
+					}
+				},"", "手机号", ["确认","取消"]);
+			}
+			$("#code").on('focus', function(evt){//display = none不会影响选择器选择
+				console.log("dldldjklfs");
+				evt.preventDefault();
+				plus.nativeUI.prompt("请输入", function(e) //prompt 第一个参数必须不为空，否则不显示
+				{
+					console.log( ((e.index==0)?"确认":"取消")+e.value );
+					if (e.index == 0)
+					{
+						$('#code').val(e.value);
+						$('#code')[0].blur();
+					}
+				},"", "验证码", ["确认","取消"]);
+			})
+			//$("#mobile").focus(mobilefocus);
+		</script>
+		
+		<script type="text/javascript"> 
+			//页面逻辑
+			function cropperImage(path){
+				$("#showEdit").show();
+		    	var $image = $('#report > img'); 
+		    	$("#report").empty();
+		    	$(' <img src="'+ path+'" style="width: 100%;height:500px"> ').appendTo($("#report"));
+		    	$image = $('#report > img');	     	
+		            $image.cropper({
+		                aspectRatio: 1 / 1,
+		                autoCropArea: 0.7,
+		                strict: true,
+		                guides: false,
+		                center: true,
+		                highlight: false,
+		                dragCrop: false,
+		                cropBoxMovable: false,
+		                cropBoxResizable: false,
+		                zoom: -0.2,
+		                checkImageOrigin: true,
+		                background: false,
+		                minContainerHeight: 400,
+		                minContainerWidth: 300
+		            });
+			}
+			// 拍照或从相册中选择图片 
+			function galleryImg() {
+				console.log('galleryimage')
+				plus.nativeUI.actionSheet( {title:"",cancel:"取消",buttons:[{title:"相机"},{title:"相册"}]}, function(e){
+					console.log( "User pressed: "+e.index );
+					if(e.index ==1)
+					{
+						// 拍照
+						var cmr = plus.camera.getCamera();
+						var res = cmr.supportedImageResolutions[0];
+						var fmt = cmr.supportedImageFormats[0];
+						console.log("Resolution: "+res+", Format: "+fmt);
+						cmr.captureImage( function( p ){
+								//mui.alert( "Capture image success: " + path );				 
+								plus.io.resolveLocalFileSystemURL( p, function ( entry ) {   
+									// 可通过entry对象操作test.html文件 
+									entry.file( function(file){										 
+										//alert("getFile:" + JSON.stringify(file)); 
+										//alert(file.size + '--' + file.name);
+										console.log(file.fullPath);
+										cropperImage(file.fullPath);
+									} );
+				                });   
+							},
+							function( error ) {
+								//alert( "Capture image failed: " + error.message );
+							},
+							{resolution:res,format:fmt}
+						);
+					}else if(e.index ==2)
+					{
+						// 从相册中选择图片
+						console.log("从相册中选择图片:");
+					    plus.gallery.pick( 
+				    		function(path){
+						    	console.log(path);
+						    	cropperImage(path);
+					    }, function ( e ) {
+					    	console.log( "取消选择图片" );
+					    }, {filter:"image"} );
+					}
+				} ); 
+			}
+			
+			$("#confirmBtn").on('tap',function(){
+				$("#showEdit").hide();
+				
+				var $image = $('#report > img');
+	            var dataURL = $image.cropper("getCroppedCanvas");
+	            var imgurl = dataURL.toDataURL("image/png", 0.5);
+	            //console.log(imgurl);
+	            $(".user_head").attr("src", imgurl);
+	            mui.web_query("headImgUpload.php?type=1", {data:imgurl}, function(data){
+	            	console.log(data.status);
+	            	if (data.status == 1){
+	            		$(".user_head").attr('src', data.img_url);
+	            		mui.toast('上传成功');
+	            	}
+	            	else
+	            	{
+	            		mui.toast('上传失败');
+	            	}
+	            	
+	            });
+			})
+			
+			$("#cancleBtn").on("tap", function(){
+				$("#showEdit").hide();
+			});
+			
+			
+			function openSubPage(title, url)
+			{
+				var wv = plus.webview.getWebviewById(url);
+				if (wv)
+				{
+					wv.show('slide-in-right');
+					mui.fire(wv, 'refresh');
+				}
+				else
+				{
+					var webview = mui.openWindow({
+						url: url,
+						show:{
+						    autoShow:true,
+						    aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
+		  					duration:600//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+						},
+						extras:{
+							suburl:url + '___sub'
+						}
+					});
+				}
+			}
+			
+			$(".uc_choose").on("click",'img', function(e){ 
+				openSubPage($(this).html(), $(this).attr('target'));				
+			})
+			
+			$(".uc_style").on('click',  function(e){ 
+				if($(this).attr("target"))
+				{
+					openSubPage($(this).html(), $(this).attr('target'));					
+				}				
+			})
+			
+			$("#logout").on('click', function(e){
+//				mui_utils.openMuiPage('./testpayment.html');
+//				return;
+				mui.web_query('userLogin.php?act=logout', {}, function(data){
+					if (data.status == 1)
+					{
+						onlogout();
+					}else
+					{
+						mui.toast('操作失败');
+					}
+				})
+			});
+			 
+			function onlogout(){
+				$(".uc_all").hide();
+				$(".login").show();
+				//UserInfo.clear();
+			}
+			
+			$(document).on('click',".uc_name img", galleryImg);
 		</script>
 	</body>
 

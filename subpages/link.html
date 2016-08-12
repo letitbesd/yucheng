@@ -1,0 +1,77 @@
+<!doctype html>
+<!--
+	作者：myn0602@163.com
+	时间：2016-07-26
+	描述：公用的打开新链接窗口，如果打开之后需要调整加载的页面内容，可以参考order_detail.html的做法
+-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+		<p>都看得到快</p>
+		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
+		<script type="text/javascript" src="../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript">
+		
+		mui.plusReady(function(){
+			
+			mui.init(
+				{
+					 swipeBack:true, //启用右滑关闭功能 
+					 beforeback:beforeBack
+				}
+			);
+			
+		})
+			
+			var back = false;
+			function beforeBack(){
+				console.log(back);
+				var w = plus.webview.currentWebview();  
+				 w.canBack( function(e){
+					console.log( "是否可返回："+e.canBack );
+					if (e.canBack)
+					{
+						w.back();
+						back = false;
+					}
+					else
+					{
+						//w.hide();
+						back = true;//此处为异步操作， 当页面返回不了了 下次再按back键将 关闭主页面
+					}
+				}) 
+				if(back){
+					mui.fire(w.opener(), 'refresh');
+				}
+				return back;
+			}
+			
+			function openURL(url)
+			{
+				var frame1 =  document.getElementById("f_test");
+				frame1.onload = function(){
+		        	console.log("iframe load. ");
+		        	var x=document.getElementById("f_test");
+					var y=(x.contentWindow || x.contentDocument);
+					if (y.document) y=y.document;
+					//y.querySelector(".ycxx_cancel").style.display = "none";//隐藏可能跳转别的地方的链接
+			   };
+				//var url = "http://yucheng.chebank.com/mobile/user.php?act=order_detail&order_id=" + order_id;
+				frame1.src = url;
+			}
+			
+			window.addEventListener('openURL', function(e){
+				openURL(e.detail.openURL);
+				plus.nativeUI.closeWaiting();
+			})
+		</script>
+	</body>
+
+</html>

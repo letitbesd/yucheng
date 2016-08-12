@@ -1,0 +1,443 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			/*评价*/
+			
+			.as_all {
+				width: 100%;
+				float: left;
+			}
+			
+			.as_back {
+				width: 100%;
+				height: 45px;
+				float: left;
+				background: #fff;
+			}
+			
+			.as_back img {
+				width: 25px;
+				float: left;
+				margin-top: 10px;
+				margin-left: 5%;
+			}
+			
+			.as_tab {
+				width: 100%;
+				height: 45px;
+				float: left;
+			}
+			
+			.as_tab p {
+				width: 50%;
+				float: left;
+				text-align: center;
+				font-size: 15px;
+				line-height: 45px;
+			}
+			
+			.as_select {
+				background: #000;
+				color: #fff;
+			}
+			
+			.as_list {
+				width: 90%;
+				margin-left: 5%;
+				background: #fff;
+				float: left;
+				margin-bottom: 15px;
+			}
+			
+			.as_shop_name {
+				width: 92%;
+				margin-left: 4%;
+				background: #F7F7F7;
+				position: relative;
+				float: left;
+				height: 45px;
+				margin-top: 15px;
+			}
+			
+			.as_shop_name img {
+				width: 25px;
+				position: absolute;
+				top: 5px;
+				left: 3%;
+			}
+			
+			.as_shop_name i {
+				width: 100%;
+				float: left;
+				text-align: center;
+				font-size: 15px;
+				color: #C0C1C1;
+				line-height: 45px;
+			}
+			
+			.as_con {
+				width: 92%;
+				margin-left: 4%;
+				background: #E6E6E8;
+				position: relative;
+				float: left;
+			}
+			
+			.as_c1 {
+				width: 30%;
+				float: left;
+			}
+			
+			.as_c2 {
+				width: 70%;
+				float: left;
+			}
+			
+			.as_c1 img {
+				width: 100%;
+				height: 100px;
+			}
+			
+			.as_c2 b {
+				width: 90%;
+				margin-left: 5%;
+				line-height: 35px;
+				float: left;
+			}
+			
+			.as_name {
+				font-size: 17px;
+				color: #000;
+				text-align: left;
+			}
+			
+			.as_red {
+				font-size: 16px;
+				color: #7B2B36;
+				text-align: left;
+			}
+			
+			.as_num {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+				border-bottom: solid 1px #A8A8A8;
+				height: 45px;
+			}
+			
+			.as_num_red {
+				font-size: 20px;
+				color: #7B2B36;
+				text-align: left;
+				float: left;
+				line-height: 45px;
+			}
+			
+			.as_dnum {
+				font-size: 15px;
+				float: right;
+				color: #4C4C4C;
+				line-height: 45px;
+			}
+			
+			.as_go {
+				width: 30%;
+				float: left;
+				margin-left: 35%;
+				font-size: 16px;
+				color: #fff;
+				background: #7B2B36;
+				margin-top: 10px;
+				text-align: center;
+				line-height: 30px;
+				margin-bottom: 10px;
+			}
+			
+			.as_blank {
+				width: 100%;
+				height: 10px;
+				float: left;
+			}
+			
+			.as_time {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.as_time p {
+				width: 50%;
+				float: left;
+				color: #A3A4A3;
+				font-size: 15px;
+				line-height: 45px;
+			}
+			
+			.as_over_time {
+				text-align: left;
+			}
+			
+			.as_type {
+				text-align: right;
+			}
+			
+			.as_num2 {
+				display: none;
+			}
+			
+			.as_xx {
+				padding-bottom: 5px;
+				border-top: solid 1px #000;
+				border-bottom: solid 1px #000;
+			}
+			
+			.as_pf {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.as_pf_title {
+				width: 100%;
+				font-size: 20px;
+				color: #B8B8B8;
+				text-align: left;
+				float: left;
+			}
+			
+			.as_pf_ms {
+				width: 100%;
+				float: left;
+				height: 45px;
+			}
+			
+			.as_pf_ms i {
+				font-size: 15px;
+				color: #C3C3C3;
+				float: left;
+				margin-right: 2%;
+				line-height: 45px;
+			}
+			
+			.as_pf_ms img {
+				width: 10%;
+				margin-left: 5%;
+				float: left;
+			}
+			
+			.as_pf_text {
+				width: 100%;
+				float: left;
+				margin-top: 15px;
+			}
+			
+			.as_pf_text textarea {
+				resize: none;
+				outline: none;
+				background: #DDDDDD;
+				height: 100px;
+				font-size: 16px;
+				color: #fff;
+				width: 100%;
+			}
+			
+			.as_text_con {
+				background: #DDDDDD;
+				height: 100px;
+				font-size: 16px;
+				color: #fff;
+				width: 100%;
+				float: left;
+			}
+			
+			.as_xx_go {
+				width: 100%;
+				font-size: 16px;
+				color: #fff;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				margin-top: 15px;
+				margin-bottom: 15px;
+				float: left;
+				background: #7B2B36;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="as_all">
+			<div class="as_back"><img src="../../images/yucheng/yc-22.png"></div>
+			<div class="as_list as_xx">
+				<div class="as_shop_name"><img src="../../images/yucheng/cart_1.png"><i>翠钻宫</i></div>
+				<div class="as_con" style="background:none;">
+					<p class="as_c1"><img src="../../images/in_3.jpg"></p>
+					<p class="as_c2"><b class="as_name">冰种飘花观音挂件</b><b class="as_red">￥111600.00</b></p>
+				</div>
+			</div>
+			<div class="as_pf">
+				<p class="as_pf_title">评分：</p>
+				<p class="as_pf_ms" id="dj_1"><i>描述：</i>
+					<img src="../../images/yucheng/x_s2.png" data="1">
+					<img src="../../images/yucheng/x_s2.png" data="2">
+					<img src="../../images/yucheng/x_s2.png" data="3">
+					<img src="../../images/yucheng/x_s2.png" data="4">
+					<img src="../../images/yucheng/x_s2.png" data="5">
+				</p>
+
+				<p class="as_pf_ms" id="dj_2"><i>服务：</i>
+					<img src="../../images/yucheng/x_s2.png" data="1">
+					<img src="../../images/yucheng/x_s2.png" data="2">
+					<img src="../../images/yucheng/x_s2.png" data="3">
+					<img src="../../images/yucheng/x_s2.png" data="4">
+					<img src="../../images/yucheng/x_s2.png" data="5">
+				</p>
+
+				<p class="as_pf_ms" id="dj_3"><i>发货：</i>
+					<img src="../../images/yucheng/x_s2.png" data="1">
+					<img src="../../images/yucheng/x_s2.png" data="2">
+					<img src="../../images/yucheng/x_s2.png" data="3">
+					<img src="../../images/yucheng/x_s2.png" data="4">
+					<img src="../../images/yucheng/x_s2.png" data="5">
+				</p>
+
+				<p class="as_pf_ms" id="dj_4"><i>物流：</i>
+					<img src="../../images/yucheng/x_s2.png" data="1">
+					<img src="../../images/yucheng/x_s2.png" data="2">
+					<img src="../../images/yucheng/x_s2.png" data="3">
+					<img src="../../images/yucheng/x_s2.png" data="4">
+					<img src="../../images/yucheng/x_s2.png" data="5">
+				</p> 
+				<p class="as_pf_text">
+					<textarea id="comment_content"></textarea>
+				</p>
+				<div class="as_xx_go" id="do_submit">提交</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<!--<script type="text/javascript" src="../../js/zepto.min.js" ></script>-->
+		<script type="text/javascript" src="../../css/jquery-1.7.1.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			var rec_id , goods;
+			window.addEventListener('setid', function(e){
+				rec_id = e.detail.id;
+				goods = e.detail.data;
+				console.log(JSON.stringify(goods));
+				$(".as_c1 img").attr('src', mui.web_sever + goods.goods_thumb);
+				$(".as_shop_name i").html(goods.supplier_name);
+				$(".as_name").html(goods.goods_name);
+				$(".as_red").html('￥' + goods.shop_price);	
+				if (!e.detail.edit){
+					//显示 不能修改
+					
+					mui.web_query('userComment.php?act=to_comment', {rec_id:rec_id}, function(data){
+						plus.nativeUI.closeWaiting();
+						
+						var item = data.comment_info; 						 
+						generate_comment_rank(item.comment_rank, $("#dj_1"));
+						generate_comment_rank(item.server, $("#dj_2"));
+						generate_comment_rank(item.send, $("#dj_3"));
+						generate_comment_rank(item.shipping, $("#dj_4"));
+						$("#comment_content").html(item.content);
+					});
+					$("#do_submit").hide();
+				}
+				else
+				{				 
+					//尚未评价的订单商品 //默认页面 能修改
+					console.log('yyy', rec_id);
+					plus.nativeUI.closeWaiting();
+					generate_comment_rank(0, $("#dj_1"));
+					generate_comment_rank(0, $("#dj_2"));
+					generate_comment_rank(0, $("#dj_3"));
+					generate_comment_rank(0, $("#dj_4"));
+					$("#dj_1 img,#dj_2 img,#dj_3 img,#dj_4 img").on('click',function(){
+						$(this).attr("src","../../images/yucheng/x_s2.png");
+						$(this).prevAll().attr("src","../../images/yucheng/x_s2.png");
+						$(this).nextAll().attr("src","../../images/yucheng/x_s1.png");
+						$(this).addClass("comment_selected");
+						$(this).prevAll().addClass("comment_selected");
+						$(this).nextAll().removeClass("comment_selected");
+					});
+					
+					$("#do_submit").click(function(){
+						var data = check_comment_value();
+						if(data){
+							data.rec_id = rec_id;
+							data.goods_id = goods.goods_id;
+							//data.o_id = 109;
+							mui.web_query("userComment.php?act=do_comment", data, function(data){
+								mui.toast(data.info);
+								if (data.status == 1)
+								{
+									mui.back();
+									mui.fire(plus.webview.currentWebview().opener(), 'refresh');
+								}
+							});
+						}
+					});
+				}
+			})
+		</script>
+		<script type="text/javascript">
+			function check_comment_value(){
+				var comment_rank = $("#dj_1").children(".comment_selected").length;
+				var server = $("#dj_2").children(".comment_selected").length;
+				var send = $("#dj_3").children(".comment_selected").length;
+				var shipping = $("#dj_4").children(".comment_selected").length;
+				if(!comment_rank || !server || !send || !shipping){
+					mui.toast("您还未对该商品评分");
+					return false;
+				}
+				var comment_content = $("#comment_content").val();
+				if(!comment_content){
+					mui.toast("请输入对该商品的评价");
+					return false;
+				}
+				var data = new Object();
+				data.comment_rank = comment_rank;
+				data.server = server;
+				data.send = send;
+				data.shipping = shipping;
+				data.content = comment_content;
+				return data;
+			}
+		
+			$(document).ready(function() {
+				generate_comment_rank(2, $("#dj_1"));
+				generate_comment_rank(3, $("#dj_2"));
+				generate_comment_rank(4, $("#dj_3"));
+				generate_comment_rank(1, $("#dj_4"));
+			});
+
+			function generate_comment_rank(comment_rank, parent_elem) {
+				if(comment_rank == 0) {
+					$(parent_elem).children("img").attr("src", "../../images/yucheng/x_s1.png");
+				} else if(comment_rank == 1) {
+					$(parent_elem).children("img").first().attr("src", "../../images/yucheng/x_s2.png");
+					$(parent_elem).children("img").slice(1, 5).attr("src", "../../images/yucheng/x_s1.png");
+				} else if(comment_rank == 2) {
+					$(parent_elem).children("img").slice(0, 2).attr("src", "../../images/yucheng/x_s2.png");
+					$(parent_elem).children("img").slice(2, 5).attr("src", "../../images/yucheng/x_s1.png");
+				} else if(comment_rank == 3) {
+					$(parent_elem).children("img").slice(0, 3).attr("src", "../../images/yucheng/x_s2.png");
+					$(parent_elem).children("img").slice(3, 5).attr("src", "../../images/yucheng/x_s1.png");
+				} else if(comment_rank == 4) {
+					$(parent_elem).children("img").slice(0, 4).attr("src", "../../images/yucheng/x_s2.png");
+					$(parent_elem).children("img").last().attr("src", "../../images/yucheng/x_s1.png");
+				} else if(comment_rank == 5) {
+					$(parent_elem).children("img").attr("src", "../../images/yucheng/x_s2.png");
+				}
+			}			
+		</script>
+	</body>
+
+</html>

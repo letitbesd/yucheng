@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<style>
+			.for_type_0, .for_type_1, .for_type_2{
+				display:none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="my_yc">
+			<div class="mc_back"><img src="../../images/yucheng/yc-22.png" class="mc_bk"></div>
+			<div class="mc_tab">
+				<p onclick="switchTab(1);">待付款</p>
+				<p onclick="switchTab(2);">待收货</p>
+				<p onclick="switchTab(3);">退款商品</p>
+				<p class="mc_select">所有订单</p>
+			</div>
+			<div class="mc_con">
+				<div>
+				<div class="mc_list">
+					<div class="mc_shop"><img src="../../images/yucheng/cart_1.png" class="mc_sp">盈宝翡翠
+						<img src="../../images/yucheng/mc_order.png" class="mc_ord"  data="100" onclick="showOrder(this);"></div>
+					<div class="mc_li">
+						<p class="mc_li_pic"><img class="goods_img" src="../../images/in_4.jpg"></p>
+						<p class="mc_li_con"><b class="mc_li_name">糯冰种翠色路路通挂件</b><b class="mc_li_price">￥0</b></p>
+					</div>
+					<div class="mc_blank"></div>
+					<!--商品循环-->
+					<!--<div class="mc_li">
+						<p class="mc_li_pic"><img class="goods_img" src="../../images/in_4.jpg"></p>
+						<p class="mc_li_con"><b class="mc_li_name">糯冰种翠色路路通挂件</b><b class="mc_li_price">￥0</b></p>
+					</div>
+					<div class="mc_blank"></div>--> 
+				</div>
+					<div class="mc_all">
+						<p class="mc_all_price">￥15.00</p>
+						<p class="mc_order_num">订单号：2016070796070</p>
+					</div>
+					<div class="mc_type for_type_0">
+						<div class="mc_good">
+							<div class="mc_good_style">已取消</div>
+						</div>
+					</div>
+					<div class="mc_type for_type_1">											
+						<div class="mc_wait_pay">
+							<p class="mc_go_pay" id="pay_order" data="220">完成付款</p><p class="mc_can_pay" id="cancel_order" data="220">取消订单</p>
+						</div>
+					</div>
+					<div class="mc_type for_type_2">	
+							<div class="mc_good">
+								<div class="mc_good_style">待发货</div>
+							</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.js"></script>
+		<script src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript" src="../../js/order_status.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				console.log("efck doing here" + plus.webview.currentWebview().type);
+				mui.init();
+				var baseurl = 'http://yucheng.chebank.com/';
+				var typeid = plus.webview.currentWebview().type;
+				mui.web_query('userOrderList.php', {
+					type: 0
+				}, function(data) {
+					var tpl = $(".mc_con")[0].innerHTML;
+					//console.log(tpl)
+					$(".mc_con").empty(); 
+					$.each(data.orders, function(idx, item) {
+						//如果已完成订单，显示所有商品，否则一个个商品显示
+						var newnode = $(tpl);
+						var goods = item.goods_list[0];//todo:如果是已完成订单，循环goods_list
+						//console.log(baseurl + goods.goods_thumb);
+						newnode.find('.goods_img').attr('src', baseurl + goods.goods_thumb);
+						newnode.find('.shop_name').html(item.shopname);
+						newnode.find('.mc_li_name').html(goods.goods_name);
+						//newnode.find('i').eq(3).html(item.order_status1);
+						newnode.find('.mc_all_price').html(item.total_fee);
+						newnode.find('.mc_li_price').html(goods.formated_subtotal);
+						newnode.find('.mc_order_num').html('订单号:' + item.order_sn);
+						newnode.find('.mc_ord').attr("data", item.order_id);
+						newnode.appendTo($(".mc_con"));
+						var r = order_status.waitReceive(item.order_status1, item.pay_status, item.shipping_status);
+						//todo:根据状态显示界面
+						if (order_status.unpay(item.order_status1))
+						{
+							$(".for_type_1").show();
+						}else if (r['待发货'])
+						{
+							$(".for_type_2").show();
+						}
+						else if(order_status.isCanceled(item.order_status1))
+						{
+							$(".for_type_0").show();
+						}
+					});
+				});
+			})
+			
+			function switchTab(index) //index 1 2 3 4 
+			{
+				console.log("clicked");
+				var webview = mui.openWindow({
+					url: './orderlist'+index+'.html',
+					show:{
+					    autoShow:true,
+					    aniShow:"none",//页面显示动画，默认为”slide-in-right“；
+	  					duration:600//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+					} 
+				});
+			}
+			
+			function showOrder(ele)
+			{
+				var order_id = $(ele).attr('data');
+				var w = plus.webview.open('./order_detail.html');
+				mui.fire(w, "show_order", {order_id:order_id});
+			}
+		</script>
+	</body>
+
+</html>

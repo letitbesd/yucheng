@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+	</head>
+
+	<body>
+
+		<div class="addr_all" id="wrapper1">
+			<div id="scroller">
+				<div class="sc_head" style="line-height:45px;text-align:center;">
+					<img src="../../images/yucheng/yc-17.png" class="sc_back" style="float:left;">添加地址
+				</div>
+				<div class="addr_con">
+					<form action="" method="post" id="theForm" name="theForm" onsubmit="return checkConsignee(this)">
+						<ul style='list-style: none'>
+							<li><input type="text" name="consignee" value="骨灰哦" id="consignee_" placeholder="收货人姓名"></li>
+							<li><i style="width:10%">+086</i><input type="text" placeholder="联系方式" name="mobile" value="4875649" id="mobile_" style="width:70%;float:left;margin-left:5%;"></li>
+							<li>
+								<input name="country" value="1" type="hidden">
+								<i>省</i>
+								<select name="province" id="selProvinces" onchange="loadCity(this)" class="province_select">
+									<option value="0"  selected="">请选择省</option>
+									<option value="2">北京</option>
+									<option value="3">安徽</option>
+									<option value="4">福建</option>
+									<option value="5">甘肃</option>
+									<option value="6">广东</option>
+									<option value="7">广西</option>
+									<option value="8">贵州</option>
+									<option value="9">海南</option>
+									<option value="10">河北</option>
+									<option value="11">河南</option>
+									<option value="12">黑龙江</option>
+									<option value="13">湖北</option>
+									<option value="14">湖南</option>
+									<option value="15">吉林</option>
+									<option value="16">江苏</option>
+									<option value="17">江西</option>
+									<option value="18">辽宁</option>
+									<option value="19">内蒙古</option>
+									<option value="20">宁夏</option>
+									<option value="21">青海</option>
+									<option value="22">山东</option>
+									<option value="23">山西</option>
+									<option value="24">陕西</option>
+									<option value="25">上海</option>
+									<option value="26">四川</option>
+									<option value="27">天津</option>
+									<option value="28">西藏</option>
+									<option value="29">新疆</option>
+									<option value="30">云南</option>
+									<option value="31">浙江</option>
+									<option value="32">重庆</option>
+									<option value="33">香港</option>
+									<option value="34">澳门</option>
+									<option value="35">台湾</option>
+								</select>
+								<i>市</i>
+								<select name="city" id="selCities" onchange="loadDisticts(this);">
+									<option value="0">请选择市</option>
+									<option value="167">哈尔滨</option>
+									<option value="168">大庆</option>
+									<option value="169" selected="">大兴安岭</option>
+									<option value="170">鹤岗</option>
+									<option value="171">黑河</option>
+									<option value="172">鸡西</option>
+									<option value="173">佳木斯</option>
+									<option value="174">牡丹江</option>
+									<option value="175">七台河</option>
+									<option value="176">齐齐哈尔</option>
+									<option value="177">双鸭山</option>
+									<option value="178">绥化</option>
+									<option value="179">伊春</option>
+								</select>
+
+								<i>区</i>
+								<select name="district" id="selDistricts" >
+									<option value="0">请选择区</option>
+									<option value="1444">呼玛县</option>
+									<option value="1445" selected="">漠河县</option>
+									<option value="1446">塔河县</option>
+								</select>
+							</li>
+							<li><input type="text" placeholder="小区、街道、门牌等详细信息" name="address" value="婆媳进去" id="address_"></li>
+							<li class="style_bun">
+								<i style="width:70%;line-height:20px;color:#b4b5b5;margin-top:5px;font-size:14px;">设为默认地址<br>注:每次下单时会默认使用该地址</i>
+								<label>
+									<input type="checkbox" style="width:5%;float:right;opacity:0;">
+									<img src="../../images/yucheng/button1.png" class="button1 bun ">
+									<img src="../../images/yucheng/button2.png" style="display:none;" class="button2 bun elem_hide">
+								</label>
+							</li>
+							<input type="hidden" id="is_default_input" name="is_default" value="0">
+							<input type="hidden" name="act" value="act_edit_address">
+							<input type="hidden" name="address_id" value="20">
+							<input type="hidden" name="zipcode" value="" id="zipcode_">
+							<input type="hidden" name="email" value="" id="email_">
+						</ul>
+						<div class="or_go" id="do_save">确定</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+		<script src="../../js/utils.js"></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script> 
+		<script>
+			$(".style_bun label").on("touchend", function() {
+				if($(".button1").hasClass("elem_hide")) {
+					$("#is_default_input").val(0);
+
+					$(".button1").removeClass("elem_hide");
+				} else {
+					$("#is_default_input").val(1);
+					$(".button1").addClass("elem_hide");
+				}
+				if($(".button2").hasClass("elem_hide")) {
+					$(".button2").removeClass("elem_hide");
+				} else {
+					$(".button2").addClass("elem_hide");
+				}
+				$(".button1").toggle();
+				$(".button2").toggle();
+			}); 
+
+			$(function() {
+				$("#do_save").on('tap', function() {
+					$("#theForm").submit();
+//					$("#wrapper1").hide();
+//					$("#wrapper").show();
+				});
+			});
+		</script>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function(data){
+				refresh();
+			});
+			
+			var w = null;
+			var isIniting = false;
+			function refresh(){
+				w = plus.webview.currentWebview();
+//				console.log(w.consignee)
+//				console.log(w.province)
+				$('#theForm').find('input[name="consignee"]').val(w.consignee);
+				$('#theForm').find('input[name="mobile"]').val(w.mobile);
+				$('#theForm').find('select[name="province"]').val(w.province);
+				
+				//$('#theForm').find('input name=city').html(w.city); 
+				$('#theForm').find('input[name="address"]').val(w.address);
+				isIniting = true;
+				loadCity(document.getElementById('selProvinces'));
+			}
+			function loadCity(ele){
+				var prov = $(ele).val(); 
+				mui.web_query('region.php', {type:2, parent:prov}, function(result){
+					var sel = document.getElementById('selCities');
+				 	sel.length = 1; 
+					sel.selectedIndex = 0;
+					sel.style.display = '';
+					if (result.regions)
+				  	{
+					    for (i = 0; i < result.regions.length; i ++ )
+					    {					
+					      var opt = document.createElement("OPTION");					
+					      opt.value = result.regions[i].region_id;					
+					      opt.text  = result.regions[i].region_name;	
+					      sel.options.add(opt);		
+					    }
+					    if (isIniting){
+					    	console.log("loading disticts");
+					    	$(sel).val(w.city);
+					    	loadDisticts(document.getElementById('selCities'))
+					    }
+				  	}
+				})
+			}
+			
+			function loadDisticts(ele){
+				var city = $(ele).val();
+				mui.web_query('region.php', {type:3, parent:city}, function(result){
+					var sel = document.getElementById('selDistricts');
+				 	sel.length = 1; 
+					sel.selectedIndex = 0;
+					sel.style.display = '';
+					if (result.regions)
+				  	{
+					    for (i = 0; i < result.regions.length; i ++ )
+					    {					
+					      var opt = document.createElement("OPTION");					
+					      opt.value = result.regions[i].region_id;					
+					      opt.text  = result.regions[i].region_name;	
+					      sel.options.add(opt);		
+					    }
+					     if (isIniting){
+					    	$(sel).val(w.district);
+					    	isIniting = false;
+					    	//loadDisticts(document.getElementById('selCities'))
+					    }
+				  	}
+				})
+			}
+
+			function checkConsignee(frm) {
+				//e.preventDefault();
+				//return false;
+				var msg = new Array();
+				var err = false;
+
+				if(frm.elements['country'] && frm.elements['country'].value == 0) {
+					msg.push('国家不能为空');
+					err = true;
+				}
+
+				if(frm.elements['province'] && frm.elements['province'].value == 0 && frm.elements['province'].length > 1) {
+					err = true;
+					msg.push('省不能为空');
+				}
+
+				if(frm.elements['city'] && frm.elements['city'].value == 0 && frm.elements['city'].length > 1) {
+					err = true;
+					msg.push('市不能为空');
+				}
+
+				if(frm.elements['district'] && frm.elements['district'].length > 1) {
+					if(frm.elements['district'].value == 0) {
+						err = true;
+						msg.push('区不能为空');
+					}
+				}
+
+				if(Utils.isEmpty(frm.elements['consignee'].value)) {
+					err = true;
+					msg.push('联系人不能为空');
+				}
+
+				if(frm.elements['email'] && frm.elements['email'].value.length > 0 && (!Utils.isEmail(frm.elements['email'].value))) {
+					err = true;
+//					msg.push(invalid_email);
+				}
+
+				if(frm.elements['address'] && Utils.isEmpty(frm.elements['address'].value)) {
+					err = true;
+					msg.push('地址不能为空');
+				}
+
+				if(frm.elements['zipcode'] && frm.elements['zipcode'].value.length > 0 && (!Utils.isNumber(frm.elements['zipcode'].value))) {
+					err = true;
+					//msg.push(zip_not_num);
+				}
+
+				if(frm.elements['mobile'] && (Utils.isEmpty(frm.elements['mobile'].value))) {
+					err = true;
+					msg.push('手机号不能为空');
+				} else {
+					if(frm.elements['mobile'] && !Utils.isMobile(frm.elements['mobile'].value))
+					{
+						err = true;
+						msg.push('手机号不正确');
+					}
+				}
+
+				if(frm.elements['tel'] && frm.elements['tel'].value.length > 0 && (!Utils.isTel(frm.elements['tel'].value))) {
+					err = true;
+					//msg.push(tele_invaild);
+				}
+
+				if(err)
+				{
+					message = msg.join("\n");
+					alert(message);
+				}
+				
+				if (!err)
+				{
+					var params = $(frm).serializeArray(); 
+					console.log(JSON.stringify(params));
+					var obj = {};
+					var mobile;
+					$.each(params, function(idx, item){
+						obj[item.name] = item.value; 
+					})
+					obj['address_id']= w.address_id;
+						console.log(w.address_id);
+					var str = (JSON.stringify(obj));
+					console.log(str);
+					
+					mui.web_query('userAddress.php?act=update',  {consignee:obj.consignee, 
+						mobile:obj.mobile,
+						address_id:obj.address_id,
+						country:obj.country,
+						province:obj.province,
+						city:obj.city,
+						district:obj.district,
+						address:obj.address,
+						is_default:obj.is_default
+					}, function(data){
+						if (data.status == 1)
+						{
+							mui.fire(w.opener(), 'refresh', {});
+							w.close();		
+						}
+						else
+						{
+							mui.toast(data.info);							
+						}
+
+					})
+				}
+
+				return false;
+
+			}
+		</script>
+	</body>
+
+</html>

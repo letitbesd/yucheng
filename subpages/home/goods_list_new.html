@@ -1,91 +1,153 @@
-﻿<!doctype html>
-<html lang="zh">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
-<META HTTP-EQUIV="Expires" CONTENT="0"> 
-<title>{$page_title}</title>
-<link rel="stylesheet" type="text/css" href="{$template_dir}/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="{$template_dir}/css/style.css" />
-<link rel="stylesheet" href="{$template_dir}/css/pullToRefresh.css" type="text/css" />
-<script type="text/javascript" src="{$template_dir}/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="{$template_dir}/js/iscroll_1.js"></script>
-<script type="text/javascript" src="{$template_dir}/js/pullToRefresh.mini.js"></script>
-<script type="text/javascript" src="{$template_dir}/js/common.js"></script>
-<style>
-#wrapper {
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	bottom:60px;
-	width: 100%;
-	margin:0;
-	height:auto;
-	
-}
-</style>
-</head>
-<body>
-	<div class="li_all" id="wrapper">
-		<ul style="float:left;">
-			<li><div class="li_header">
-			{foreach from=$goods_list item=goods key=key name=goods_list}
-				{if $key eq 0}
-					<img src="/{$goods.original_img}">
-				{/if}
-			{/foreach}
-		</div></li>
-		<li><div class="sl_con">
-			{foreach from=$goods_list item=goods key=key name=goods_list}
-				{if $key neq 0}
-				<div class="sl_list">
-					<p><img src="/{$goods.goods_thumb}"></p>
-					<p>{$goods.goods_name}</p>
-					<p>￥{$goods.shop_price}</p>
-					<p>{$goods.on_sale_time}上架</p>
-					<p><img src="{$template_dir}/img/icon/yc-18.png"></p>
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/home/style.css" rel='stylesheet' />
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul style="-webkit-padding-start: 0;">
+					<li>
+						<div class="li_header" data="100" onclick="showGoods(this);">
+							<img src="../../images/in_1.jpg">
+						</div>
+					</li>
+				</ul>
+				<div class="sl_con">
+					<div class="sl_list" data="100" onclick="showGoods(this);">
+						<p><img src="../../images/in_2.jpg"></p>
+						<p>{$goods.goods_name}</p>
+						<p>￥{$goods.shop_price}</p>
+						<p>{$goods.on_sale_time}上架</p>
+						<p><img src="../../images/yucheng/yc-18.png"></p>
+					</div>
+					<div class="sl_list" data="100" onclick="showGoods(this);">
+						<p><img src="../../images/in_2.jpg"></p>
+						<p>{$goods.goods_name}</p>
+						<p>￥{$goods.shop_price}</p>
+						<p>{$goods.on_sale_time}上架</p>
+						<p><img src="../../images/yucheng/yc-18.png"></p>
+					</div>
 				</div>
-				{/if}
-			{/foreach}
-		</div></li>
-		</ul>
-	</div>
-	<input type="hidden" id="page_input" value="{$page}"/>
-	<input type="hidden" id="refresh_url_input" value="/mobile/goods_list.php?act=new"/>
-<script type="text/javascript">
-function add_list(list){
-	var lenght = list.length;
-	if(list && list[0]){
-		page = page + 1;
-		var el, li, i=0, item;
-		el =document.querySelector(".sl_con");
-		item = list[i];
-		while(item){
-			li = document.createElement("div");
-			$(li).addClass("sl_list");
-			li.innerHTML=
-				"<p><img src='/" + item.goods_thumb + "'></p>"+
-				"<p>" + item.goods_name + "</p>"+
-				"<p>￥" + item.shop_price + "</p>"+
-				"<p>" + item.on_sale_time + "上架</p>"+
-				"<p><img src='{$template_dir}/img/icon/yc-18.png'></p>";
-			el.appendChild(li, el.childNodes[0]);
-			i = i + 1;
-			item = list[i];
-		}
-		wrapper.refresh();
-	}else{
-		refresh_end_flag = 1;
-		refresh_end();
-	}
-}
-</script>
-<script type="text/javascript" src="{$template_dir}/js/pullToRefreshUtil.js"></script>
-</body>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						height: 50, //可选.默认50.触发上拉加载拖动距离
+						contentrefresh: '正在加载...',
+						contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+						callback: pullupRefresh
+					}/*,
+					 down : {
+				      height:50,//可选,默认50.触发下拉刷新拖动距离,
+				      auto: true,//可选,默认false.自动下拉刷新一次
+				      contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+				      contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+				      contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+				      callback :function(){
+				      	setTimeout(function(){
+				      		mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				      		
+				      	}, 1000);
+
+				      } //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				    }*/
+				}
+			});
+
+			//add list
+			var url = "http://yucheng.chebank.com/";
+			 
+			function add_list2(list) { 
+				page++;
+				var lenght = list.length;
+				if(list && list[0]) { 
+					var el, li ,item;
+					el = $(".sl_con");
+					el.empty();
+					
+					for (var i = 0 ; i < list.length; i++){
+						item = list[i];
+						if(i == 0) {
+							$(".li_header").find("img").attr('src', url + item.goods_thumb);
+							$(".li_header").data('goods_id', item.goods_id);
+							i++;
+						} else {
+							li = $('<div class="sl_list" data="100" onclick="showGoods(this);">\
+									<p><img src="../../images/in_2.jpg"></p>\
+									<p class="gname">{$goods.goods_name}</p>\
+									<p class="gprice">￥{$goods.shop_price}</p>\
+									<p class="gsaletime">{$goods.on_sale_time}上架</p>\
+									<p><img src="../../images/yucheng/yc-18.png"></p>\
+								</div>'); 
+							
+							li.data('goods_id', item.goods_id);
+							$(el).append(li);
+							i ++; 
+						}
+					}
+				}
+			}
+
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			var page = 1;
+
+			function pullupRefresh() {
+
+				mui.web_query('goodsList.php?act=new&page=' + page,  {page: page},function(data) {
+						if(data.goods_list && data.goods_list.length > 0) {
+							add_list2(data.goods_list);
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+						} else {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						}
+					}
+				);
+			}
+			if(mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pullupLoading();
+					}, 10);
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pullupLoading();
+				});
+			}
+		 
+						 
+			function showGoods(ele)
+			{
+				var id = $(ele).data('goods_id'); 
+				console.log("showing goods " + id);				
+				var wv = plus.webview.getWebviewById('./home/goods_detail.html');
+				if (wv)
+				{
+					wv.show('slide-in-right');
+					mui.fire(wv, "initGoodId", {id:id});					
+				}
+				else
+					mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id});
+			}
+		</script>
+	</body>
+
 </html>

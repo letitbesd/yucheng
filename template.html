@@ -3,12 +3,12 @@
 
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>123</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="css/mui.min.css">
 		<style>
 			html,
 			body {
@@ -93,6 +93,7 @@
 					contentWebview = self.children()[0];
 				}
 				contentWebview.hide("none");
+				//contentWebview.loadData( '<html><body></body></html>' );
 			}, 350);
 		}
 		
@@ -100,6 +101,7 @@
 		var menuElem = document.getElementById("menu")
 
 		window.addEventListener("updateHeader", function(e) {
+			console.log('updateHeader , id:' + e.detail.id)
 			var title = e.detail.title;
 			var showMenu = e.detail.showMenu;
 			var href = e.detail.target;
@@ -120,18 +122,22 @@
 				}
 				
 				if (contentWebview.getURL() != href) {
+					//console.log('loading page:' + href);
 					contentWebview.loadURL(href);
+//					contentWebview.show();
 				} else {
 					contentWebview.show();
 				}
 				setTimeout(function () {
 					self.show(aniShow);
-				},10); 
-				mui.fire(contentWebview, "updateID", {
-					id:100
-				})
-			}
+				},10);
+			} 
+			if (e.detail.id)
+			{
+				console.log('event fired' +  e.detail.id);
+				mui.fire(contentWebview, 'initGoodId', {id: e.detail.id});
 			
+			}
 		});
 		
 		
@@ -150,7 +156,7 @@
 		});
 		
 		mui.menu = function () {
-			console.log(menuElem.style.display);
+			//console.log(menuElem.style.display);
 			if(menuElem.style.display !== "none"){
 				if(contentWebview==null){
 					contentWebview = plus.webview.currentWebview().children()[0];

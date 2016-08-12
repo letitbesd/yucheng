@@ -1,0 +1,164 @@
+﻿<!doctype html>
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<META HTTP-EQUIV="Expires" CONTENT="0">
+		<title>玉城</title>
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/home/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home/style.css" />
+		<style> 
+			.in_blo5 p {
+			    width: 31%;
+			    margin-left: 1%;
+			    float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul id="tpl_hold">
+					<!--<li style="clear:both">
+						<div class="in_blo4" style="position:relative;">
+							<img src="../../images/in_3.jpg" class="to_goods_detail" data="242">
+							<img src="../../images/yucheng/addr.png" class="logo">
+						</div>
+						<div class="in_blo5" style="float:left">
+							<p class="to_goods_detail">
+								<img src="../../images/in_5.jpg">
+								<b>测试商品1</b>
+								<b>￥</b>
+								<span>30000.00</span>
+							</p>
+							<p class="to_goods_detail">
+								<img src="../../images/in_5.jpg">
+								<b>测试商品1</b>
+								<b>￥</b>
+								<span>30000.00</span>
+							</p>
+							<p class="to_goods_detail">
+								<img src="../../images/in_5.jpg">
+								<b>测试商品1</b>
+								<b>￥</b>
+								<span>30.00</span>
+							</p> 
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script src="../../js/zepto.min.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				mui.init({
+					pullRefresh: {
+						container: '#pullrefresh', //待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+						up: {
+							height: 50, //可选.默认50.触发上拉加载拖动距离
+							auto: true, //可选,默认false.自动上拉加载一次
+							contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+							contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+							callback: pullrefreshFunction //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						},
+					}
+				});
+			})
+
+			var page = 1;
+
+			function pullrefreshFunction() {
+				//通过ajax从服务器获取新数据；
+				console.log('page ' + page);
+				mui.web_query('supplierList.php', {
+					page: page
+				}, function(data) {
+					console.log(JSON.stringify(data.supplier_list));
+					if (data && data.supplier_list && data.supplier_list.length > 0) {
+							add_list(data.supplier_list);
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); 
+
+					} else {
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					}
+				})
+			}
+			
+			function getTemplate(){
+				return $('<li style="clear:both">\
+						<div class="in_blo4" style="position:relative;">\
+							<img src="../../images/in_3.jpg" class="to_goods_detail" data="0" onclick="showGoods(this);">\
+							<img src="../../images/yucheng/addr.png" class="logo">\
+						</div>\
+						<div class="in_blo5" style="float:left">\
+						</div>\
+					</li>');
+			}
+			
+			function getSubTemplate(){
+				return $('<p class="to_goods_detail">\
+								<img src="../../images/in_5.jpg" data="0" onclick="showGoods(this);">\
+								<b>测试商品1</b>\
+								<b>￥46800.00</b>\
+							</p>');
+			}
+
+			var url = 'http://yucheng.chebank.com/';
+			function add_list(list) {
+				page++;				
+				for (var i = 0; i < list.length; i++) {
+					var item = list[i];
+//					console.log(item.supplier_name);
+					var newnode =   getTemplate();  
+					var goods_list = item.goods_list;
+					newnode.find(".logo").attr('src', url + item.shop_logo);
+					newnode.find('.in_blo4').find('img').eq(1).attr('src', url + item.shop_logo);
+					if (goods_list) {
+						$.each(goods_list, function(j, goods) {
+							if (j == 0) {
+								var t  = newnode.find('.in_blo4').find('img').eq(0);
+								t.attr('src', url + goods.original_img);
+								t.attr('data', goods.goods_id)
+								return false;
+							}
+						});
+						//other goods except first one.
+						console.log(goods_list.length);
+						for (var k = 1 ; k < Math.min(goods_list.length, 4); k++)
+						{
+							var goods = goods_list[k];
+							var childnode = getSubTemplate();
+							childnode.find("img").attr('src', url + goods.goods_thumb);
+							childnode.find("img").attr('data', goods.goods_id);
+							childnode.find("b").eq(0).html(mui_utils.trimString( goods.goods_name, 8));
+							childnode.find("b").eq(1).html('￥' +goods.shop_price);
+							newnode.find('.in_blo5').append(childnode); 							 
+						} 
+					}
+					$("#tpl_hold").append(newnode);
+				};
+			}
+			 
+			function showGoods(ele)
+			{
+				var goods_id = (ele.getAttribute('data'));				 
+				mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:goods_id});	
+				
+			}
+		
+		</script>
+	</body>
+
+</html>

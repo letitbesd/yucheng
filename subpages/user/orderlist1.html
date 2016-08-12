@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+
+		<style>
+			#wrapper {
+				position: absolute;
+				left: 0;
+				width: 100%;
+				bottom: 0px;
+				top: 0px;
+			}
+			
+			#scroller {
+				position: absolute;
+				z-index: 1;
+				-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+				width: 100%;
+				-webkit-transform: translateZ(0);
+				-moz-transform: translateZ(0);
+				-ms-transform: translateZ(0);
+				-o-transform: translateZ(0);
+				transform: translateZ(0);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				-webkit-text-size-adjust: none;
+				-moz-text-size-adjust: none;
+				-ms-text-size-adjust: none;
+				-o-text-size-adjust: none;
+				text-size-adjust: none;
+				padding-bottom: 300px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="my_yc">
+			<div class="mc_back"><img src="../../images/yucheng/yc-22.png" class="mc_bk"></div>
+			<div class="mc_tab">
+				<p class="mc_select">待付款</p>
+				<p onclick="switchTab(2)">待收货</p>
+				<p onclick="switchTab(3)">退款商品</p>
+				<p onclick="switchTab(4)">所有订单</p>
+			</div>
+
+			<div class="div1" style='display:block'>
+				<div class="mc_con">
+					<div class="mc_list">
+						<div class="mc_shop">
+							<img src="../../images/yucheng/cart_1.png" class="mc_sp">
+							<span class='shop_name'>盈宝翡翠</span>
+							<img src="../../images/yucheng/mc_order.png" data="100" class="mc_ord" onclick="showOrder(this);">
+						</div>
+						<div class="mc_li">
+							<p class="mc_li_pic"><img class='goods_img' src="../../images/in_4.jpg"></p>
+							<p class="mc_li_con">
+								<b class="mc_li_name">糯冰种翠色路路通挂件</b>
+								<b class="mc_li_price">￥0</b>
+							</p>
+						</div>
+						<div class="mc_blank"></div>
+					</div>
+					<div class="mc_all">
+						<p class="mc_all_price">￥15.00</p>
+						<p class="mc_order_num">订单号：2016070796070</p>
+					</div>
+					<div class="mc_type">
+						<div class="mc_wait_pay">
+							<p class="mc_go_pay" onclick="dotask(this,1)" data="90">完成付款</p>
+							<p class="mc_can_pay" id="cancel_order" onclick="dotask(this,2)" data="90">取消订单</p>
+						</div>
+						<div class="mc_good">
+							<div class="mc_good_style">已取消</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="div2" style='display:none'></div>
+			<div class="div3" style='display:none'></div>
+			<div class="div4" style='display:none'></div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/zepto.js"></script>
+		<script src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript" src="../../js/order_status.js" ></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				//console.log("orderlist.html plusready" + plus.webview.currentWebview().type);
+				mui.init();
+				var baseurl = 'http://yucheng.chebank.com/';
+				//var typeid = plus.webview.currentWebview().type;
+				mui.web_query('userOrderList.php', {
+					type: 1
+				}, function(data) {
+					var tpl = $(".mc_con");
+					var div = tpl.parent();
+					div.empty();
+					$.each(data.orders, function(idx, item) {
+						var newnode = tpl.clone();
+						var goods = item.goods_list[0];
+						//console.log(baseurl + goods.goods_thumb);
+						newnode.find('.goods_img').attr('src', baseurl + goods.goods_thumb);
+						newnode.find('.shop_name').html(item.shopname);
+						newnode.find('.mc_li_name').html(goods.goods_name);
+						newnode.find('.mc_ord').attr("data", item.order_id);
+						 
+						//newnode.find('i').eq(3).html(item.order_status1);
+						newnode.find(".mc_li_price").html(goods.formated_subtotal);
+						newnode.find('.mc_all_price').html(item.total_fee);
+						newnode.find('.mc_order_num').html('订单号:' + item.order_sn);
+						if (item.order_status1 == 0)
+						{
+							newnode.find(".mc_good").hide(); 
+							newnode.find(".mc_go_pay").attr('data', item.order_id);
+							newnode.find(".mc_can_pay").attr('data', item.order_id);
+						}
+						else
+						{
+							newnode.find(".mc_wait_pay").hide();
+						}
+						newnode.appendTo(div);
+					});
+				});
+			})
+
+			function switchTab(index) //index 1 2 3 4 
+			{
+				console.log("clicked");
+				var webview = mui.openWindow({
+					url: './orderlist' + index + '.html',
+					show: {
+						autoShow: true,
+						aniShow: "none", //页面显示动画，默认为”slide-in-right“；
+						duration: 600 //页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+					}
+				});
+			}
+			
+			function showOrder(ele)
+			{
+				var order_id = $(ele).attr('data');
+				var w = plus.webview.open('./order_detail.html');
+				mui.fire(w, "show_order", {order_id:order_id});
+			}
+			
+			function dotask(ele, type)
+			{
+				var order_id = $(ele).attr("data");
+				if (type == 1){
+					//完成付款
+				}else if(type ==2){
+					console.log("order id" + order_id)
+					mui.web_query("userOrderOpera.php?act=cancel", {order_id:order_id}, function(data){
+						if (data.status == 1){
+							var tpl = $(ele).parents(".mc_con");
+							tpl.find(".mc_good").show();
+							tpl.find(".mc_wait_pay").hide();
+						}
+					})
+				}
+			}
+		</script>
+	</body>
+
+</html>

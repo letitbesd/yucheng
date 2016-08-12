@@ -1,0 +1,433 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<style>
+			/*评价*/
+			
+			.as_all {
+				width: 100%;
+				float: left;
+			}
+			
+			.as_back {
+				width: 100%;
+				height: 45px;
+				float: left;
+				background: #fff;
+			}
+			
+			.as_back img {
+				width: 25px;
+				float: left;
+				margin-top: 10px;
+				margin-left: 5%;
+			}
+			
+			.as_tab {
+				width: 100%;
+				height: 45px;
+				float: left;
+			}
+			
+			.as_tab p {
+				width: 50%;
+				float: left;
+				text-align: center;
+				font-size: 15px;
+				line-height: 45px;
+			}
+			
+			.as_select {
+				background: #000;
+				color: #fff;
+			}
+			
+			.as_list {
+				width: 90%;
+				margin-left: 5%;
+				background: #fff;
+				float: left;
+				margin-bottom: 15px;
+			}
+			
+			.as_shop_name {
+				width: 92%;
+				margin-left: 4%;
+				background: #F7F7F7;
+				position: relative;
+				float: left;
+				height: 45px;
+				margin-top: 15px;
+			}
+			
+			.as_shop_name img {
+				width: 25px;
+				position: absolute;
+				top: 5px;
+				left: 3%;
+			}
+			
+			.as_shop_name i {
+				width: 100%;
+				float: left;
+				text-align: center;
+				font-size: 15px;
+				color: #C0C1C1;
+				line-height: 45px;
+			}
+			
+			.as_con {
+				width: 92%;
+				margin-left: 4%;
+				background: #E6E6E8;
+				position: relative;
+				float: left;
+			}
+			
+			.as_c1 {
+				width: 30%;
+				float: left;
+			}
+			
+			.as_c2 {
+				width: 70%;
+				float: left;
+			}
+			
+			.as_c1 img {
+				width: 100%;
+				height: 100px;
+			}
+			
+			.as_c2 b {
+				width: 90%;
+				margin-left: 5%;
+				line-height: 35px;
+				float: left;
+			}
+			
+			.as_name {
+				font-size: 17px;
+				color: #000;
+				text-align: left;
+			}
+			
+			.as_red {
+				font-size: 16px;
+				color: #7B2B36;
+				text-align: left;
+			}
+			
+			.as_num {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+				border-bottom: solid 1px #A8A8A8;
+				height: 45px;
+			}
+			
+			.as_num_red {
+				font-size: 20px;
+				color: #7B2B36;
+				text-align: left;
+				float: left;
+				line-height: 45px;
+			}
+			
+			.as_dnum {
+				font-size: 15px;
+				float: right;
+				color: #4C4C4C;
+				line-height: 45px;
+			}
+			
+			.as_go {
+				width: 30%;
+				float: left;
+				margin-left: 35%;
+				font-size: 16px;
+				color: #fff;
+				background: #7B2B36;
+				margin-top: 10px;
+				text-align: center;
+				line-height: 30px;
+				margin-bottom: 10px;
+			}
+			
+			.as_blank {
+				width: 100%;
+				height: 10px;
+				float: left;
+			}
+			
+			.as_time {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.as_time p {
+				width: 50%;
+				float: left;
+				color: #A3A4A3;
+				font-size: 15px;
+				line-height: 45px;
+			}
+			
+			.as_over_time {
+				text-align: left;
+			}
+			
+			.as_type {
+				text-align: right;
+			}
+			
+			.as_num2 {
+				display: none;
+			}
+			
+			.as_xx {
+				padding-bottom: 5px;
+				border-top: solid 1px #000;
+				border-bottom: solid 1px #000;
+			}
+			
+			.as_pf {
+				width: 92%;
+				margin-left: 4%;
+				float: left;
+			}
+			
+			.as_pf_title {
+				width: 100%;
+				font-size: 20px;
+				color: #B8B8B8;
+				text-align: left;
+				float: left;
+			}
+			
+			.as_pf_ms {
+				width: 100%;
+				float: left;
+				height: 45px;
+			}
+			
+			.as_pf_ms i {
+				font-size: 15px;
+				color: #C3C3C3;
+				float: left;
+				margin-right: 2%;
+				line-height: 45px;
+			}
+			
+			.as_pf_ms img {
+				width: 10%;
+				margin-left: 5%;
+				float: left;
+			}
+			
+			.as_pf_text {
+				width: 100%;
+				float: left;
+				margin-top: 15px;
+			}
+			
+			.as_pf_text textarea {
+				resize: none;
+				outline: none;
+				background: #DDDDDD;
+				height: 100px;
+				font-size: 16px;
+				color: #fff;
+				width: 100%;
+			}
+			
+			.as_text_con {
+				background: #DDDDDD;
+				height: 100px;
+				font-size: 16px;
+				color: #fff;
+				width: 100%;
+				float: left;
+			}
+			
+			.as_xx_go {
+				width: 100%;
+				font-size: 16px;
+				color: #fff;
+				height: 45px;
+				line-height: 45px;
+				text-align: center;
+				margin-top: 15px;
+				margin-bottom: 15px;
+				float: left;
+				background: #7B2B36;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="as_all">
+			<div class="as_tab">
+				<p class="as_sty1 as_select">待评价</p>
+				<p class="as_sty2">已评价</p>
+			</div>
+
+			<div class="as_list as_num1">
+				<div>
+				<div class="as_shop_name"><img src="../../images/yucheng/cart_1.png"><i>翠钻宫</i></div>
+				<div class="as_con" data="100" goods_id="1">
+					<p class="as_c1"><img src="../../images/in_5.jpg"></p>
+					<p class="as_c2"><b class="as_name">糯冰种飘翠元宝车挂</b><b class="as_red">￥5220.00</b></p>
+				</div>
+				<div class="as_num">
+					<!--<p class="as_num_red">￥820000</p>-->
+					<p class="as_dnum">订单号：2016071499995</p>
+				</div> 
+				<div class="as_go" onclick="doComment(this);">去评价</div>
+				</div>
+			</div>
+			<div class="as_list as_num2">
+				<div>
+				<div class="as_shop_name"><img src="../../images/yucheng/cart_1.png"><i>翠钻宫2</i></div>
+				<div class="as_con" data="200" goods_id="1" onclick="showComment(this);">
+					<p class="as_c1"><img src="../../images/in_5.jpg"></p>
+					<p class="as_c2"><b class="as_name">糯冰种飘翠元宝车挂2</b><b class="as_red">￥5220.00</b></p>
+				</div>
+				<div class="as_num">
+					<!--<p class="as_num_red">￥820000</p>-->
+					<p class="as_dnum">订单号：2016071499995</p>
+				</div> 
+				<div class="as_time">
+						<p class="as_over_time">完成时间：2016-07-13xx</p>
+						<p class="as_type">状态：已评价</p>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript">
+			var list = {};
+			function getToComment(){
+				return $('<div>\
+				<div class="as_shop_name"><img src="../../images/yucheng/cart_1.png"><i>翠钻宫</i></div>\
+				<div class="as_con" data="100" goods_id="1">\
+					<p class="as_c1"><img src="../../images/in_5.jpg"></p>\
+					<p class="as_c2"><b class="as_name">糯冰种飘翠元宝车挂</b><b class="as_red">￥5220.00</b></p>\
+				</div>\
+				<div class="as_num">\
+					<!--<p class="as_num_red">￥820000</p>-->\
+					<p class="as_dnum">订单号：2016071499995</p>\
+				</div> \
+				<div class="as_go" onclick="doComment(this);">去评价</div>\
+				</div>');
+			}
+			function getAlreadyComment(){
+				return $('<div>\
+				<div class="as_shop_name"><img src="../../images/yucheng/cart_1.png"><i>翠钻宫2</i></div>\
+				<div class="as_con" data="200" goods_id="1" onclick="showComment(this);">\
+					<p class="as_c1"><img src="../../images/in_5.jpg"></p>\
+					<p class="as_c2"><b class="as_name">糯冰种飘翠元宝车挂2</b><b class="as_red">￥5220.00</b></p>\
+				</div>\
+				<div class="as_num">\
+					<!--<p class="as_num_red">￥820000</p>-->\
+					<p class="as_dnum">订单号：2016071499995</p>\
+				</div> \
+				<div class="as_time">\
+						<p class="as_over_time">完成时间：2016-07-13xx</p>\
+						<p class="as_type">状态：已评价</p>\
+				</div>\
+				</div>\
+			</div>');
+			}
+			function refresh(){
+				console.log('doing coments_sub refresh');
+				mui.web_query('userComment.php?act=list', {}, function(data){
+					
+					//console.log(str1, str2);
+					$('.as_num1').empty();
+					$('.as_num2').empty();
+					
+					if (data.item_list)
+					{
+						//console.log(JSON.stringify(data.item_list));
+						
+						$.each(data.item_list, function(idx, item){
+							var newnode = item.comment_status == "1" ? getAlreadyComment() :getToComment(); 
+							newnode.find('.as_c1 img').attr('src', 'http://yucheng.chebank.com/'+item.goods_thumb);
+							newnode.find('.as_name').html(item.goods_name);
+							newnode.find(".as_red").html('￥' + item.goods_price);
+							newnode.find(".as_dnum").html('订单号:' + item.order_sn); 
+							newnode.find(".as_con").attr('data', item.rec_id);
+							newnode.find(".as_con").attr('goods_id', item.goods_id);
+							newnode.find(".as_shop_name i").html(item.shopname);
+							list[item.rec_id] = item;
+							//console.log(item.comment_status);
+							if (item.comment_status =="1")
+							{
+								newnode.appendTo($(".as_num2"));	
+								//console.log('已评价' + item.rec_id);
+								newnode.find(".as_over_time").html("完成时间：" +item.comment_time);
+							}
+							else
+							{
+								newnode.appendTo($(".as_num1"));						
+								//console.log('未评价' + item.rec_id);
+							}
+
+						})
+					}
+				})
+			}
+			mui.plusReady(function() {
+				mui.init({});
+			})
+			window.addEventListener('refresh', function(){
+				//consle.log("zz.z..")
+				refresh();
+			})
+		</script>
+		<script>
+			$(".as_sty1").on("click",function(){
+				$(this).siblings("p").removeClass("as_select");
+				$(this).addClass("as_select");
+				$(".as_num2").hide();
+				$(".as_num1").show();
+			});
+			
+			$(".as_sty2").on("click",function(){
+				$(this).siblings("p").removeClass("as_select");
+				$(this).addClass("as_select");
+				$(".as_num1").hide();
+				$(".as_num2").show();
+			});
+			
+			function doComment(ele)
+			{
+				var id = $(ele).siblings('.as_con').attr('data');
+				var goods_id = $(ele).siblings('.as_con').attr('goods_id');
+				console.log(id +'/' + goods_id)
+				mui_utils.openMuiPage('./do_comment.html' ,'setid', {id:id,data:list[id], edit:true});
+			}
+			
+			function showComment(ele)
+			{
+				var id = $(ele).attr('data');
+				var goods_id = $(ele).attr('goods_id'); 
+				console.log(id+'/' +goods_id) 
+				mui_utils.openMuiPage('./do_comment.html', 'setid', {id:id,data:list[id], edit:false});			
+			}
+		</script>
+	</body>
+
+</html>

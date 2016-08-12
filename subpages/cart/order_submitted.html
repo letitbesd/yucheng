@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" /> 
+		<link href="../../css/home/reset.css" rel="stylesheet" />
+		<style>
+			.wc_back {
+				width: 90%;
+				margin-left: 5%;
+				height: 45px;
+				border-bottom: solid 1px #333;
+			}
+			
+			.wc_back img {
+				width: 35px;
+				float: left;
+				margin-top: 5px;
+			}
+			
+			.wc_style {
+				width: 90%;
+				margin-left: 5%;
+				height: 100px;
+				border-bottom: solid 1px #333;
+				line-height: 100px;
+				text-align: center;
+			}
+			
+			.wc_style img {
+				width: 35px;
+				margin-top: 32px;
+				margin-right: 5px;
+				float: left;
+				margin-left: 23%;
+			}
+			
+			.wc_style i {
+				float: left;
+				font-size: 18px;
+			}
+			
+			.wc_con {
+				width: 90%;
+				margin-left: 5%;
+				margin-top: 5px;
+			}
+			
+			.wc_con p {
+				width: 100%;
+				font-size: 14px;
+				color: #717171;
+				text-align: left;
+				line-height: 25px;
+			}
+			
+			.wc_red {
+				color: #7B2B36;
+			}
+			
+			.wc_bun {
+				position: fixed;
+				bottom: 10px;
+				left: 5%;
+				width: 90%;
+				height: 45px;
+				line-height: 45px;
+				color: #fff;
+				font-size: 16px;
+				text-align: center;
+				background: #7B2B36;
+			}
+			.success{
+				/*display: none;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="yc_wc">
+			<div class="wc_back"><img src="../../images/yucheng/yc-22.png"></div>
+			<div class='success'>
+				<div class="wc_style"><img src="../../images/yucheng/tk_2.png"><i>订单已提交成功</i></div>
+				<div class="wc_con">
+					<p>订单号：<i>2016080407023</i></p>
+					<p>支付金额：<i>￥111600</i></p>
+					<p>配送方式：<i class="wc_red">顺丰速运</i></p>
+				</div>
+				<div class="wc_bun">支付</div>
+			</div>
+			
+		</div>
+
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/wxpay.js" ></script>
+		 
+		<script type="text/javascript">
+			mui.init();
+			var post_data = {};
+			window.addEventListener('init', function(e){
+				var res = e.detail.data;
+				$.each(res, function(idx, item){
+								console.log(item.name + '=' + item.value);
+								if (item.name.indexOf('payment') == 0){
+									post_data[item.name] = item.value; 
+								}else if(item.name.indexOf('pay_ship') == 0){
+									post_data[item.name] = item.value; 
+								}else if(item.name.indexOf('bonus_') == 0){
+									post_data[item.name] = item.value; 
+								}
+							});
+				
+			})
+			
+			var pay_data = {};
+			mui.plusReady(function(){
+				wxpay.init();				
+				//请求orderconfirm.php 接口
+				console.log('orderGenerate:' + JSON.stringify(post_data));
+				post_data['data_type'] = 'text';
+				mui.web_query('orderGenerate.php', post_data, function(data){ 
+					if (data.status == 1)
+					{
+						//console.log(JSON.stringify(data.order));
+						$('.success').show();
+						$('.wc_red').html(data.order.shipping_name); 
+						$('.wc_con').find('p').eq(0).html('订单号：<i>' + data.order.order_sn+'</i>');
+						$('.wc_con').find('p').eq(1).html('<p>支付金额：<i>￥' + data.order.order_amount + '</i></p>');
+						pay_data['order_sn'] = data.order.order_sn;
+						pay_data['order_id'] = data.order.order_id;
+					}
+					else
+					{
+						mui.toast(data.info);
+					}
+				})
+			})
+			
+			$('.wc_bun').on('click', function() {
+			 	wxpay.pay({order_id:pay_data.order_id, on_successs:function(){
+			 		//confirm order is payed ?
+			 		mui.web_query('payResult.php', {order_id:pay_data.order_id}, function(data){
+			 			if (data.retcode == 1)
+			 			{
+			 				mui.alert('pay success');
+			 				
+			 			}
+			 			else
+			 			{
+			 				mui.alert(('pay fail'));
+			 			}
+			 			mui.fire(plus.webview.currentWebview().opener(), 'closepage');
+			 		})
+			 	}});
+//			 	wxpay.pay({order_id:207}); 
+				//todo: 请求支付结果 http://yucheng.chebank.com/mapi/payResult.php
+			});
+
+			$(".wc_back").on("click", function() {
+				/*var backUrl = "";
+				if(backUrl) {
+					window.location.href = backUrl;
+				} else {
+					window.history.go(-1);
+				}*/
+
+			}); 
+		</script>
+	</body>
+
+</html>

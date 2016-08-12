@@ -1,0 +1,492 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" href="../../css/home/style.css" />-->
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<style>
+			/*店铺首页*/
+			
+			.si_all {
+				width: 100%;
+				background: #FFFFFF;
+				float: left;
+				padding-bottom: 70px;
+			}
+			
+			.si_back {
+				width: 100%;
+				text-align: center;
+				font-size: 17px;
+				color: #fff;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 2;
+			}
+			
+			.si_back b {
+				width: 100%;
+				display: block;
+				text-align: center;
+				line-height: 45px;
+			}
+			
+			.si_bk {
+				width: 25px;
+				float: left;
+				margin: 13px;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			
+			.si_b1 {
+				width: 100%;
+				float: left;
+				position: relative;
+			}
+			
+			.si_in {
+				width: 100%;
+			}
+			
+			.si_kf {
+				width: 35px;
+				position: absolute;
+				right: 6%;
+				bottom: 18px;
+			}
+			
+			.si_b2 {
+				width: 90%;
+				float: left;
+				padding: 40px 0 40px 0;
+				border-bottom: solid 1px #221814;
+				margin-left: 5%;
+			}
+			
+			.si_b2 p {
+				width: 33%;
+				float: left;
+				text-align: center;
+			}
+			
+			.si_b2 b {
+				width: 100%;
+				line-height: 45px;
+				color: #792b34;
+				font-size: 17px;
+				font-weight: 400;
+			}
+			
+			.si_b2 i {
+				width: 100%;
+				float: left;
+				font-size: 15px;
+				color: #3e3a39;
+			}
+			
+			.si_b3 {
+				width: 90%;
+				float: left;
+				border-bottom: solid 1px #221814;
+				margin-left: 5%;
+				position: relative;
+			}
+			
+			.si_b3_title {
+				width: 94%;
+				margin-left: 3%;
+				font-size: 15px;
+				color: #3e3a39;
+				line-height: 35px;
+			}
+			
+			.si_b3_con {
+				width: 94%;
+				margin-left: 3%;
+				font-size: 14px;
+				color: #3e3a39;
+				line-height: 20px;
+			}
+			
+			#si_wai {
+				width: 10px;
+				text-align: center;
+				display: block;
+				height: 9px;
+			}
+			
+			.si_b3_down {
+				background: url("../../css/home/si_down.png");
+				background-size: 100% 100%;
+				position: absolute;
+				top: 14px;
+				left: 50%;
+			}
+			
+			.si_b3_up {
+				background: url("../../css/home/si_up.png");
+				background-size: 100% 100%;
+				margin: 20px 0 20px 50%;
+			}
+			
+			.n1 {
+				display: none;
+			}
+			
+			.si_b4 {
+				width: 90%;
+				float: left;
+				border-bottom: solid 1px #221814;
+				margin-left: 5%;
+				position: relative;
+			}
+			
+			.si_b4_down {
+				background: url("../../css/home/si_down.png");
+				background-size: 100% 100%;
+				position: absolute;
+				top: 14px;
+				left: 50%;
+			}
+			
+			.si_b4_up {
+				background: url("../../css/home/si_up.png");
+				background-size: 100% 100%;
+				margin: 20px 0 20px 50%;
+				float: left;
+			}
+			
+			#s4_wai {
+				width: 10px;
+				text-align: center;
+				display: block;
+				height: 9px;
+			}
+			
+			.si_b4_title {
+				width: 94%;
+				margin-left: 3%;
+				font-size: 15px;
+				color: #3e3a39;
+				line-height: 35px;
+			}
+			
+			.si_b4_con {
+				width: 100%;
+				padding: 5px 0 0px 0;
+				float: left;
+			}
+			
+			.si_b4_con img {
+				width: 24%;
+				margin-left: 1%;
+				display: block;
+				float: left;
+			}
+			
+			.si_b5 {
+				width: 90%;
+				float: left;
+				border-bottom: solid 1px #221814;
+				margin-left: 5%;
+				position: relative;
+			}
+			
+			.si_b5_title {
+				width: 94%;
+				margin-left: 3%;
+				font-size: 15px;
+				color: #3e3a39;
+				line-height: 35px;
+				z-index: 999;
+			}
+			
+			.si_b5_con {
+				width: 100%;
+				height: 200px;
+			}
+			
+			.si_b5_down {
+				background: url("../../css/home/si_down.png");
+				background-size: 100% 100%;
+				position: absolute;
+				top: 14px;
+				left: 50%;
+			}
+			
+			.si_b5_up {
+				background: url("../../css/home/si_up.png");
+				background-size: 100% 100%;
+				margin: 20px 0 20px 50%;
+			}
+			
+			#s5_wai {
+				width: 10px;
+				text-align: center;
+				display: block;
+				height: 9px;
+			}
+			
+			.imgzoom_pack {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background: rgba(0, 0, 0, .7);
+				display: none;
+				z-index: 99999;
+			}
+			
+			.si_go {
+				width: 90%;
+				line-height: 45px;
+				font-size: 16px;
+				line-height: 45px;
+				text-align: center;
+				margin-left: 5%;
+				background: #2E2F31;
+				position: fixed;
+				bottom: 5px;
+				left: 0;
+				color: #fff;
+			}
+			
+			.si_b4_con li {
+				display: block;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 -1px 2px rgba(0, 0, 0, .1);
+			}
+			/*弹框样式*/
+			
+			.imgzoom_pack {
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+				background: rgba(0, 0, 0, .7);
+				display: none;
+				z-index: 99999;
+			}
+			
+			.imgzoom_pack .imgzoom_x {
+				color: #fff;
+				height: 30px;
+				width: 30px;
+				line-height: 30px;
+				background: #000;
+				text-align: center;
+				position: absolute;
+				right: 4%;
+				top: 15px;
+				z-index: 10;
+				cursor: pointer;
+				font-size: 24px;
+			}
+			
+			.imgzoom_pack .imgzoom_img {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				overflow: hidden;
+			}
+			
+			.imgzoom_pack .imgzoom_img img {
+				position: absolute;
+				top: 50%;
+				width: 100%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="si_all">
+			<div class="si_back"><img src="../../images/yucheng/yc-22.png" class="si_bk"><b>翠钻宫</b></div>
+			<div class="si_b1">
+				<img src="../../images/in_6.jpg" class="si_in">
+				<a href="tel:666-666666"><img src="../../images/yucheng/yc-20.png" class="si_kf"></a>
+			</div>
+			<div class="si_b2">
+				<p><b>20x</b><i>商品数量</i></p>
+				<p><b>74x</b><i>已卖商品</i></p>
+				<p><b>101%x</b><i>好评率</i></p>
+			</div>
+			<div class="si_b3">
+				<p class="si_b3_title">公司简介</p>
+				<!--<p class="si_b3_con">本店专营各类翡翠，玉器
+产品丰富，质量上乘，假一赔十，欢迎选购~！</p>-->
+				<p class="si_b3_con n1" style="display: none;">本店专营各类翡翠，玉器 产品丰富，质量上乘，假一赔十，欢迎选购~！
+				</p>
+				<p class="si_b3_down" id="si_wai"></p>
+			</div>
+
+			<div class="si_b5">
+				<div class="si_b5_title">实体店址</div>
+				<div class="si_b5_con" id="map" style="display: none;position: relative;"></div>
+				<!--<p>239d0d9</p>-->
+				<!--<iframe id="mapframe" name="mapframe">
+						<div class="si_b5_con" id="map" style="border: 1px solid red;width:100px;height:100px;display: block;">map</div>
+						<p>239d0d9</p>
+					</iframe>-->
+				<div class="si_b5_down" id="s5_wai"></div>
+			</div>
+
+			<div class="si_b4">
+				<p class="si_b4_title">资质证书</p>
+				<ul class="si_b4_con" style="display: none;">
+					<li><img src="../../images/shop_credit1_supplier17.jpg"></li>
+					<li><img src="../../images/shop_credit2_supplier17.jpg"></li>
+					<li><img src="../../images/shop_credit3_supplier17.jpg"></li>
+				</ul>
+				<section class="imgzoom_pack" style="display: none">
+					<div class="imgzoom_x">X</div>
+					<div class="imgzoom_img"><img src=""></div>
+				</section>
+				<p class="si_b4_down" id="s4_wai"></p>
+			</div>
+
+			<div class="si_go" onclick="gotoShop(this);">进入店铺</div>
+		</div>
+		<script src="../../js/mui.min.js "></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript" src="../../js/mui_utils.js"></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/scale.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=DF4434a7f8dade5aa67d63aa5245ee6f"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&amp;ak=DF4434a7f8dade5aa67d63aa5245ee6f&amp;services=&amp;t=20160801150053"></script>
+		<script type="text/javascript ">
+			mui.init({
+
+			});
+
+			var em = null,
+				map = null;
+			// plus map 接口处理地图 有个问题是地图是fixed定位，并且 在最上层
+			function showMap2() {
+				// 确保DOM解析完成
+				//				return;
+				if(!em || !window.plus || map) {
+					return;
+				};
+				console.log($("#map").length);
+				map = new plus.maps.Map("map");
+				plus.maps.Map.geocode("海淀区大钟寺地铁站", {}, function(event) {
+					var address = event.address; // 转换后的地理位置
+					var point = event.coord; // 转换后的坐标信息
+					var coordType = event.coordType; // 转换后的坐标系类型
+					//					alert("Coord:"+JSON.stringify(point));
+					map.centerAndZoom(point, 15);
+				}, function(e) {
+					alert("Failed:" + JSON.stringify(e));
+				});
+			}
+			if(window.plus) {
+				//showMap();
+			} else {
+				//document.addEventListener("plusready", plusReady, false);
+			}
+			// DOMContentloaded事件处理
+			document.addEventListener("DOMContentLoaded", function() {
+				em = document.getElementById("map");
+				//plusReady();
+			}, false);
+			var id = 0,
+				sdata = {};
+
+			window.addEventListener("setid", function(e) {
+				id = e.detail.id;
+				mui.web_query("supplierIndex.php", {
+					supplier_id: e.detail.id
+				}, function(data) {
+					if(data) {
+						sdata = data;
+						$(".si_back b").html(data.shop_name);
+						$(".si_in").attr("src", mui.web_sever + data.shop_logo);
+						$(".si_b4_con").empty();
+						$.each(data.shop_credit, function(idx, url) {
+							$('<li><img src="' + mui.web_sever + url + '"></li>').appendTo($(".si_b4_con"));
+						});
+
+						$(".si_b3_con.n1").html(data.shop_desc);
+						$(".si_b2").html('<p><b>' + data.goods_number + '</b><i>商品数量</i></p>	<p><b>' + data.sellgoods_number + '</b><i>已卖商品</i></p><p><b>' + data.evaluation + '</b><i>好评率</i></p>');
+
+						//image zoom plugin
+						ImagesZoom.init({
+							"elem": ".si_b4_con"
+						});
+					}
+
+				})
+			})
+		</script>
+		<script>
+			$("#si_wai").on("click", function() {
+				$(".n1").toggle();
+				if($("#si_wai").hasClass("si_b3_up")) {
+					$(this).removeClass("si_b3_up").addClass("si_b3_down");
+				} else {
+					$(this).removeClass("si_b3_down").addClass("si_b3_up");
+				}
+			});
+
+			$("#s5_wai").on("click", function() {
+				$("#map").toggle();
+				if($("#s5_wai").hasClass("si_b5_down")) {
+					$(this).removeClass("si_b5_down").addClass("si_b5_up");
+					em = document.getElementById("map");
+					showMap();
+				} else {
+					$(this).addClass("si_b5_down").removeClass("si_b5_up");
+				}
+			});
+
+			$("#s4_wai").on("click", function() {
+				$(".si_b4_con").toggle();
+				if($("#s4_wai").hasClass("si_b4_down")) {
+					$(this).removeClass("si_b4_down").addClass("si_b4_up");
+
+				} else {
+					$(this).addClass("si_b4_down").removeClass("si_b4_up");
+				}
+			});
+
+			function gotoShop(ele) {
+				//var id = $(ele).attr('data');
+				mui_utils.openMuiPage('./shop_goods.html', 'setid', {
+					id: id,
+					name: sdata.shop_name
+				});
+			}
+		</script>
+		<script type="text/javascript">
+			// 百度地图web版 API功能
+			function showMap() {
+				var map = new BMap.Map("map");
+				var point = new BMap.Point(116.331398, 39.897445);
+				map.centerAndZoom(point, 16);
+				// 创建地址解析器实例
+				var myGeo = new BMap.Geocoder();
+				// 将地址解析结果显示在地图上,并调整地图视野
+				//var addrstr = sdata.shop_address ? sdata.shop_address || '';
+				myGeo.getPoint(sdata.shop_address, function(point) {
+					if(point) {
+						map.centerAndZoom(point, 16);
+						map.addOverlay(new BMap.Marker(point));
+					} else {
+						alert("您选择地址没有解析到结果!");
+					}
+				}, ""); //city 不设置
+			}
+		</script>
+	</body>
+
+</html>

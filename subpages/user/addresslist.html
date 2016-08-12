@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+	</head>
+
+	<body>
+		<div class="addr_all" id="wrapper2">
+			<div id="scroller">
+				<div class="sc_head" style="line-height:45px;text-align:center;">
+					<!--<img src="../../images/yucheng/yc-17.png" class="sc_back" style="float:left;">收货地址-->
+					<i class="oc_bj">编辑</i><i class="oc_ok">完成</i>
+				</div>
+				<div class="addre_con">
+					<ul class="address_list">
+						<li class="addr_list">
+							<p>
+								<b class="oc_name">杨俊峰222</b>
+								
+							</p>
+							<p>
+								<b class="oc_num">18508834357</b>
+								<b class="oc_addr">云南-昆明-盘龙区-欣都龙城2a</b>
+							</p>
+							<p class="oc_del">
+								<b onclick="editAddress(this);"><img src="../../images/yucheng/change.png"><i>修改</i></b>
+								<b onclick="dropAddress(this)"><img src="../../images/yucheng/delete.png"><i>删除</i></b>
+							</p>
+						</li>
+					</ul>
+					<div class="or_go" onclick="">增加收货地址</div>
+				</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script>
+			var windowHeight = $(window).height(),
+				$body = $("body");
+			$body.css("height", windowHeight);
+			var startX, startY, moveEndX, moveEndY, X, Y;
+
+			$(".oc_con").on("touchstart", function(e) {
+				e.preventDefault();
+				startX = e.originalEvent.changedTouches[0].pageX,
+					startY = e.originalEvent.changedTouches[0].pageY;
+			});
+			$(".oc_con").on("touchmove", function(e) {
+				e.preventDefault();
+				moveEndX = e.originalEvent.changedTouches[0].pageX,
+					moveEndY = e.originalEvent.changedTouches[0].pageY,
+					X = moveEndX - startX,
+					Y = moveEndY - startY;
+
+				if(Math.abs(X) > Math.abs(Y) && X > 0) {
+					$(this).children(".oc_c2").css("margin-left", "0");
+					$(this).children(".sc_c3").hide();
+				} else if(Math.abs(X) > Math.abs(Y) && X < 0) {
+					$(this).children(".oc_c2").css("margin-left", "-67px");
+					$(this).children(".sc_c3").show();
+					$(this).children(".sc_c3 img").show();
+				}
+			});
+			$(".style_bun label").on("touchend", function() {
+				$(".button1").toggle();
+				$(".button2").toggle();
+			});
+			$(".oc_bj").on("click", function() {
+				$(".oc_del").show();
+				$(this).hide();
+				$(".oc_ok").show();
+			});
+			$(".oc_ok").on("click", function() {
+				$(".oc_del").hide();
+				$(this).hide();
+				$(".oc_bj").show();
+			});
+			
+			$('.or_go').on('tap', function(){
+				var styles = {};
+				var extras = {
+					consignee:"",
+					mobile:"",
+					country:1,
+					province:0,
+					city:0,
+					district:0,
+					address:"",
+					is_default:0,
+					address_id:0
+				};
+				var w = plus.webview.create('address_detail.html', 'address_detail.html', styles, extras);
+				w.show('slide-in-right',600);
+			});
+			
+			mui.plusReady(function(){
+				mui.init();
+				refresh();
+			})
+			
+			function editAddress(target)
+			{
+				var styles = {};
+				var id = $(target).parent().attr('data'); 
+				//console.log(id)
+				var item = (address_list[id]);
+				var extras = {
+					consignee:item.consignee,
+					mobile:item.mobile,
+					country:1,
+					province:item.province,
+					city:item.city,
+					district:item.district,
+					address:item.address,
+					is_default:0,
+					address_id:id
+				};
+				var w = plus.webview.create('address_detail.html', 'address_detail.html', styles, extras);
+				w.show('slide-in-right',600);
+				$(".oc_ok").trigger('click');
+			}
+			
+			function dropAddress(target)
+			{
+				if (confirm('你确认要删除该收货地址吗？'))
+				{
+					var consignee_id = $(target).parent().attr('data');					
+					console.log('deleting ' + consignee_id);
+					mui.web_query('userAddress.php?act=delete', {id:consignee_id}, function(data){
+						if (data.status == 1)
+						{
+							refresh();
+						}
+					})
+				}				 
+			}
+			
+			var address_list = {};
+			function refresh(){
+				mui.web_query('userAddress.php?act=list', {}, function(data){
+					if (data.consignee_list)
+					{
+						var tpl = $('<li class="">\
+							<p>\
+								<b class="oc_name">杨俊峰222</b>\
+							</p>\
+							<p>\
+								<b class="oc_num">18508834357</b>\
+								<b class="oc_addr">云南-昆明-盘龙区-欣都龙城2a</b>\
+							</p> \
+							<p class="oc_del">\
+								<b onclick="editAddress(this);"><img src="../../images/yucheng/change.png"><i>修改</i></b>\
+								<b onclick="dropAddress(this);"><img src="../../images/yucheng/delete.png"><i>删除</i></b>\
+							</p>\
+						</li>');
+						$('.address_list').empty();
+						$.each(data.consignee_list, function(idx, item){
+							var newnode = tpl.clone();
+							newnode.find('.oc_name').html(item.consignee);
+							newnode.find('.oc_num').html(item.mobile);
+							newnode.find('.oc_del').attr('data', item.address_id); 
+							if(item.is_default){
+								newnode.find('.oc_name').parent().append($('<b class="mo_addr_title">默认地址</b>'));
+								
+							}
+							newnode.find('.oc_addr').html(item.province_name + '-' + item.city_name + '-' + item.district_name + '-' + item.address);
+							newnode.appendTo($('.address_list'));
+							address_list[item.address_id] = item;
+							//newnode.attr('data', '');
+						});
+						
+					}
+				})
+			}
+			
+			window.addEventListener('refresh', function(){
+				refresh();
+			})
+			 
+		</script>
+	</body>
+
+</html>

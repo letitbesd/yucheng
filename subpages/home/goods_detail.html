@@ -1,267 +1,574 @@
-﻿<!doctype html>
-<html lang="zh">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=no">
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache"> 
-<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache"> 
-<META HTTP-EQUIV="Expires" CONTENT="0"> 
-<title>玉城</title>
-<link rel="stylesheet" type="text/css" href="./css/reset.css" />
-<link rel="stylesheet" type="text/css" href="./css/swiper.min.css" />
-<link rel="stylesheet" type="text/css" href="./css/style.css" />
-<script type="text/javascript" src="./js/iscroll.js"></script>
-<script src="./js/jquery-2.1.1.min.js"></script>	
-<script type="text/javascript">
+<!doctype html>
+<html>
 
-var myScroll;
-
-function loaded () {
-	myScroll = new IScroll('#wrapper', { mouseWheel: true,click:true });
-	var con_height = Number($(".swiper-container").height());
-		var wheight = $(window).height();
-	var cha = Number(wheight)-con_height-60;
-	$("#wrapper").css("bottom",cha+"px");
-	
-}
-
-document.addEventListener('touchstart', function (e) { e.preventDefault(); }, false);
-
-</script>
-<style>
-#wrapper {
-	position: absolute;
-	left: 0;
-	width: 96%;
-}
-
-#scroller {
-	position: absolute;
-	z-index: 1;
-	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	width: 100%;
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	transform: translateZ(0);
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	-webkit-text-size-adjust: none;
-	-moz-text-size-adjust: none;
-	-ms-text-size-adjust: none;
-	-o-text-size-adjust: none;
-	text-size-adjust: none;
-}
-</style>
-</head>
-<body onload="loaded()">
-	<div class="ne_all">
-		<div class="ne_header">
-			<div class="ne_back"><img src="./img/icon/yc-22.png"></div>
-			<div class="swiper-container slide_ne" style="background:#080403;z-index:-1;">
-				<div class="swiper-wrapper">	
-					<div class="swiper-slide"><img src="./img/yc-78.jpg"></div>
-					<div class="swiper-slide"><img src="./img/yc-78.jpg"></div>
-					<div class="swiper-slide"><img src="./img/yc-78.jpg"></div>
-					<div class="swiper-slide"><img src="./img/yc-78.jpg"></div>
-					<div class="swiper-slide"><img src="./img/yc-78.jpg"></div>
-				</div>
-				<!-- Add Pagination -->
-				<div class="swiper-pagination swiper_ne"></div>
-			</div>			
-		</div>
-		<div class="ne_cont" id="wrapper">
-			<div id="scroller">
-			<div class="ne_c1">
-			<p class="ne_c1_p1"><b></b><b><img src="./img/icon/yc-20.png"></b><b><img src="./img/icon/yc-21.png"></b></p>
-			<p>什么鬼什么鬼什么鬼</p>
-			<p>￥41000</p>
-			</div>
-			<div class="ne_c4">
-				<p>市场价：<del>￥70000</del></p>
-				<p>支付定金：<i>￥1500</i></p>
-			</div>
-			<div class="ne_c5">
-				<p class="ne_ba">支付定金后商家将在30分钟内与您联系配合您完成交易<br/>商家承担关税、运费</p>
-				<p class="ne_bb">
-				<a><i><img src="./img/icon/yc-100.png"></i><b>正品保证</b></a>
-				<a><i><img src="./img/icon/yc-100.png"></i><b>权威鉴定</b></a>
-				<a><i><img src="./img/icon/yc-100.png"></i><b>源头供货</b></a>
-				<a><i><img src="./img/icon/yc-100.png"></i><b>7天退货</b></a>
-				</p>
-				<p class="ne_bc">
-					<b><i></i>本商品不支持货到付款</b>
-					<b><i></i>本商品如无质量问题，不支持退换货</b>
-				</p>
-			</div>
-			<div class="ne_c2">
-				<div class="ne_title">商品信息</div>
-				<p><b>尺寸：</b><b><i>内径：56.7mm </i></b><b><i>宽：17mm </i></b><b><i>厚：8.2mm </i></b></p>
-				<p><b>颜色：</b><b><i>晴水飘阳绿</i></b></p>
-				<p><b>透明度：</b><b><i>三分之一透明</i></b></p>
-				<p><b>瑕坯裂絮：</b><b><i>肉眼不见裂隙，看不见，看不见，看不见</i></b></p>
-				<p><b>原石产地：</b><b><i>老缅甸</i></b></p>
-				<p><b>工艺水平：</b><b><i>手工精细</i></b></p>
-				<p><b>国检证书：</b><b><i>绝对的A货，绝对正品，只要998.</i></b></p>
-				<p><b>随单配件：</b><b><i>月光宝盒、金箍棒、金银珠宝。数不胜数。。。</i></b></p>
-				<p><b>售后承诺：</b><b><i>一经交易，永不退货。。</i></b></p>
-				<p><b>配送时间：</b><b><i>几天后，你懂的。</i></b></p>
-				<p><b>编辑：</b><b><i>小崔</i></b></p>
-				<p><b>摄影师：</b><b><i>小汪</i></b></p>
-				<p><b>摄影时间：</b><b><i>2016-6-6</i></b></p>
-			</div>
-
-			<div class="ne_c3">
-				<div class="ne_title">相关证书</div>
-				<div class="ne_zp">
-					<img src="./img/yc-53.jpg">
-					<img src="./img/yc-53.jpg">
-					<img src="./img/yc-53.jpg">
-					<img src="./img/yc-53.jpg">
-					<img src="./img/yc-53.jpg">
-					<img src="./img/yc-53.jpg">
-				</div>
-			</div>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品详情2</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home/style.css" />
+		<style>
+			.ne_c1_p1 img {
+				width: 100%;
+			}
 			
-			<div class="ne_c3">
-				<div class="ne_title">相关证书</div>
-				<div class="ne_zs">
-					<img src="./img/yc-54.jpg">
-					<img src="./img/yc-54.jpg">
-					<img src="./img/yc-54.jpg">
-					<img src="./img/yc-54.jpg">
-				</div>
-			</div>
-			<div class="ne_c3" style="float:left">
-			<div class="ne_title">相关证书</div>
-				<div class="ne_zj">
-					<p style="margin-bottom:0;">
-						<b style="text-align:center;"><img src="./img/yc-90.png"></b>
-						<b class="zj_title">玻璃种</b>
-						<b>透明</b>
-						<b>内部汇聚光较强</b>
-						<b>多数光线可透过</b>
-						<b>内部特征清晰可见</b>
-						<b>标注：</b>
-						<b>透明</b>
-					</p>
-					
-					<p style="margin-bottom:19px;">
-						<b style="text-align:center;"><img src="./img/yc-91.png"></b>
-						<b class="zj_title">冰玻种</b>
-						<b>半透明</b>
-						<b>内部汇聚光较强</b>
-						<b>大部分光线可透过</b>
-						<b>内部特征可见</b>
-						<b>标注：</b>
-						<b>三分之二透明</b>
-					</p>	
-
-					<p style="margin-bottom:19px;">
-						<b style="text-align:center;"><img src="./img/yc-92.png"></b>
-						<b class="zj_title">冰种</b>
-						<b>尚透明</b>
-						<b>内部汇聚光弱</b>
-						<b>部分光线可透过</b>
-						<b>内部特征尚可见</b>
-						<b>标注：</b>
-						<b>二分之一透明</b>
-				
-					</p>	
-
-					<p>
-						<b style="text-align:center;"><img src="./img/yc-93.png"></b>
-						<b class="zj_title">糯冰种</b>
-						<b>微透明</b>
-						<b>内部有微量汇聚光</b>
-						<b>部分光线可透过</b>
-						<b>内部特征模糊可见</b>
-						<b>标注：</b>
-						<b>略微透明</b>
-					</p>
-
-					<p>
-						<b style="text-align:center;"><img src="./img/yc-94.png"></b>
-						<b class="zj_title">细糯种</b>
-						<b>不透明</b>
-						<b>内部无汇聚光</b>
-						<b>基本无光线透过</b>
-						<b>内部特征不可见</b>
-						<b>标注：</b>
-						<b>不透明</b>
-					</p>					
-				</div>
-			</div>
-
-			<div class="ne_c3" style="float:left">
-			<div class="ne_title">相关证书</div>
-				<div class="ne_zj">
-					<p style="margin: 0 1% 20px 1%;width:31%;">
-						<b style="text-align:center;"><img src="./img/yc-95.png"></b>
-						<b class="zj_title">极细/极纯净</b>
-						<b>矿物颗粒小于0.1mm</b>
-						<b>结构非常细腻致密，粒度均匀，10倍放大镜下不见粒度及复合原生、次生矿物充填痕隙。 未见内外特征，或仅在不显眼处有点状物、絮状物，对整体美观无影响。</b>
-					</p>
-					
-					<p style="margin: 0 1% 20px 1%;width:31%;">
-						<b style="text-align:center;" ><img src="./img/yc-96.png"></b>
-						<b class="zj_title">细/纯净</b>
-						<b>矿物颗粒小于0.1~0.5mm</b>
-						<b>结构细腻致密，粒度均匀，10倍放大镜下不见粒度及复合原生、次生矿物充填痕隙，偶见翠性。 细微的内、外特征，肉眼较难见，对整体美观几乎无影响。</b>
-					</p>	
-
-					<p style="margin: 0 1% 20px 1%;width:31%;">
-						<b style="text-align:center;"><img src="./img/yc-97.png"></b>
-						<b class="zj_title">较细/较纯净</b>
-						<b>矿物颗粒小于0.5～1.0mm</b>
-						<b>结构致密，粒度尚均匀，10倍放大镜下见少量粒度及复合原生、次生矿物充填痕隙，偶见翠性。 具较明显的内、外特征，肉眼较可见，对整体美观有轻微的影响。</b>
-					</p>	
-
-					<p style="margin: 0 1% 20px 1%;width:31%;">
-						<b style="text-align:center;"><img src="./img/yc-98.png"></b>
-						<b class="zj_title">粗/尚纯净</b>
-						<b>矿物颗粒小于1.0～2.0mm</b>
-						<b> 结构不够致密，粒度不均匀。10倍放大镜下见细小复合原生及次生矿物充填痕隙，见多量翠性。 具细微的内、外特征，肉眼易见，对整体美观有影响。</b>
-					</p>
-
-					<p style="margin: 0 1% 20px 1%;width:31%;">
-						<b style="text-align:center;"><img src="./img/yc-99.png"></b>
-						<b class="zj_title">较粗/不纯净</b>
-						<b>矿物颗粒大于2.0mm</b>
-						<b>结构疏松，粒度大小悬殊。肉眼可见痕、复合原生及次生矿物充填痕隙等，见大量翠性。 具细微的内、外特征，肉眼易见，对整体美观和有较明显影响。</b>
-					</p>					
-				</div>
-			</div>
+			.sh_cang {
+				display: none;
+			}
 			
-		</div>
-		<div class="ne_bun"><p>加入购物袋</p><p>支付定金</p><p>已售罄</p></div>
-		</div>
-		
-	</div>
-</body>
-	<script src="./js/swiper.min.js"></script>	
-    <script>
-    var swiper = new Swiper('.slide_ne', {
-		effect : 'fade',
-        pagination: '.swiper_ne',
-		loop : true,
-		loopAdditionalSlides : 1,
-        paginationClickable: true,
-        spaceBetween: 30,
-		loop:true,
-		autoplay:2000,
-		autoplayDisableOnInteraction : false,
-    });
-    
-    console.log(window.goodsid);
+			.topbar_fixed {
+				top: 0;
+				overflow: hidden;
+				position: absolute;
+				z-index: 10;
+			}
+			
+			.shop_num {
+				position: absolute;
+				right: 1%;
+				top: 5px;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background: #E70012;
+				font-size: 16px;
+				color: #fff;
+				text-align: center;
+				line-height: 21px;
+				display: block;
+			}
+		</style>
+	</head>
 
+	<body>
 
-    </script>
+		<div class="ne_all" style="padding-bottom: 60px;">
+			<div class="ne_header">
+				<div class="swiper-container slide_ne" style="background:#080403;z-index:-1;">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="../../images/yc-79.jpg"></div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination swiper_ne"></div>
+				</div>
+				<div class="st_time dis_none for_type_0" style="z-index:9999;bottom:100px;">
+					<div class="in_willbegin_time">
+						<ul class="countdown">
+							<li style="margin-left:5%">剩余</li>
+							<li>
+								<span class="days">01</span>
+							</li>
+							<li style="margin-right:5%;">天</li>
+							<li>
+								<span class="hours">00</span>
+							</li>
+							<li>:</li>
+							<li>
+								<span class="minutes">00</span>
+							</li>
+							<li>:</li>
+							<li>
+								<span class="seconds">00</span>
+							</li>
+							<li></li>
+						</ul>
+						<input type="hidden" class="remain_time_input" value='{$goods.remain_second}' />
+					</div>
+					<div class="st_price">
+						<p><b>{$goods.discount}</b>折</p>
+						<p>￥<b>{$goods.promote_price}</b></p>
+						<p>原价￥<b>{$goods.shop_price}</b></p>
+					</div>
+				</div>
+
+			</div>
+			<div class="ne_cont" style="margin-top:400px">
+				<div id="scroller">
+					<div class="ne_c1 topbar" style="margin-bottom: 15px;height: 50px;background:#F8F9F9;overflow: hidden;">
+						<p class="ne_c1_p1">
+							<b class="ne_c1_b1"><img src="../../images/yucheng/yc-20.png"></b>
+
+							<b class="ne_c1_b2" onclick="addToCart();"><img src="../../images/yucheng/yc-21.png"></b>
+							<b class="shop_num">0</b>
+							<b class="ne_c1_b3" onclick="addFav();">
+								<img src="../../images/yucheng/shoucang.png" class='sh_can'>
+								<img src="../../images/yucheng/shoucang_1.png" class='sh_cang'>
+							</b>
+							<b class="ne_c1_b4" onclick="share();">
+								<img src="../../images/yucheng/fenx.png">
+							</b>
+							<b class="ne_c1_b5" onclick="like();">
+								<img src="../../images/yucheng/zan_1.png" class="zan_1">
+								<img src="../../images/yucheng/zan_2.png" class="zan_2">
+							</b>
+							<b class="ne_c1_b6">100000</b>
+						</p>
+					</div>
+					<div class="ne_c1 update1">
+						<p class="ne_c1_p1"></p>
+						<p>糯冰种略飘翠玉壶222</p>
+						<p>￥46800.00</p>
+					</div>
+					<div class="ne_c4" style="padding-top:0;">
+						<p>市场价：<del>￥56160.00</del></p>
+						<p style="color:#812e37">支付定金：<i>￥10000.00</i></p>
+					</div>
+					<div class="ne_c5">
+						<p class="ne_ba">支付定金后商家将在30分钟内与您联系配合您完成交易<br/>商家承担关税、运费</p>
+						<p class="ne_bb">
+							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>正品保证</b></a>
+							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>权威鉴定</b></a>
+							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>源头供货</b></a>
+							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>7天退货</b></a>
+						</p>
+						<p class="ne_bc">
+							<b><i></i>本商品不支持货到付款</b>
+							<b><i></i>本商品如无质量问题，不支持退换货</b>
+						</p>
+					</div>
+					<div class="ne_c2">
+						<div class="ne_title">商品信息</div>
+						<p><b>尺寸：</b><b><i>内径：0.000mm </i></b><b><i>宽：87.700mm </i></b><b><i>厚：60.000mm </i></b></p>
+						<p><b>颜色：</b><b><i>0.000</i></b></p>
+						<p><b>透明度：</b><b><i>略透</i></b></p>
+						<p><b>瑕坯裂絮：</b><b><i>肉眼可见细小石纹，但瑕不掩瑜</i></b></p>
+						<p><b>原石产地：</b><b><i>缅甸北部密支那宝石级翡翠矿区</i></b></p>
+						<p><b>工艺水平：</b><b><i>全手工精细雕刻；经钻石粉千次抛光</i></b></p>
+						<p><b>国检证书：</b><b><i>本品为天然缅甸A货翡翠，成交时出具权威检测证书，欢迎到任何权威珠宝检测机构复检。</i></b></p>
+						<p><b>随单配件：</b><b><i>珠宝盒、国检A货证书、挂件另增精美挂绳，其他赠品按实物邮寄为准。</i></b></p>
+						<p><b>售后承诺：</b><b><i>签收之时起7日内，不需任何理由均可自由退换，保证提供完美服务，并承担一切法律责任。</i></b></p>
+						<p><b>配送时间：</b><b><i>付款之时起72小时内发货，使用顺丰快递或EMS特快专递，三到五天即可到达，特殊情况适当顺延。</i></b></p>
+						<p><b>编辑：</b><b><i>阳光</i></b></p>
+						<p><b>摄影师：</b><b><i>杨强</i></b></p>
+						<p><b>摄影时间：</b><b><i>2016-07-05</i></b></p>
+					</div>
+
+					<div class="ne_c3 xq">
+						<div class="ne_title">商品详情</div>
+						<div class="ne_zp ne_show">
+							<img src="../../images/in_6.jpg">
+						</div>
+					</div>
+
+					<div class="ne_c3 zs">
+						<div class="ne_title">产品证书</div>
+						<div class="ne_zs ne_show">
+							<img src="../../images/certification.jpg">
+						</div>
+					</div>
+					<div class="ne_c3 tmd" style="float:left">
+						<div class="ne_title">翡翠透明度</div>
+						<div class="ne_zj ne_show">
+							<p style="margin-bottom:0;">
+								<b style="text-align:center;"><img src="../../images/yc-90.png"></b>
+								<b class="zj_title">玻璃种</b>
+								<b>透明</b>
+								<b>内部汇聚光较强</b>
+								<b>多数光线可透过</b>
+								<b>内部特征清晰可见</b>
+								<b>标注：</b>
+								<b>透明</b>
+							</p>
+
+							<p style="margin-bottom:19px;">
+								<b style="text-align:center;"><img src="../../images/yc-91.png"></b>
+								<b class="zj_title">冰玻种</b>
+								<b>半透明</b>
+								<b>内部汇聚光较强</b>
+								<b>大部分光线可透过</b>
+								<b>内部特征可见</b>
+								<b>标注：</b>
+								<b>三分之二透明</b>
+							</p>
+
+							<p style="margin-bottom:19px;">
+								<b style="text-align:center;"><img src="../../images/yc-92.png"></b>
+								<b class="zj_title">冰种</b>
+								<b>尚透明</b>
+								<b>内部汇聚光弱</b>
+								<b>部分光线可透过</b>
+								<b>内部特征尚可见</b>
+								<b>标注：</b>
+								<b>二分之一透明</b>
+
+							</p>
+
+							<p>
+								<b style="text-align:center;"><img src="../../images/yc-93.png"></b>
+								<b class="zj_title">糯冰种</b>
+								<b>微透明</b>
+								<b>内部有微量汇聚光</b>
+								<b>部分光线可透过</b>
+								<b>内部特征模糊可见</b>
+								<b>标注：</b>
+								<b>略微透明</b>
+							</p>
+
+							<p>
+								<b style="text-align:center;"><img src="../../images/yc-94.png"></b>
+								<b class="zj_title">细糯种</b>
+								<b>不透明</b>
+								<b>内部无汇聚光</b>
+								<b>基本无光线透过</b>
+								<b>内部特征不可见</b>
+								<b>标注：</b>
+								<b>不透明</b>
+							</p>
+						</div>
+					</div>
+
+					<div class="ne_c3 zd" style="float:left">
+						<div class="ne_title">翡翠的质地</div>
+						<div class="ne_zj ne_show">
+							<p style="margin: 0 1% 20px 1%;width:31%;">
+								<b style="text-align:center;">
+							<img src="../../images/yc-95.png"></b>
+								<b class="zj_title">极细/极纯净</b>
+								<b>矿物颗粒小于0.1mm</b>
+								<b>结构非常细腻致密，粒度均匀，10倍放大镜下不见粒度及复合原生、次生矿物充填痕隙。 未见内外特征，或仅在不显眼处有点状物、絮状物，对整体美观无影响。</b>
+							</p>
+
+							<p style="margin: 0 1% 20px 1%;width:31%;">
+								<b style="text-align:center;"><img src="../../images/yc-96.png"></b>
+								<b class="zj_title">细/纯净</b>
+								<b>矿物颗粒小于0.1~0.5mm</b>
+								<b>结构细腻致密，粒度均匀，10倍放大镜下不见粒度及复合原生、次生矿物充填痕隙，偶见翠性。 细微的内、外特征，肉眼较难见，对整体美观几乎无影响。</b>
+							</p>
+
+							<p style="margin: 0 1% 20px 1%;width:31%;">
+								<b style="text-align:center;"><img src="../../images/yc-97.png"></b>
+								<b class="zj_title">较细/较纯净</b>
+								<b>矿物颗粒小于0.5～1.0mm</b>
+								<b>结构致密，粒度尚均匀，10倍放大镜下见少量粒度及复合原生、次生矿物充填痕隙，偶见翠性。 具较明显的内、外特征，肉眼较可见，对整体美观有轻微的影响。</b>
+							</p>
+
+							<p style="margin: 0 1% 20px 1%;width:31%;">
+								<b style="text-align:center;"><img src="../../images/yc-98.png"></b>
+								<b class="zj_title">粗/尚纯净</b>
+								<b>矿物颗粒小于1.0～2.0mm</b>
+								<b> 结构不够致密，粒度不均匀。10倍放大镜下见细小复合原生及次生矿物充填痕隙，见多量翠性。 具细微的内、外特征，肉眼易见，对整体美观有影响。</b>
+							</p>
+
+							<p style="margin: 0 1% 20px 1%;width:31%;">
+								<b style="text-align:center;"><img src="../../images/yc-99.png"></b>
+								<b class="zj_title">较粗/不纯净</b>
+								<b>矿物颗粒大于2.0mm</b>
+								<b>结构疏松，粒度大小悬殊。肉眼可见痕、复合原生及次生矿物充填痕隙等，见大量翠性。 具细微的内、外特征，肉眼易见，对整体美观和有较明显影响。</b>
+							</p>
+						</div>
+					</div>
+
+				</div>
+				<div class="in_willbegin_time for_type_2" style="position:fixed;bottom:3px;width:90%;left:5%;background:#7B2B36;z-index:99999;display:none">
+					<ul class="countdown" style="text-align:center;font-size:16px;color:#fff;line-height:45px;list-style: none;">
+						<li style="margin-left:26%">剩余</li>
+						<li>
+							<span class="days">02</span>
+						</li>
+						<li>天</li>
+						<li style="margin-left:5%;">
+							<span class="hours">00</span>
+						</li>
+						<li>:</li>
+						<li>
+							<span class="minutes">00</span>
+						</li>
+						<li>:</li>
+						<li>
+							<span class="seconds">00</span>
+						</li>
+					</ul>
+					<input type="hidden" class="remain_time_input" value='{$goods.remain_second}' />
+				</div>
+				<nav class="mui-bar mui-bar-tab for_type_2">
+					<a class="mui-tab-item" href="subpages/goods_attr.html" style="background:#000000">
+						<span class="mui-icon mui-icon-email"></span>
+						<span class="mui-tab-label">加入购物袋</span>
+					</a>
+					<a class="mui-tab-item" href="tab-webview-subpage-contact.html" style="background:#792b34">
+						<span class="mui-icon mui-icon-contact"></span>
+						<span class="mui-tab-label">支付定金</span>
+					</a>
+					<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
+						<span class="mui-icon mui-icon-contact"></span>
+						<span class="mui-tab-label">已售罄</span>
+					</a>
+				</nav>
+				<nav class="mui-bar mui-bar-tab for_type_1 for_type_0">
+					<div class="ne_bun">
+						<p class="add_cart" onclick="addToCart();">加入购物袋</p>
+						<p class="pay_for">支付定金</p>
+						<p class="sale_over">已售罄</p>
+					</div>
+				</nav>
+
+			</div>
+
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js"></script>
+		<script src="../../js/zepto.min.js"></script>
+		<script src="../../js/swiper.min.js"></script>
+		<script src="../../js/time.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var shares = null,
+				sharewx = null;
+			mui.plusReady(function() {
+				plus.share.getServices(function(s) {
+					shares = s;
+					for(var i in s) {
+						if('weixin' == s[i].id) {
+							sharewx = s[i];
+						}
+					}
+				}, function(e) {
+					mui.alert("获取分享服务列表失败：" + e.message);
+				});
+			})
+
+			function shareWeixinMessage() {
+				sharewx.send({
+					content: shareContent,
+					href: "http://yucheng.chebank.com/mobile/goods_detail.php?goods_id=" + id,
+					extra: {
+						scene: "WXSceneTimeline"
+					}
+				}, function() {
+					alert("分享成功！");
+				}, function(e) {
+					alert("分享失败：");
+				});
+			}
+
+			var swiper;
+
+			var id = 0;
+			window.addEventListener("initGoodId", function(e) {
+				id = e.detail.id;
+				console.log('showing for goods id ' + id);
+				doAjax();
+			})
+			$(".ne_title").on("click", function() {
+				$(this).siblings(".ne_show").toggle();
+			});
+			var url = "http://yucheng.chebank.com/";
+
+			function updateValues(data) {
+				if(data.goods_img_list) {
+					var str = "";
+					$('.swiper-wrapper').empty();
+					$.each(data.goods_img_list, function(idx, item) {
+						if(idx < 5) {
+							$('<div class="swiper-slide"><img src="' + url + item.img_url + '"></div>').appendTo($('.swiper-wrapper'));
+						} else {
+							return false;
+						}
+					});
+
+					swiper = new Swiper('.slide_ne', {
+						effect: 'fade',
+						pagination: '.swiper_ne',
+						loop: true,
+						loopAdditionalSlides: 1,
+						paginationClickable: true,
+						spaceBetween: 30,
+						loop: true,
+						autoplay: 2000,
+						autoplayDisableOnInteraction: false,
+					});
+
+					var num = data.goods_thumbup_amount; 
+					$(".ne_c1_b6").html(data.goods_thumbup_amount);
+					if(data.is_thumbup == 1) {
+						$(".zan_1").hide();
+						$(".zan_2").show();
+					}
+					if(data.is_collect == 1) {
+						$(".sh_can").hide();
+						$(".sh_cang").show();
+					}
+
+					$(".ne_c13").find('p').eq(1).html(data.goods.goods_name);
+					$(".ne_c13").find('p').eq(2).html(data.goods.shop_price);
+
+					$(".ne_c12").find('p').eq(1).html(data.goods.goods_name);
+					$(".ne_c12").find('p').eq(2).html(data.goods.shop_price);
+					$('.ne_c4').find('del').html(data.goods.market_price);
+					$('.ne_c4').find('i').html(data.goods.deposit);
+
+					$(".ne_c2").find('i').eq(0).html(data.goods.inside_diameter);
+					$(".ne_c2").find('i').eq(1).html(data.goods.goods_width);
+					$(".ne_c2").find('i').eq(2).html(data.goods.goods_thickness);
+					$(".ne_c2").find('i').eq(3).html(data.goods.goods_color);
+					$(".ne_c2").find('i').eq(4).html(data.goods.transparency);
+					$(".ne_c2").find('i').eq(5).html(data.goods.defect);
+					$(".ne_c2").find('i').eq(6).html(data.goods.origin_place);
+					$(".ne_c2").find('i').eq(7).html(data.goods.craft);
+					$(".ne_c2").find('i').eq(8).html(data.goods.editor);
+					$(".ne_c2").find('i').eq(9).html(data.goods.photographer);
+					$(".ne_c2").find('i').eq(10).html(data.goods.photo_time);
+
+					str = "";
+					$.each(data.goods_img_list, function(idx, item) {
+						str += '<img src="' + url + item.img_original + '">';
+						//						console.log(url + item.img_original);
+					});
+
+					$(".ne_zp").html(str);
+
+					str = "";
+					$.each(data.goods_credit_list, function(idx, item) {
+						str += '<img src="' + url + item.img_original + '">';
+						//						console.log(url + item.img_original);
+					})
+					$(".ne_zs").html(str);
+
+				}
+			}
+			var shareContent = "";
+
+			function doAjax() {
+				if(id == 0)
+					return;
+				mui.web_query("goodsDetail.php", {goods_id: id,data_type:'json'},function(data) {						
+							//console.log(data.type);
+							//console.log(data['goods']);
+							setTimeout(function(){
+								plus.nativeUI.closeWaiting()
+								}, 1000);
+							$('.update1').find('p').eq(1).html(data.goods.goods_name);
+							$('.update1').find('p').eq(2).html(data.goods.shop_price);
+							$(".shop_num").html(data.cart_goods_number);
+							shareContent = data.goods.goods_name;
+							switch(data.type) {
+								case 0:
+									$(".for_type_1").hide();
+									$(".for_type_2").hide();
+									$(".for_type_0").show();
+									$('.st_time').show();
+									$(".st_price").find("b").eq(0).html(data.goods.discount);
+									$(".st_price").find("b").eq(1).html(data.goods.promote_price);
+									$(".st_price").find("b").eq(2).html(data.goods.shop_price);
+									updateValues(data);
+									$(".in_willbegin_time").each(function(idx) {
+										$(this).downCount(parseInt(data.goods.remain_second));
+									});
+									break;
+								case 1:
+									$(".for_type_0").hide();
+									$(".for_type_2").hide();
+									$(".for_type_1").show();
+									updateValues(data);
+									break;
+								case 2:
+									$(".for_type_1").hide();
+									$(".for_type_0").hide();
+									$(".for_type_2").show();
+									updateValues(data);
+									$(".in_willbegin_time").each(function(idx) {
+										$(this).downCount(parseInt(data.goods.remain_second));
+									});
+									break;
+								default:
+									break;
+							}
+					}
+				);
+			}
+		</script>
+
+		<script type="text/javascript">
+			//处理页面业务逻辑 
+			function addToCart() {
+
+				console.log('adding to cart ' + id);
+				mui.web_query('shoppingCart.php?act=add', {
+					goods_id: id
+				}, function(data) {
+					//todo:animat into gouwuche
+					if(data.error == 0) {
+						mui.toast("已添加购物车");
+						var num = parseInt($(".shop_num").html());
+						$(".shop_num").html(num + 1);
+					} else {
+						mui.toast("添加失败"+data.message);
+						
+					}
+
+				});
+			}
+
+			function like() {
+				console.log('like');
+				mui.web_query("userThumbup.php?act=thumbup", {
+					goods_id: id
+				}, function(data) {
+					if(data.status == 1) {
+						mui.toast("点赞成功");
+						$('.zan_1').hide();
+						$('.zan_2').show();
+
+						$(".ne_c1_b6").html()
+					} else {
+						mui.toast('点赞失败 ' + data.info);
+					}
+				})
+			}
+
+			var num = 0;
+
+			function addFav() {
+				console.log('addFav');
+				mui.web_query("userCollect.php?act=collect", {
+					goods_id: id
+				}, function(data) {
+					if(data.status == 1) {
+						mui.toast(data.info);
+						$('.sh_cang').show();
+						$(".sh_can").hide();
+
+					} else {
+						mui.toast(data.info);
+					}
+				})
+			}
+
+			function share() {
+				shareWeixinMessage();
+				return;
+				var _t = encodeURI(document.title); //'${(activity.intro)!}'这是取得Action穿过来的值，如果想取当前标题改为document.title  
+				var _url = encodeURI(document.location);
+				_url = "http://yucheng.chebank.com/mobile/goods_detail.php?goods_id=" + id;
+				//console.log(_url);
+				var _appkey = encodeURI("appkey"); //你从腾讯获得的appkey  
+				var _pic = encodeURI(''); //（列如：var _pic='图片url1|图片url2|图片url3....）  
+				var _site = ''; //你的网站地址  
+				var _u = 'http://v.t.qq.com/share/share.php?title=' + _t + '&url=' + _url + '&appkey=' + _appkey + '&site=' + _site + '&pic=' + _pic;
+				window.open(_u, '转播到腾讯微博', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no');
+			}
+
+			$(".ne_all").on('scroll', function() {
+				//				console.log("SCROLLING");
+				var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+				//console.log(scrollTop,$(".ne_all").scrollTop());
+				if($(".ne_all").scrollTop() >= 400) {
+					if(!$(".topbar").hasClass('topbar_fixed')) {
+						$(".topbar").addClass("topbar_fixed");
+					}
+				} else {
+					if($(".topbar").hasClass('topbar_fixed')) {
+						$(".topbar").removeClass("topbar_fixed");
+					}
+				}
+			})
+			window.onscroll = function() {
+				var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+				//console.log(scrollTop);
+			}
+		</script>
+	</body>
+
 </html>

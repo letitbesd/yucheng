@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>支付流程</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="width:100%;height:100%;">
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">支付流程</h1>
+		</header>
+		<IFRAME style="WIDTH: 50%; HEIGHT: 0px;overflow: hidden;" id="form_frame" name="form_frame" src="" frameBorder="0" scrolling="auto" runat="server"></IFRAME>
+		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;margin-top:0px" id="target_frame" name="target_frame" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
+		
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+		<script type="text/javascript">
+			var formstr;
+			window.addEventListener('init', function(e){
+				formstr = e.detail.formstr;
+				console.log("init");
+			})
+			mui.plusReady(function() {
+				console.log('plusready ');
+				var w = plus.webview.currentWebview(); 
+//				console.log(formstr);  
+initPage();
+				mui.init({
+					swipeBack:true, //启用右滑关闭功能
+					/*subpages: [{
+							url: 'flow_sub.html',
+							id: 'flow_sub.html',
+							styles: {
+								top: '45px', //mui标题栏默认高度为45px；
+								bottom: '0px' //默认为0px，可不定义；
+							},
+							extras:{str:formstr}//额外扩展参数
+						}
+					],*/
+					beforeback:beforeBack
+			});
+		})
+			
+		function initPage(){
+			console.log('flow_sub plusready');
+				var w = plus.webview.currentWebview();
+				var x=document.getElementById("form_frame");
+				var y=(x.contentWindow || x.contentDocument);
+					if (y.document) y=y.document;
+				y.body.innerHTML = formstr;
+				y.formCart.target = "target_frame";//表单1会初始化购物车表单信息，提交对象为表单2，表单2会跳转到提交地---微信网页版flow.php?step=checkout
+				var x2 = document.getElementById("target_frame");
+				x2.onload = function(){ //加载微信版网页 隐藏底部链接
+					console.log("target_frame onload");
+					var y2=(x2.contentWindow || x2.contentDocument);
+					if (y2.document) y2=y2.document;
+					if (y2.location == "http://yucheng.chebank.com/mobile/flow.php?step=checkout")
+					{
+						y2.querySelector(".in_bottom").style.display = "none";//禁止可能跳转的按钮 
+					}
+
+				}
+				y.formCart.submit(); 
+				x2.addEventListener('load',function(data){
+					
+					console.log("target_frame onload");
+					var y2=(x2.contentWindow || x2.contentDocument);
+					if (y2.document) y2=y2.document;
+					//plus.nativeUI.alert('loaded' + y2.location);
+					if (y2.location == "http://yucheng.chebank.com/mobile/flow.php?step=checkout")
+					{
+						y2.querySelector('#confirm_form').onsubmit = function(e) {  
+							    var e = e || window.event;  
+							    if (e.preventDefault) 
+							    	e.preventDefault();
+							    else 
+							   	 	window.event.returnValue = false;
+							   	return false;
+						}//阻止网页默认的表单提交跳转功能，我们会自己跳转至本地页面order_submitted.html。
+						var res = $(y2.querySelector('#confirm_form')).serializeArray();
+							
+						y2.querySelector(".sc_bun").addEventListener('click', function(e){
+							console.log('here');
+							//表单提交时我们自己跳转至本地页面，本地页面再提交表单数据至接口，建order_submitted.html 
+							mui_utils.openMuiPage('./order_submitted.html','init', {data:res});
+						})
+						y2.querySelector(".sc_total").addEventListener('click', function(e){
+							console.log("button clicked"); 
+							closeCurrent();
+						})
+					}
+
+				});
+		}
+		
+		function closeCurrent(){
+			var w = plus.webview.currentWebview();
+			w.hide();
+		}
+		
+		window.addEventListener('closepage', function(){
+			closeCurrent();
+		})
+	 
+		function beforeBack(){
+			var w = plus.webview.currentWebview(); 
+			//console.log(w.str);  
+			mui.fire(w.opener(), 'refresh'); 
+			return true;
+		}
+		
+		</script>
+	</body>
+
+</html>

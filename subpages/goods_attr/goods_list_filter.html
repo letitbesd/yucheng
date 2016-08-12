@@ -1,0 +1,333 @@
+<!doctype html>
+<html> 
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/home/style.css" rel="stylesheet" />
+	</head>
+	<body>	 
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+				<li class="li_head" style="float:left;width:100%">
+					<div class="sx_all"> 
+						<div class="sx_head">
+							<p class="sx_tab_one hd_select">
+								<a class="sx_style_one">品类</a><i>
+								<img src="../../images/yucheng/sx_down.png" class="sx_down dis_none" style="display: none;"></i>
+								<i><img src="../../images/yucheng/sx_up.png" class="sx_up" style="display: block;"></i>
+							</p>
+							<p class="sx_tab_two"><a class="sx_style_two">智能排序</a><i>
+								<img src="../../images/yucheng/sx_down.png" class="sx_down"></i>
+								<i><img src="../../images/yucheng/sx_up.png" class="sx_up" style="display: none;"></i>
+							</p>
+							<p class="sx_tab_three"><a class="sx_style_three">筛选</a>
+								<i><img src="../../images/yucheng/sx_down.png" class="sx_down"></i>
+								<i><img src="../../images/yucheng/sx_up.png" class="sx_up" style="display: none;"></i>
+							</p>
+						</div>
+						<div class="sx_con_one category_div" style="display: none;">
+							<p onclick="set_cat_id(369);" data="369">手镯</p>
+							<p onclick="set_cat_id(370);" data="370">挂件吊坠</p>
+							<p onclick="set_cat_id(371);" data="371">戒指</p>
+							<p onclick="set_cat_id(372);" data="372">耳钉耳坠</p>
+							<p onclick="set_cat_id(373);" data="373">项链手串</p>
+							<p onclick="set_cat_id(374);" data="374">翡翠手表</p>
+							<p onclick="set_cat_id(375);" data="375">裸石蛋面</p>
+							<p onclick="set_cat_id(376);" data="376">毛石边料</p>
+							<p onclick="set_cat_id(377);" data="377">把玩摆件</p>
+							<p onclick="set_cat_id(378);" data="378">车挂包挂</p>
+							<p onclick="set_cat_id(379);" data="379">其他</p>
+							<p onclick="set_cat_id(368);" data="368">测试</p>
+						</div>
+						<div class="sx_con_two sort_div" style="display: none;">
+							<p onclick="doSort('hot');" data="hot">人气</p>
+							<p onclick="doSort('time');" data="time">最新</p>
+							<p onclick="doSort('price');" data="price">价格</p>
+						</div>
+						<div class="sx_con_three attr_div" style="display: none;">
+							<div class='attr_filter'>
+							<div class="sx_price">
+								<p class="sx_tittle">价格</p>
+								<b>不限</b>
+								<b>500</b>
+								<b>501-3000元</b>
+								<b>3001-7000元</b>
+								<b>7001-1万元</b>
+								<b>1万-2万元</b>
+								<b>2万-5万元</b>
+								<b>5万-15万元</b>
+								<b>15万-30万元</b>
+								<b>30万元以上</b>
+							</div>
+							<div class="sx_price">
+								<p class="sx_tittle">种水</p>
+								<b>不限</b>
+								<b>玻璃种</b>
+								<b>高冰种</b>
+								<b>冰种</b>
+								<b>糯冰种</b>
+								<b>糯种</b>
+								<b>豆种</b>
+								<b>干青种</b>
+								<b>其他</b>
+							</div>
+							<div class="sx_price">
+								<p class="sx_tittle">题材</p>
+								<b>不限</b>
+								<b>观音</b>
+								<b>佛公</b>
+								<b>关公</b>
+								<b>如意</b>
+								<b>福豆</b>
+								<b>福瓜</b>
+								<b>叶子</b>
+								<b>葫芦</b>
+								<b>平安扣</b>
+								<b>无事牌</b>
+								<b>路路通</b>
+								<b>节节高</b>
+								<b>佛手</b>
+								<b>白菜</b>
+								<b>生肖</b>
+								<b>龙凤</b>
+								<b>麒麟</b>
+								<b>貔貅</b>
+								<b>瑞兽</b>
+								<b>花鸟</b>
+								<b>虫鱼</b>
+								<b>人物</b>
+								<b>其他</b>
+							</div>
+							<div class="sx_price">
+								<p class="sx_tittle">颜色</p>
+								<b>不限</b>
+								<b>满绿</b>
+								<b>带色</b>
+								<b>晴水</b>
+								<b>蓝水</b>
+								<b>飘花</b>
+								<b>紫粉色</b>
+								<b>红黄翡</b>
+								<b>油青色</b>
+								<b>多彩</b>
+								<b>墨翠</b>
+								<b>其他</b>
+							</div>
+							</div>
+							<div class="sx_go">确定</div>
+						</div>
+					</div>
+				</li>
+				<li class="sx_con_all">
+					<div class="li_con">
+						<div class="li_list">
+							<p><img src="../../images/in_2.jpg"></p>
+							<p>凤飞挂件</p>
+							<p>￥20000.00</p>
+							<p>商家店铺名称</p>
+							<p><img src="../../images/yucheng/yc_address.png"><i class="gl_addr">昆明</i></p>
+						</div>
+						<div class="li_list">
+							<p><img src="../../images/in_2.jpg"></p>
+							<p>凤飞挂件</p>
+							<p>￥20000.00</p>
+							<p>商家店铺名称</p>
+							<p><img src="../../images/yucheng/yc_address.png"><i class="gl_addr">昆明</i></p>
+						</div>	
+						<div class="li_list">
+							<p><img src="../../images/in_2.jpg"></p>
+							<p>凤飞挂件</p>
+							<p>￥20000.00</p>
+							<p>商家店铺名称</p>
+							<p><img src="../../images/yucheng/yc_address.png"><i class="gl_addr">昆明</i></p>
+						</div>	
+					</div>
+				</li>
+			 
+				</ul>
+			</div>
+		</div>  
+	<script src="../../js/zepto.min.js"></script>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+	<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+	<script type="text/javascript">
+		var page = 1;
+		info = {cat_id : 0}; 
+		var attr_key = "";
+		var order_by = ""; 
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh', 
+				up: {
+					contentrefresh: '正在加载...',
+					callback: pullrefreshFunction,
+					auto:false,
+				}
+			}
+		});
+		
+		mui.plusReady(function(){
+			console.log('plusready');
+		})
+		
+		window.addEventListener('set_id', function(e)
+		{
+			set_cat_id (e.detail.id);  
+		})
+		
+		window.addEventListener('set_key', function(e)
+		{
+			set_attr_key(e.detail.key);
+			
+		})
+		
+		function set_cat_id(cat_id)
+		{
+			console.log('set_cat_id ' + cat_id);
+			
+			$(".category_div").find('p').each(function(idx, item){
+				if ($(item).attr('data') == cat_id)
+				{
+					$(item).addClass('sx_select');
+				}
+			})
+			info.cat_id = cat_id; 
+			page = 1;
+			mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+			attr_key = "";
+			pullrefreshFunction();
+			
+		} 
+		
+		function set_attr_key(p_attr_key)
+		{
+			console.log('setting attrkey ' + p_attr_key);
+			attr_key = p_attr_key;  
+			page = 1;
+			mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+			do_ajax("", order_by, attr_key); 
+		}
+			
+		function pullrefreshFunction()
+		{
+			
+			do_ajax(info.cat_id,  order_by, attr_key,  function(b){ 
+				mui('#pullrefresh').pullRefresh().endPullupToRefresh(b);
+			}); 
+		} 
+		
+		$(document).on('click',".sx_go", doFilter);
+		function doFilter(e)
+		{
+			e.stopPropagation();
+			$(".attr_div").hide();
+			attr_key = '';
+			$(".attr_div .sx_price").each(function(item){
+				var tmp = $(this).find(".sx_select").html();
+				if (tmp && tmp.trim()!= "不限")
+				{
+					attr_key += tmp.trim() +',';
+				}
+			})
+			if (attr_key.length > 0)
+			{
+				attr_key = attr_key.slice(0, -1);
+			}
+			console.log(attr_key);
+			console.log("-------------------");
+			page = 1;
+			setTimeout(function(){
+				do_ajax(info.cat_id,  order_by, attr_key);
+			}, 400);
+			
+		}
+		
+		function doSort(p_order_by){
+			page = 1;
+			mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+			order_by = p_order_by;
+			do_ajax(info.cat_id, order_by, attr_key);
+		}
+		
+		function do_ajax(p_cat_id, p_order_by, p_attr_key, cb){
+			//p_cat_id
+			console.log("DOING AJAX");
+//				console.log('page ' + page);
+			var p_is_ajax = page > 1 ? 1:0;
+			//attr_key = p_attr_key ? p_attr_key : '';
+			//order_by = p_order_by ? p_order_by : '';
+			var params = {page:page, cat_id:info.cat_id, attr_key:attr_key,  orderby:order_by, is_ajax:p_is_ajax};
+			console.log($.param(params));
+			//var url = "http://yucheng.chebank.com/mapi/goodsList.php?act=filter"; 				
+			mui.web_query("goodsList.php?act=filter",params,function(data){
+				if (data){
+					try{	
+						if (page == 1)
+						{
+							var str =  "";
+							if (data.attr_list && data.attr_list.length > 0)
+							{
+								console.log("update attr key");
+								$.each(data.attr_list, function(idx, item){							
+									str += '<div class="sx_price">'; 
+									str +='<p class="sx_tittle">'+ item.attr_name + '</p>';
+									str += '<b>不限</b>';
+									$.each(item.attr_values, function(j, item2){		
+									//console.log(item2);
+										str += '<b>' + item2 + '</b>';
+									});
+									str += '</div>';
+								});
+//									str += '<div class="sx_go" onclick="doFilter();">确定</div>';	
+								$('.attr_filter').html(str);
+							}
+							
+						}							
+						
+						//update goods_list;
+						//$(".sx_con_all").empty();
+						if (page == 1)  $(".sx_con_all>.li_con").empty();
+										 
+						$.map(data.goods_list, function(item,idx){
+							//console.log(item.ori)
+							str = "";		
+							str += '<div class="li_list">';
+							str +='<p><img src="'+ mui.web_sever + item.goods_thumb +'" onclick="showGoods('+ item.goods_id + ');"></p>';
+							str += '<p>' + mui_utils.trimString(item.goods_name, 11) +'</p>';
+							str += '<p>' + item.shop_price +'</p>';
+							str += '<p>' + item.shop_name +'</p>';
+							str += '<p><img src="../../images/yucheng/yc_address.png"><i class="gl_addr">'+item.shop_city +'</i></p>';
+							str += '</div>'; 
+							$(".sx_con_all>.li_con").append($(str));
+						}); 
+						if (data.goods_list.length >0)
+							cb&&cb(false);
+						else
+							cb&&cb(true);
+						
+					}catch(e){
+						console.log(e.stack);
+						//alert(e.stack)
+					}
+				}//end if data
+				page ++; 
+				}
+			); 
+		}
+		
+		function showGoods(id){
+			console.log(id);
+			mui_utils.openMuiPage("../home/goods_detail.html", 'initGoodId', {id:id}); 
+		}
+		  
+	</script>
+	<script type="text/javascript" src="../../js/goods_list_filter.js" ></script>
+		
+	</body>
+
+</html>

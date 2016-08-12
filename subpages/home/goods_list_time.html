@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<link rel="stylesheet" type="text/css" href="../../css/home/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/home/style.css" /> 
+	<div class="st_all"> 
+		<div class="st_tab">
+			<p class="st_left st_select">最后疯抢</p>
+			<p class="st_right">即将开始</p>
+		</div>
+		<div class="st_last"> 
+			<div class="st_la_con to_goods_detail" data="0" onclick="showGoods(this);">
+				<img src="/{$goods.original_img}">
+				<div class="st_time">
+					<div class="in_willbegin_time">
+						<ul class="countdown">
+							<li style="margin-left:5%">剩余</li>
+							<li>
+								<span class="days">00</span>
+							</li>
+							<li style="margin-right:5%;">天</li>
+							<li>
+								<span class="hours">00</span>
+							</li>
+							<li>:</li>
+							<li>
+								<span class="minutes">00</span>		
+							</li>
+							<li>:</li>
+							<li>
+								<span class="seconds">00</span>
+							</li>
+							<li></li>
+						</ul>
+						<input type="hidden" class="remain_time_input" value='{$goods.remain_second}'/>
+					</div>
+					<div class="st_price">
+						<p><b>{$goods.discount}</b>折</p>
+						<p>￥<span>{$goods.promote_price}</span></p>
+						<p>原价￥<span>{$goods.shop_price}</span></p>	
+					</div>
+				</div>
+			</div> 
+		</div>
+		<div class="st_will">
+			<div class="st_la_con to_goods_detail" data="{$goods.goods_id}" onclick="showGoods(this);">
+			<img src="/{$goods.original_img}">
+					<div class="st_time">
+						<div class="in_willbegin_time" style="background:#792b34;color:#fff;">
+							<ul class="countdown">
+							<li style="margin-left:5%;">剩余</li>
+							<li>
+							<span class="days" style="">00</span>
+							</li>
+							<li style="margin-right:5%;">天</li>
+							<li style="margin:0 5% 0 5%;display:none;">即将开始
+							</li>
+							<li>
+							<span class="hours">00</span>
+							</li>
+							<li>:</li>
+							<li>
+							<span class="minutes">00</span>		
+							</li>
+							<li>:</li>
+							<li>
+							<span class="seconds">00</span>
+							</li>
+							<li></li>
+							</ul>
+							<input type="hidden" class="remain_time_input" value='{$goods.remain_second}'/>
+						</div>
+					<div class="st_price">
+						<p><b>{$goods.discount}</b>折</p>
+						<p>￥<span>{$goods.promote_price}</span></p>
+						<p>原价￥<span>{$goods.shop_price}</span></p>	
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+	<script src="../../js/zepto.min.js"></script>	
+	<script type="text/javascript" src="../../js/time.js" ></script>
+	<script>
+	$(".st_left").on("click",function(){
+		$(".st_right").removeClass("st_select");
+		$(this).addClass("st_select");
+		$(".st_will").hide();
+		$(".st_last").show();
+	});
+	$(".st_right").on("click",function(){
+		$(".st_left").removeClass("st_select");
+		$(this).addClass("st_select");
+		$(".st_last").hide();
+		$(".st_will").show();
+	});
+	
+	$(".to_goods_detail img").on("tap", function(e){
+		var goods_id = $(this).attr('data');
+		console.log(goods_id);
+		var webview = mui.openWindow({
+			url:'./goods_detail.html',
+			show:{
+			    autoShow:true,
+			    aniShow:"slide-in-right",//页面显示动画，默认为”slide-in-right“；
+				duration:600//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+			},
+			extras:{
+				goods_id:goods_id  //扩展参数
+			}
+		});
+		mui.fire(webview, "initGoodId", {id:goods_id});
+	})
+	</script>
+	<script src="../../js/mui.min.js"></script>
+	<script type="text/javascript" src="../../js/mui_utils.js" ></script>
+	<script src="../../js/mui_ajax.js"></script>
+	<script type="text/javascript"> 
+		var url = "http://yucheng.chebank.com/";
+		mui.plusReady(function(){
+			mui.init({
+				swipeBack:false
+			});
+		 
+			mui.web_query('goodsList.php?act=time',{},function(data){
+//					 console.log(data.goods_startsell_list);
+					var will_list =  data.goods_willbegin_list;
+					 var tpl = $('.st_last').find('.to_goods_detail').clone();
+					 var tpl2 = $(".st_will").find(".to_goods_detail").clone();
+					 $(".st_last").empty();
+					 $('.st_will').empty();
+					 
+					 $.each(data.goods_startsell_list, function(idx, goods){
+					 	var newnode = tpl.clone();
+//					 	console.log(url + goods.goods_img)
+						newnode.attr('data', goods.goods_id);
+					 	newnode.find('img').attr('src', url + goods.original_img); 
+					 	newnode.find('.countdown').downCount(goods.remain_second);
+					 	newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
+					 	newnode.find('.st_price p').eq(1).find('span').html(goods.promote_price );
+					 	newnode.find('.st_price p').eq(2).find('span').html(goods.shop_price );
+					 	
+					 	newnode.appendTo( $(".st_last"));
+					 })
+					 
+					 $.each(data.goods_willbegin_list, function(idx, goods){
+					 	var newnode = tpl2.clone();
+						newnode.attr('data', goods.goods_id);
+					 	newnode.find('img').attr('src', url + goods.original_img); 
+					 	newnode.find('.countdown').downCount(goods.remain_second);
+					 	newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
+					 	newnode.find('.st_price p').eq(1).find('span').html(goods.promote_price );
+					 	newnode.find('.st_price p').eq(2).find('span').html(goods.shop_price );
+					 	
+					 	newnode.appendTo( $(".st_will"));
+					 });
+					 
+				}
+			);
+	});
+	
+	function showGoods(ele){
+		var id = $(ele).attr("data");
+		console.log("showing goods " + id);
+		mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id});	
+	}
+	</script>
+</body>
+
+</html>
