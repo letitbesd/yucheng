@@ -104,7 +104,9 @@
         "Payment":{
         	"description": "管理支付插件"
         },
-        "OAuth":{}
+        "OAuth":{
+        "description": "登录鉴权"
+        }
 	},
 	"plus": {
 		"splashscreen": {
@@ -212,7 +214,9 @@
 					"js/zepto.min.js",
 					"js/mui.min.js",
 					"js/update.js",
-					"js/wxpay.js"
+					"js/wxpay.js",
+					"js/app.js",
+					"js/user_info.js"
 				],
 				"refer": [
 					"guide.html",
@@ -342,7 +346,9 @@
 					"images/yucheng/register3.png",
 					"js/jQuery.md5.js",
 					"js/mui_utils.js",
-					"css/home/reset.css"
+					"css/home/reset.css",
+					"js/app.js",
+					"images/thirdpartylogin/weixin.png"
 				],
 				"refer": [
 					"subpages/user/orderlist.html",
@@ -840,7 +846,8 @@
 				"refer": [
 					"subpages/user/orderlist3.html",
 					"subpages/user/orderlist1.html",
-					"subpages/user/order_detail.html"
+					"subpages/user/order_detail.html",
+					"subpages/user/orderlist2.html"
 				],
 				"priority": 0
 			},

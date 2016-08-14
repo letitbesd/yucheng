@@ -9,6 +9,38 @@
 		<link rel="stylesheet" href="../css/home/reset.css" />
 		<link rel="stylesheet" href="../css/cropper.min.css" /> 
 		<link href="../css/mui.min.css" rel="stylesheet" /> 
+		<style>
+			.oauth-area {
+				position: absolute;
+				bottom: 20px;
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background-size: 30px 30px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd;
+				border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active {
+				border: solid 1px #aaa;
+			}
+			
+			.oauth-area .oauth-btn.disabled {
+				background-color: #ddd;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -47,7 +79,11 @@
 					<b onclick="sendSMS();" class="fs_yzm" id="get_code">发送验证码</b><b id="time_count" class="ds" style="display:none;"><i id="CountdownElem"></i>重新发送</b></p>
 			</div>
 			<!--<div class="lg_reg" onclick="close();">返回</div>-->
-			<div class="lg_go" onclick="do_login();">登录</div> 
+			<div class="lg_go" onclick="do_login();" style="display:block">登录</div> 
+			<div class="lg_go" onclick="do_binding();" style="display:none">bind</div> 
+			<div class="mui-content-padded oauth-area">
+
+			</div>
 		</div>
 		<div id="showEdit" style="display: none; width:100%;height: 100%;position: absolute;top:0;left: 0;z-index: 9;">
 	        <div style="width:100%;position: absolute;top:0px;left:0px;">
@@ -65,8 +101,8 @@
 		<script type="text/javascript" src="../js/user_info.js" ></script>
 		<script type="text/javascript" src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/mui_utils.js" ></script>
-		<script type="text/javascript" src="../js/mui_ajax.js" ></script>
-
+		<script type="text/javascript" src="../js/mui_ajax.js" ></script> 
+		<script type="text/javascript" src="../js/app.js" ></script>
 		<script type="text/javascript">
 			mui.plusReady(function(){
 				console.log('plus ready');//only do once when first create page.
@@ -120,57 +156,22 @@
 					{
 						$(".uc_all").show();
 						$(".login").hide();
+						console.log("usercenter result.");
 						$(".uc_name").find('i').html(data.user_info.user_name);
-						if (data.user_info.head_img)
+						$(".uc_name").find('img').attr('src', data.user_info.headimg);
+						if (data.wechat_nickname_app)
 						{
-							$(".uc_name").find('img').attr('src', mui.web_sever+data.user_info.head_img);							
-						}
-						UserInfo.extra(data.user_info.user_name + "@" + data.user_info.head_img);
+							$(".uc_name").find('i').html(data.wechat_nickname_app);
+						} 
 					}
 					else
 					{
 						//未登录,调出登陆界面
-						if (UserInfo.username())
-						{
-							//如果曾经登陆过，实现自动登录
-							autoLogin();
-						}
-						else
-						{
-							onlogout();
-						}
-						
+						onlogout();
 					}
 				}, null,null);
 			}
-			var retry_count = 3;//todo: 最多进行三次请求userCenter.php 接口，如果还是拿不到用户信息，必须让用户手动登陆
-			function autoLogin(){ 
-				var ds = "ER21Ha26jIu89SHI02sa45Shou11MEI";
-				var mb = UserInfo.mb();
-				var ui = UserInfo.username();
-				var autocode = UserInfo.autocode();
-				console.log(mb + '/' + ui + '/' + autocode);
-				//console.log(UserInfo.test());
-				var str = $.md5(ds+mb+ui+autocode);
-				
-				console.log('autologin:auto_code:' + str);
-				mui.web_query("mobileAutoLogin.php", {auto_code:str}, function(data){
-						if (data.status == 1)
-						{
-							UserInfo.autocode(String(data.auto_code));
-							mui.toast('autologin success!'); 
-							var extra = UserInfo.extra();
-							$(".uc_name").find('i').html(extra.split('@')[0]);							 
-							$(".uc_name").find('img').attr('src', mui.web_sever+extra.split('@')[1]); 
-							$(".uc_all").show();
-							$(".login").hide();
-						}else
-						{
-							mui.toast('autologin fail!');
-							onlogout();
-						}
-				})
-			}
+			 
 			
 			function sendSMS(){
 				var num  = $('#mobile').val();
@@ -192,19 +193,14 @@
 				var code  = $('#code').val();
 				//var url ="http://yucheng.chebank.com/mobile/user.php?ajax_act=login";//wechat
 				var url =  "userLogin.php"; //jieko
-				mui.web_query(url, {mobile:num, code:code}, function(data){
+				var usid = UserInfo.wxinfo().userInfo.openid || "";
+				console.log("wweixin id " + usid);
+				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
 					if (data.status == 1)
-					{						
-						
-						UserInfo.username(data.user_id);
-						UserInfo.mb(num);
-						UserInfo.autocode(String(data.auto_code));
-						
-						refresh();
-						//mui.toast('登陆成功');
-						//console.log(JSON.stringify(document.cookie))
-						//plus.webview.currentWebview().hide(); 
-						//console.log(JSON.stringify(data));
+					{	 
+						UserInfo.autologinstr({mobile:num, userid:data_user_id, autocode:data.auto_code});
+						refresh();//refresh icon and nickname
+						mui.toast('登陆成功');
 					}
 					else
 					{
@@ -214,6 +210,7 @@
 				})
 			}
 			
+		
 			//document.querySelector('#mobile').addEventListener('focus', )
 			$(document).on('focus', "#mobile", mobilefocus);
 			function mobilefocus(evt){
@@ -315,8 +312,7 @@
 			}
 			
 			$("#confirmBtn").on('tap',function(){
-				$("#showEdit").hide();
-				
+				$("#showEdit").hide();				
 				var $image = $('#report > img');
 	            var dataURL = $image.cropper("getCroppedCanvas");
 	            var imgurl = dataURL.toDataURL("image/png", 0.5);
@@ -393,7 +389,53 @@
 			function onlogout(){
 				$(".uc_all").hide();
 				$(".login").show();
-				//UserInfo.clear();
+				//UserInfo.clear(); 
+				app.showThirdPartLogin(do_wechat_login);
+			}
+			
+			function do_binding(){
+				var num  = $('#mobile').val();
+				var code  = $('#code').val();
+				var usid = UserInfo.wxinfo().userinfo.openid; 
+				mui.web_query("userBindWechat.php?act=wechat_bind", {mobile:num,code:code,usid:usid}, function(data){
+					 //{"status":1,"info":"登录成功","user_id":"7","session_id":"d01f844b9f2e58ee07f47095bbcb2e23","auto_code":324354,"bind":"1"} at js/mui_ajax.js:40
+					//todo: save autocode
+					//UserInfo.
+					console.log("here");
+					if (data.bind == 1){
+						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
+					}
+					mui.toast(data.info);
+				})
+			}
+			function do_wechat_login(auth){
+				var name = auth.userInfo.nickname || auth.userInfo.name;										
+				var obj = mui.extend({token:auth.authResult.access_token,
+					username:auth.userInfo.nickname,
+					iconUrl:auth.userInfo.headimgurl,
+					 usid:auth.userInfo.openid,
+					}, auth.userInfo);
+				UserInfo.wxinfo(auth);//save to storage. 
+				console.log('do_wechat_login');
+				mui.web_query("userBindWechat.php?act=wechat_login", obj, function(data){
+					if (data.bind == 0)
+					{
+						console.log('havenot bind');
+						//show binding button.
+						$(".lg_go").eq(0).hide();
+						$(".lg_go").eq(1).show(); 
+						$('.oauth-area').hide();
+					}
+					else{
+						console.log('already  bind'); 
+						$(".uc_name").find('i').html(auth.userInfo.nickname);
+						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
+						UserInfo.autologinstr({mobile:data.mobile_phone, userid:data.user_id, autocode:data.auto_code})
+						$(".uc_all").show();
+						$(".login").hide();
+					}
+					
+				})
 			}
 			
 			$(document).on('click',".uc_name img", galleryImg);

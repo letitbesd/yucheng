@@ -52,7 +52,8 @@
 					</div>
 					<div class="mc_type for_type_1">											
 						<div class="mc_wait_pay">
-							<p class="mc_go_pay" id="pay_order" data="220">完成付款</p><p class="mc_can_pay" id="cancel_order" data="220">取消订单</p>
+							<p class="mc_go_pay" id="pay_order" data="220">完成付款</p>
+							<p class="mc_can_pay" id="cancel_order" data="220">取消订单</p>
 						</div>
 					</div>
 					<div class="mc_type for_type_2">	
@@ -97,16 +98,18 @@
 						newnode.appendTo($(".mc_con"));
 						var r = order_status.waitReceive(item.order_status1, item.pay_status, item.shipping_status);
 						//todo:根据状态显示界面
+						//console.log(item.order_status1 +'/' + item.pay_status + '/' +item.shipping_status);
+						//console.log(r);
 						if (order_status.unpay(item.order_status1))
 						{
-							$(".for_type_1").show();
+							newnode.find(".for_type_1").show();
 						}else if (r['待发货'])
 						{
-							$(".for_type_2").show();
+							newnode.find(".for_type_2").show();
 						}
 						else if(order_status.isCanceled(item.order_status1))
 						{
-							$(".for_type_0").show();
+							newnode.find(".for_type_0").show();
 						}
 					});
 				});

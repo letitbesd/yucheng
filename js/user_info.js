@@ -5,10 +5,9 @@
 UserInfo.clear = function(){
     plus.storage.removeItem('username');//save userid
     plus.storage.removeItem('password');
-    plus.storage.removeItem('token');
-    plus.storage.removeItem('mobile_number');
-    plus.storage.removeItem('autocode');
-    plus.storage.removeItem('extra');
+    plus.storage.removeItem('token'); 
+    plus.storage.removeItem('headimage');
+    plus.storage.removeItem('wxinfo');
     
 }
 
@@ -46,43 +45,57 @@ UserInfo.username = function(){
      
 };
 
-UserInfo.extra = function(){
-    if(arguments.length == 0){
-        return plus.storage.getItem('extra');        
+//save a object json string, return a string.
+UserInfo.autologinstr = function(){
+	if(arguments.length == 0){
+        var obj = plus.storage.getItem('autologinstr');
+        obj = JSON.parse(obj);
+        if (obj){
+        	var ds = "ER21Ha26jIu89SHI02sa45Shou11MEI";
+        	var str = ds + obj.mobile + obj.userid + obj.autocode;
+        	return str;
+        }
+        return "";
+        
     }
-    if(arguments[0] === ''){
-        plus.storage.removeItem('extra');
-        return;
+	var p = arguments[0];
+    if (typeof (p) == "object")
+    {
+    	console.log("saving autologinstr :" + p.mobile + p.userid + p.autocode);
+    	plus.storage.setItem('username', JSON.stringify(p));
     }
-    plus.storage.setItem('extra', arguments[0]);
-    console.log(plus.storage.getItem('extra'));
-     
-};
+    
+}
 
-UserInfo.mb = function(){
+//argument is object 
+UserInfo.wxinfo = function(){
+	if(arguments.length == 0){
+        var tmp = plus.storage.getItem('wxinfo');
+        return JSON.parse(tmp);
+    }
+    
+    var tmp = arguments[0];
+    if (typeof(tmp) == "object")
+    	tmp = JSON.stringify(tmp);
+    plus.storage.setItem('wxinfo', tmp);
+    console.log(plus.storage.getItem('wxinfo'));
+}
+
+
+
+UserInfo.headimage = function(){
     if(arguments.length == 0){
-        return plus.storage.getItem('mobile_number');        
+        return plus.storage.getItem('headimage');        
     }
     if(arguments[0] === ''){
-        plus.storage.removeItem('mobile_number');
+        plus.storage.removeItem('headimage');
         return;
     }
-    plus.storage.setItem('mobile_number', arguments[0]);
-    console.log(plus.storage.getItem('mobile_number'));
+    plus.storage.setItem('headimage', arguments[0]);
+    console.log(plus.storage.getItem('headimage'));
     
 };
-UserInfo.autocode = function(){
-    if(arguments.length == 0){
-        return plus.storage.getItem('autocode');        
-    }
-    if(arguments[0] === ''){
-        plus.storage.removeItem('autocode');
-        return;
-    }
-    //console.log("saving token as " + arguments[0]);
-    plus.storage.setItem('autocode', arguments[0]); 
-     console.log(plus.storage.getItem('autocode'));
-};
+
 
 UserInfo.password = function(){
     if(arguments.length == 0){
