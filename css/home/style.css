@@ -897,8 +897,8 @@ a {
 }
 .sc_back {
 	display: block;
-	width: 10px;
-	padding-top: 13px;
+	width: 15px;
+	margin-top: 13px;
 }
 
 .sc_list {
@@ -2127,9 +2127,10 @@ a {
 	font-size: 16px;
 	background: #2E2F31;
 	margin-top: 25px;
-	position: fixed;
-	bottom: 100px;
-	left: 5%;
+	float: left;
+	margin-top: 50px;
+	margin-left: 5%;
+	margin-bottom: 100px;
 }
 
 .addr_list p:nth-of-type(1) {
