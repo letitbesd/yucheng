@@ -77,14 +77,14 @@
 						<input type="hidden" class="remain_time_input" value='{$goods.remain_second}' />
 					</div>
 					<div class="st_price">
-						<p><b>{$goods.discount}</b>折</p>
+						<p><b>促</b></p>
 						<p>￥<b>{$goods.promote_price}</b></p>
 						<p>原价￥<b>{$goods.shop_price}</b></p>
 					</div>
 				</div>
 
 			</div>
-			<div class="ne_cont" style="margin-top:400px">
+			<div class="ne_cont" style="margin-top:440px">
 				<div id="scroller">
 					<div class="ne_c1 topbar" style="margin-bottom: 15px;height: 50px;background:#F8F9F9;overflow: hidden;">
 						<p class="ne_c1_p1">
@@ -449,7 +449,7 @@
 									$(".for_type_2").hide();
 									$(".for_type_0").show();
 									$('.st_time').show();
-									$(".st_price").find("b").eq(0).html(data.goods.discount);
+									//$(".st_price").find("b").eq(0).html(data.goods.discount);
 									$(".st_price").find("b").eq(1).html(data.goods.promote_price);
 									$(".st_price").find("b").eq(2).html(data.goods.shop_price);
 									updateValues(data);
