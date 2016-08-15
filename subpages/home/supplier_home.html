@@ -410,7 +410,7 @@
 					if(data) {
 						sdata = data;
 						$(".si_back b").html(data.shop_name);
-						$(".si_in").attr("src", mui.web_sever + data.shop_logo);
+						$(".si_in").attr("src", mui.web_sever + data.shop_index_img);
 						$(".si_b4_con").empty();
 						$.each(data.shop_credit, function(idx, url) {
 							$('<li><img src="' + mui.web_sever + url + '"></li>').appendTo($(".si_b4_con"));

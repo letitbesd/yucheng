@@ -19,7 +19,7 @@
 					</li>
 					<li>
 						<div class="li_header to_goods_detail" data="358">
-							<img src="../../images/in_3.jpg">
+							<img src="../../images/in_3.jpg" class="shop_index">
 							<img src="../../images/yucheng/yc-20.png" class="kefu">
 						</div>
 					</li>
@@ -117,7 +117,15 @@
 			window.addEventListener('setid', function(e) {
 				id = e.detail.id;
 				$(".sl_name").html(e.detail.name);
-				
+			mui.plusReady(function() {
+				mui.web_query("supplierIndex.php", {
+					supplier_id: id,
+					
+				}, function(data) {
+							$(".shop_index").attr('src',mui.web_sever + data.shop_index_img);
+					
+				});
+			})				
 			})
 		</script>
 	</body>
