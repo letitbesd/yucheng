@@ -60,6 +60,9 @@
 				<p class="uc_style" target="./user/addresslist.html">收货地址</p>
 				<p class="uc_style" target="./user/coupon.html">我的优惠券</p>
 				<p class="uc_style" target="./user/comments.html">我的评价</p>
+				<p class="uc_style" target="./user/support.html">关于玉城</p>
+				<p class="uc_style" target="./user/support.html">玉城客服</p>
+				<p class="uc_style" target="./user/support.html">玉城客服</p>
 				<p class="uc_style" target="./user/support.html">玉城客服</p>
 				<p class="uc_style" id="logout" target="">退出登录</p>
 			</div>
@@ -198,11 +201,17 @@
 			} 
 			 
 			function do_login(){
+				console.log("ddldld");
 				var num  = $('#mobile').val();
 				var code  = $('#code').val();
 				//var url ="http://www.jadechina.cn/mobile/user.php?ajax_act=login";//wechat
 				var url =  "userLogin.php"; //jieko
-				var usid = UserInfo.wxinfo().userInfo.openid || "";
+				var wxinfo = UserInfo.wxinfo();
+				var usid = "";
+				if (wxinfo)
+				{
+					usid = wxinfo.userInfo.openid || ""; 
+				} 
 				console.log("wweixin id " + usid);
 				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
 					if (data.status == 1)
