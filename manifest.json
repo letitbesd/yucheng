@@ -401,7 +401,8 @@
 					"css/home/style.css",
 					"css/mui.min.css",
 					"js/mui_ajax.js",
-					"css/home/loader.png"
+					"css/home/loader.png",
+					"css/home/reset.css"
 				],
 				"refer": [
 					"subpages/goods_attr/goods_list_filter.html",
@@ -436,7 +437,8 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/mui_ajax.js",
-					"js/mui_utils.js"
+					"js/mui_utils.js",
+					"subpages/home/supplier_list.html"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -524,7 +526,8 @@
 					"js/mui_utils.js",
 					"images/in_3.jpg",
 					"fonts/mui.ttf",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"subpages/home/goods_list_new.html"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -651,7 +654,8 @@
 					"js/mui_ajax.js"
 				],
 				"refer": [
-					"subpages/home/goods_detail.html"
+					"subpages/home/goods_detail.html",
+					"subpages/home/goods_list_time.html"
 				],
 				"priority": 0
 			},
@@ -731,7 +735,8 @@
 					"css/home/style.css",
 					"css/home/reset.css",
 					"js/mui_ajax.js",
-					"js/mui_utils.js"
+					"js/mui_utils.js",
+					"subpages/home/goods_list_bought.html"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -790,7 +795,8 @@
 					"css/home/reset.css",
 					"js/zepto.min.js",
 					"js/mui_ajax.js",
-					"css/home/loader.png"
+					"css/home/loader.png",
+					"css/reset.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -805,7 +811,8 @@
 					"js/mui_ajax.js",
 					"css/home/loader.png",
 					"js/zepto.min.js",
-					"images/in_4.jpg"
+					"images/in_4.jpg",
+					"css/reset.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -815,7 +822,8 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"subpages/user/comments_sub.html",
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/reset.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -916,7 +924,8 @@
 					"css/home/reset.css",
 					"js/mui_ajax.js",
 					"css/home/loader.png",
-					"js/utils.js"
+					"js/utils.js",
+					"images/icon/yc-17.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -984,7 +993,8 @@
 					"js/mui_ajax.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/mui_utils.js"
+					"js/mui_utils.js",
+					"css/reset.css"
 				],
 				"refer": [
 					"subpages/user/do_comment.html"
@@ -1107,7 +1117,8 @@
 			},
 			"template_sub.html": {
 				"resources": [
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"subpages/home/goods_list_new.html"
 				],
 				"refer": [],
 				"priority": 0
