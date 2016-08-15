@@ -11,39 +11,121 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
 	</head>
 
-	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+	<body style="WIDTH: 100%;">
+		<div class="ycxx_all">
+			<div class="ycxx_back"><img src="themesmobile/self_themes/img/icon/yc-22.png" class="back"></div>
+			<p class="ycxx_shop"><i class="ycxx_img"><img src="../../images/icon/cart_1.png"></i><i class="ycxx_shop_name">翠钻宫</i></p>
+			<div class="goodslist">
+				<div class="ycxx_c1">
+					<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+					<div class="ycxx_co2">
+						<p class="ycxx_name">冰种飘花观音挂件</p>
+						<p class="ycxx_price">￥111600.00</p>
+						<p class="ycxx_style">状态：待发货</p>
+						<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>
+					</div>
+				</div>
+			<div class="ycxx_c1">
+				<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+				<div class="ycxx_co2">
+					<p class="ycxx_name">冰种飘花观音挂件</p>
+					<p class="ycxx_price">￥111600.00</p>
+					<p class="ycxx_style">状态：待发货</p>
+					<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>					
+				</div>
+			</div>
+			</div>
+			
+			<div class="ycxx_c2">
+				
+			</div>
+
+			<div class="ycxx_c3 wait_goods">
+				<p>订单编号：2016081348706</p>
+				<p>创建时间：2016-08-13 11:57:28</p>  
+			</div> 
+		</div>
+		<div class="mc_wait_pay">
+			<p class="mc_go_pay" id="pay_order" data="277" onclick="dopay();">完成付款</p>
+			<p class="mc_can_pay" id="cancel_order" data="277">取消订单</p>
+		</div>
+		<script src="../../js/zepto.min.js"></script>  
+		<script type="text/javascript" src="../../js/wxpay.js" ></script>		 
+		
 		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
 		<script type="text/javascript">
-			mui.init(
-				{
-					 swipeBack:true, //启用右滑关闭功能
-				}
-			);
-			
-			
-			function showOrder(order_id)
-			{
-				var frame1 =  document.getElementById("f_test");
-				frame1.onload = function(){   
-		        	console.log("iframe load. ");
-		        	var x=document.getElementById("f_test");
-					var y=(x.contentWindow || x.contentDocument);
-					if (y.document) y=y.document;
-					y.querySelector(".ycxx_cancel").style.display = "none";//隐藏可能跳转别的地方的链接
-			    };   
-				
-				var url = "http://yucheng.chebank.com/mobile/user.php?act=order_detail&order_id=" + order_id;
-				frame1.src = url;
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+			});
+
+			function showOrder(order_id) {
+				 mui.web_query('userorderdetail.php', {order_id:order_id}, function(data){
+				 	 var str = "";
+				 	 $(".goodslist").empty();
+					 $.each(data.goods_list, function(idx,item){
+					 	var newnode = $('<div class="ycxx_c1">\
+							<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>\
+							<div class="ycxx_co2">\
+								<p class="ycxx_name">冰种飘花观音挂件</p>\
+								<p class="ycxx_price">￥111600.00</p>\
+								<p class="ycxx_style">状态：待付款</p>\
+							</div>\
+						</div>'); 
+						newnode.find('.ycxx_name').html(item.goods_name);
+						newnode.find(".ycxx_price").html("￥"+item.goods_price);
+						newnode.find(".ycxx_co1 img").attr('src', mui.server + item.goods_thumb);
+					 	//<div class="ycxx_c1">  </div>
+					 	 $(".goodslist").append(newnode);
+					 })
+					 
+					 str = '';
+					 str +='<div class="ycxx_addr"><img src="../../images/icon/addr.png"></div><div class="ycxx_acon"><p class="ycxx_aname">收货人：'
+					 + data.order.consignee + '</p><p class="ycxx_anum">' + data.order.mobile + '</p><p class="ycxx_addres">收货地址：' +data.order.address+ '</p></div>'
+					  
+					  $(".ycxx_c2").html(str);
+					  var tmp = new Date(parseInt(data.order.add_time));
+						var str = '<p>订单编号：' + data.order.order_sn + '</p><p>创建时间：' + tmp+ '</p>';
+						$(".ycxx_c3").html(str);
+						
+					pay_data['order_id'] = data.order.order_id;
+				 })
 			}
-			
-			window.addEventListener('show_order', function(e){
+
+			window.addEventListener('show_order', function(e) {
 				var id = e.detail.order_id;
 				showOrder(id);
+				wxpay.init();	
 			})
+			
+			var postdata = {};
+			var pay_data = {};
+			function dopay(){
+				if (pay_data.order_id)
+			 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
+			 	else
+			 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
+			}
+			
+			function checkPayResult(){
+				mui.web_query('payResult.php', {order_id:pay_data.order_id}, function(data){
+			 			if (data.retcode == 1)
+			 			{
+			 				mui.alert('pay success');
+			 			}
+			 			else
+			 			{
+			 				mui.alert(('pay fail'));
+			 			}
+			 			//mui.fire(plus.webview.currentWebview().opener(), 'closepage');
+			 		})
+			}
 		</script>
 	</body>
 
