@@ -279,5 +279,198 @@
 			"js/zepto.js",
 			"js/mui_ajax.js"
 		]
+	},
+	"index.html": {
+		"resources": [
+			"js/user_info.js",
+			"fonts/mui.ttf",
+			"css/mui.css",
+			"js/jQuery.md5.js",
+			"images/icon/icon7.png",
+			"images/icon/icon10.png",
+			"images/640x960.png",
+			"js/mui.min.js",
+			"images/icon/icon8.png",
+			"js/update.js",
+			"css/home/reset.css",
+			"images/icon/icon9.png",
+			"js/mui_ajax.js",
+			"js/jquery-1.7.1.js",
+			"subpages/home.html"
+		],
+		"refer": [
+			"guide.html",
+			"subpages/home.html",
+			"subpages/goods_attr.html",
+			"subpages/shopping_cart.html",
+			"subpages/user.html"
+		]
+	},
+	"subpages/user/addresslist.html": {
+		"resources": [
+			"images/yucheng/delete.png",
+			"images/yucheng/change.png",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css"
+		]
+	},
+	"subpages/user/fav.html": {
+		"resources": [
+			"js/zepto.min.js",
+			"css/reset.css",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"images/in_4.jpg",
+			"images/yucheng/cart_2.png"
+		]
+	},
+	"subpages/home.html": {
+		"resources": [
+			"images/yucheng/icon6.png",
+			"js/mui_utils.js",
+			"images//yc-53.jpg",
+			"images/yucheng/icon1.png",
+			"js/zepto.min.js",
+			"images/yucheng/icon5.png",
+			"css/swiper.min.css",
+			"css/home/style.css",
+			"js/swiper.min.js",
+			"images/in_5.jpg",
+			"images/yucheng/icon4.png",
+			"images/yucheng/icon3.png",
+			"images/icon/icon2.png",
+			"images/yc-53.jpg",
+			"js/mui.min.js",
+			"css/home/reset.css",
+			"css/mui.css"
+		],
+		"refer": [
+			"subpages/home/goods_detail.html",
+			"template_sub.html",
+			"subpages/home/supplier_home.html",
+			"template.html"
+		]
+	},
+	"subpages/user/comments.html": {
+		"resources": [
+			"subpages/user/comments_sub.html"
+		],
+		"refer": [
+			"subpages/user/comments_sub.html"
+		]
+	},
+	"subpages/goods_attr.html": {
+		"resources": [
+			"images//yc-79.jpg",
+			"images//yc-78.jpg",
+			"images//yc-80.jpg",
+			"css/mui.min.css",
+			"images//yc-77.jpg",
+			"images//yc-81.jpg",
+			"css/home/style.css",
+			"css/home/reset.css"
+		],
+		"refer": [
+			"subpages/goods_attr/goods_list_filter.html"
+		]
+	},
+	"subpages/shopping_cart.html": {
+		"resources": [
+			"js/wxpay.js",
+			"images/yucheng/car_choose.png",
+			"images/yucheng/cart_1.png",
+			"images/in_4.jpg",
+			"images/yucheng/check_1.png",
+			"images/icon/car_del.png",
+			"images/yucheng/check_2.png",
+			"images/yucheng/cart_2.png",
+			"images/icon/cart_cr.png",
+			"css/home/style.css",
+			"css/swiper.min.css",
+			"css/mui.min.css",
+			"css/home/reset.css"
+		]
+	},
+	"subpages/user.html": {
+		"resources": [
+			"js/app.js",
+			"images/yucheng/uc_logo.png",
+			"images/yucheng/uc_icon4.png",
+			"images/yucheng/register1.png",
+			"images/yucheng/uc_icon6.png",
+			"images/yucheng/uc_icon1.png",
+			"images/yucheng/uc_icon3.png",
+			"css/cropper.min.css",
+			"images/yucheng/register2.png",
+			"js/cropper.min.js",
+			"images/yucheng/uc_icon5.png",
+			"images/yucheng/uc_icon2.png",
+			"images/yucheng/register3.png",
+			"js/user_info.js",
+			"css/mui.min.css",
+			"css/home/style.css",
+			"css/home/reset.css",
+			"js/jquery-1.7.1.js"
+		],
+		"refer": [
+			"subpages/user/addresslist.html",
+			"subpages/user/fav.html",
+			"subpages/user/support.html",
+			"subpages/user/comments.html",
+			"subpages/user/coupon.html"
+		]
+	},
+	"subpages/home/supplier_home.html": {
+		"resources": [
+			"js/scale.js",
+			"js/mui_utils.js",
+			"images/shop_credit3_supplier17.jpg",
+			"js/mui.min.js",
+			"images/shop_credit2_supplier17.jpg",
+			"images/shop_credit1_supplier17.jpg",
+			"css/home/si_down.png",
+			"images/yucheng/yc-22.png"
+		]
+	},
+	"subpages/goods_attr/goods_list_filter.html": {
+		"resources": [
+			"js/goods_list_filter.js",
+			"css/home/style_now.css",
+			"js/mui_utils.js",
+			"images/yucheng/yc_address.png",
+			"images/in_2.jpg",
+			"images/yucheng/sx_down.png",
+			"images/yucheng/sx_up.png"
+		]
+	},
+	"template.html": {
+		"resources": [
+			"template_sub.html",
+			"js/mui.js"
+		]
+	},
+	"subpages/user/coupon.html": {
+		"resources": [
+			"images/yucheng/user.png",
+			"images/yucheng/yhq_use.png",
+			"images/yucheng/yhq_useles.png",
+			"images/yucheng/yc-17.png",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"css/reset.css"
+		]
+	},
+	"subpages/user/comments_sub.html": {
+		"resources": [
+			"images/in_5.jpg",
+			"images/yucheng/cart_1.png",
+			"js/mui_utils.js",
+			"js/mui.min.js",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/reset.css"
+		]
 	}
 }
