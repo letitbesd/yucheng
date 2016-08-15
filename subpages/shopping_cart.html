@@ -165,7 +165,7 @@
 							<p class="sc_de_shoose_1" style="display: none;"><img src="../images/yucheng/check_2.png"></p>
 							<p class="sc_c1" style="margin-left: -67px;"><img src="../images/in_4.jpg"></p>
 							<p class="sc_c2">
-								<b><i>碧玉翠绿耳钉耳钉</i><i style="color:#656464">￥6666.00</i><i style="color:#792B34">定金￥2222.00元</i></b>
+								<b><i>碧玉翠绿耳钉耳钉</i><i style="color:#792B34;line-height: 83px;">￥6666.00</i></b>
 							</p>
 							<p class="sc_c3" style="display: block;"><img src="../images/yucheng/cart_2.png"></p>
 						</div>
@@ -195,15 +195,16 @@
 			</div>
 			<div style="clear:both"/>
 			<div class="sc_total">
-				<p><b>合计</b><b id="price_amount">￥0元</b></p>
-				<p><b>支付定金</b><b id="deposit_amount">￥0元</b></p>
+				<p style="margin-top: 15px;"><b>合计</b><b id="price_amount">￥0元</b></p>
+				
 			</div>
 			<div class="sc_bun" onclick="selcart_submit();">结算</div>
 		</div>
+		</div>
 		<div class="sc_choose_all" style="display: none;">
 			<div class="sc_ch_all">
-				<p class="sc_c_all"><img src="../images/yucheng/car_choose.png" class="car_ch1"><img src="../images/yucheng/cart_cr.png" class="car_ch2" style="display: none;"><i>全选</i></p>
-				<p class="sc_d_all" id="batch_delete"><img src="../images/yucheng/car_del.png"><i>删除</i></p>
+				<p class="sc_c_all"><img src="../images/yucheng/car_choose.png" class="car_ch1"><img src="../images/icon/cart_cr.png" class="car_ch2" style="display: none;"><i>全选</i></p>
+				<p class="sc_d_all" id="batch_delete"><img src="../images/icon/car_del.png"><i>删除</i></p>
 			</div>
 		</div>
 
@@ -270,7 +271,7 @@
 								goodsNode.find('.rec_id').val(goods.rec_id);
 								goodsNode.find('.goods_id').val(goods.goods_id);
 								goodsNode.find('.sc_c1').find("img").attr('src', url + goods.goods_thumb);
-								goodsNode.find('.sc_c2').html('<b><i>'+goods.goods_name+ '</i><i style="color:#656464">'+goods.goods_price+'</i><i style="color:#792B34">定金￥'+goods.deposit+'元</i></b>')
+								goodsNode.find('.sc_c2').html('<b><i>'+goods.goods_name+ '</i><i style="color:#656464">'+goods.goods_price+'</i></b>')
 								
 								newnode.append(goodsNode);
 							})
