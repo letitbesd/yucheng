@@ -3,34 +3,12 @@
 
 //清除登录信息
 UserInfo.clear = function(){
-    plus.storage.removeItem('username');//save userid
-    plus.storage.removeItem('password');
-    plus.storage.removeItem('token'); 
+    plus.storage.removeItem('username');//save userid 
     plus.storage.removeItem('headimage');
-    plus.storage.removeItem('wxinfo');
-    
+    plus.storage.removeItem('wxinfo'); 
+    plus.storage.removeItem('autologinstr'); 
 }
-
-/*//检查是否包含自动登录的信息
-UserInfo.auto_login = function(){
-    var username = UserInfo.username();
-    var pwd = UserInfo.password();
-    if(!username || !pwd){
-        return false;
-    }
-    return true;
-}
-
-//检查是否已登录
-UserInfo.has_login = function(){	
-    var username = UserInfo.username();
-    var pwd = UserInfo.password();
-    var token = UserInfo.token();
-    if(!username || !pwd || !token){
-        return false;
-    }
-    return true;
-};*/
+ 
 
 UserInfo.username = function(){
     if(arguments.length == 0){
@@ -96,30 +74,5 @@ UserInfo.headimage = function(){
     console.log(plus.storage.getItem('headimage'));
     
 };
-
-
-UserInfo.password = function(){
-    if(arguments.length == 0){
-        return plus.storage.getItem('password');        
-    }
-    if(arguments[0] === ''){
-        plus.storage.removeItem('password');
-        return;
-    }
-    plus.storage.setItem('password', arguments[0]);
-     console.log(plus.storage.getItem('password'));
-};
-
-UserInfo.token = function(){
-    if(arguments.length == 0){
-        return plus.storage.getItem('token');       
-    }
-    if(arguments[0] === ''){
-        plus.storage.removeItem('token');
-        return;
-    }
-
-    plus.storage.setItem('token', arguments[0]);
-     console.log(plus.storage.getItem('token'));
-     
-};
+ 
+ 
