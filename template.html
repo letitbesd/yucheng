@@ -114,9 +114,10 @@
 			} else {
 				mui.options.keyEventBind.menubutton = false;
 			}
-			menu.style.display = display;
-			
-			if(mui.os.android&&aniShow&&parseFloat(mui.os.version)>=4.4){
+			menu.style.display = display; 
+			if(mui.os.android&&aniShow&&parseFloat(mui.os.version)>=4.0) 
+			{
+				console.log(")))))))))");
 				if(contentWebview==null){
 					contentWebview = self.children()[0];
 				}
@@ -132,7 +133,7 @@
 					self.show(aniShow);
 				},10);
 			} 
-			if (e.detail.id)
+			//if (e.detail.id)
 			{
 				console.log('event fired' +  e.detail.id);
 				mui.fire(contentWebview, 'initGoodId', {id: e.detail.id});
