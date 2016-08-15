@@ -175,8 +175,10 @@
 		</form>
 	</div>
 		<div class="sc_head">
+			<div class="sc_head_con">
 			<!--<img src="../images/yucheng/yc-17.png" class="sc_back">-->
 			<i class="sc_check" style="display: block;">编辑</i><i class="sc_cancel" style="display: none;">取消</i>
+			</div>
 		</div>
 		<div class="sc_pay" style="display: block;">
 			<div class="sc_line"></div>
@@ -411,6 +413,19 @@
 				{
 					//do a refresh();
 					refresh();
+			$(".sc_cancel").hide();
+			$(".sc_check").show();
+//			move();
+			$(".sc_pay").show();
+			$(".sc_li_all").removeClass("del");
+			$(".sc_choose_all").hide();
+			$(".sc_shoose").show();
+			$(".sc_de_shoose_1").hide();
+			$(".sc_de_shoose").hide();
+			$(".sc_ch1").show();
+			$(".sc_ch2").hide();
+			$(".car_ch2").hide();
+			$(".car_ch1").show();					
 				}
 				else{
 					mui.toast('网络异常');

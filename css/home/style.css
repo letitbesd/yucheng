@@ -881,13 +881,20 @@ a {
 	position: fixed;
 	top: 0;
 	left: 0;
+	width: 100%;
+	height: 45px;
+	background: #E6E6E8;
+	z-index: 9999;
+
+}
+.sc_head_con{
 	width: 90%;
 	height: 45px;
 	margin-left: 5%;
 	border-bottom: solid 1px #2d2f30;
-	z-index: 9999;
+	
+	float: left;
 }
-
 .sc_back {
 	display: block;
 	width: 10px;
@@ -2008,7 +2015,7 @@ a {
 	line-height: 35px;
 	height: 35px;
 	float: left;
-	margin-top: -42px;
+	margin-top: -46px;
 	margin-left: 5%;
 	color: #fff;
 }
