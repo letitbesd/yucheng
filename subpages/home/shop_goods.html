@@ -44,6 +44,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/mui_ajax.js"></script>
 		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
 		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
@@ -78,7 +79,7 @@
 						}
 						else
 						{
-							var newnode = $('<div class="sl_list to_goods_detail" data="342">\
+							var newnode = $('<div class="sl_list to_goods_detail" data="342" onclick="showgoods(this);">\
 								<p><img src="../../images/in_3.jpg"></p>\
 								<p>和和美美吊坠</p>\
 								<p>￥1999.00</p>\
@@ -88,6 +89,7 @@
 								</p>\
 							</div>');
 							newnode.attr("data", goods.goods_id);
+							console.log(goods.goods_id)
 							newnode.find("img").eq(0).attr("src", mui.web_sever + goods.goods_thumb);
 							newnode.find("p").eq(1).html(goods.goods_name);
 							newnode.find("p").eq(2).html('￥' + goods.shop_price);
@@ -127,6 +129,12 @@
 				});
 			})				
 			})
+			
+			function showgoods(ele){
+				var id = $(ele).attr("data");
+				console.log(id);
+				mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id})
+			}
 		</script>
 	</body>
 

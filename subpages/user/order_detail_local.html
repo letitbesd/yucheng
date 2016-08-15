@@ -80,7 +80,8 @@
 						</div>'); 
 						newnode.find('.ycxx_name').html(item.goods_name);
 						newnode.find(".ycxx_price").html("￥"+item.goods_price);
-						newnode.find(".ycxx_co1 img").attr('src', mui.server + item.goods_thumb);
+						//console.log(mui.web_sever + item.goods_thumb);
+						newnode.find(".ycxx_co1 img").attr('src', mui.web_sever + item.goods_thumb);
 					 	//<div class="ycxx_c1">  </div>
 					 	 $(".goodslist").append(newnode);
 					 })
@@ -95,6 +96,7 @@
 						$(".ycxx_c3").html(str);
 						
 					pay_data['order_id'] = data.order.order_id;
+					pay_data['pay_code'] = data.payment_list.pay_code;
 				 })
 			}
 
@@ -107,10 +109,14 @@
 			var postdata = {};
 			var pay_data = {};
 			function dopay(){
-				if (pay_data.order_id)
-			 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
-			 	else
-			 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
+				if (pay_data['pay_code'] == "weixin")
+				{
+					if (pay_data.order_id)
+				 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
+				 	else
+				 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
+				}
+				
 			}
 			
 			function checkPayResult(){
@@ -122,8 +128,7 @@
 			 			else
 			 			{
 			 				mui.alert(('pay fail'));
-			 			}
-			 			//mui.fire(plus.webview.currentWebview().opener(), 'closepage');
+			 			} 
 			 		})
 			}
 		</script>

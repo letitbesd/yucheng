@@ -229,7 +229,8 @@
 			"css/home/si_down.png",
 			"images/yucheng/yc-22.png",
 			"images/in_6.jpg",
-			"images/yucheng/yc-20.png"
+			"images/yucheng/yc-20.png",
+			"css/home/si_up.png"
 		],
 		"refer": [
 			"subpages/home/shop_goods.html"
@@ -280,7 +281,8 @@
 		"resources": [
 			"images/in_5.jpg",
 			"images/yucheng/cart_1.png"
-		]
+		],
+		"refer": []
 	},
 	"subpages/home/goods_list_time.html": {
 		"resources": [
@@ -291,7 +293,8 @@
 			"css/home/style.css",
 			"css/home/reset.css",
 			"js/mui_ajax.js"
-		]
+		],
+		"refer": []
 	},
 	"subpages/user/orderlist1.html": {
 		"resources": [
@@ -327,7 +330,8 @@
 			"js/mui_ajax.js",
 			"images/yucheng/yc-55.png",
 			"js/wxpay.js"
-		]
+		],
+		"refer": []
 	},
 	"subpages/user/orderlist2.html": {
 		"resources": [
@@ -360,7 +364,8 @@
 			"css/home/reset.css",
 			"images/yucheng/yc-17.png",
 			"js/mui_ajax.js"
-		]
+		],
+		"refer": []
 	},
 	"subpages/user/fav.html": {
 		"resources": [
@@ -369,7 +374,8 @@
 			"css/home/style.css",
 			"css/mui.min.css",
 			"css/reset.css"
-		]
+		],
+		"refer": []
 	},
 	"subpages/user/orderlist3.html": {
 		"resources": [
@@ -382,7 +388,8 @@
 			"js/zepto.js",
 			"images/yucheng/yc-22.png",
 			"js/mui_ajax.js"
-		]
+		],
+		"refer": []
 	},
 	"subpages/home/shop_goods.html": {
 		"resources": [
@@ -396,7 +403,11 @@
 			"images/yucheng/yc-20.png",
 			"css/home/reset.css",
 			"images/yucheng/yc-17.png",
-			"js/mui_ajax.js"
+			"js/mui_ajax.js",
+			"js/mui_utils.js"
+		],
+		"refer": [
+			"subpages/home/goods_detail.html"
 		]
 	},
 	"subpages/home/goods_list_new.html": {
@@ -411,16 +422,19 @@
 			"images/yucheng/yc-18.png",
 			"js/mui_ajax.js",
 			"images/in_1.jpg"
-		]
+		],
+		"refer": []
 	},
 	"subpages/home/goods_list_bought.html": {
 		"resources": [
 			"images/yucheng/yc-77.png"
-		]
+		],
+		"refer": []
 	},
 	"guide.html": {
 		"resources": [
 			"css/mui.css"
-		]
+		],
+		"refer": []
 	}
 }

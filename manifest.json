@@ -1055,9 +1055,12 @@
 					"images/yucheng/yc-20.png",
 					"css/home/reset.css",
 					"js/mui_ajax.js",
-					"js/zepto.min.js"
+					"js/zepto.min.js",
+					"js/mui_utils.js"
 				],
-				"refer": [],
+				"refer": [
+					"subpages/home/goods_detail.html"
+				],
 				"priority": 0
 			},
 			"subpages/link.html": {
