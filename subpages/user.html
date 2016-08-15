@@ -11,13 +11,11 @@
 		<link href="../css/mui.min.css" rel="stylesheet" /> 
 		<style>
 			.oauth-area {
-				position: absolute;
-				bottom: 20px;
-				left: 0px;
+				margin-top: 25px;
 				text-align: center;
 				width: 100%;
 				padding: 0px;
-				margin: 0px;
+				float: left;
 			}
 			
 			.oauth-area .oauth-btn {
@@ -43,7 +41,7 @@
 		</style>
 	</head>
 
-	<body>
+	<body style="background: #2D2F30">
 		<div class="uc_all" style="display:block">
 			<div class="uc_head">
 				<p class="uc_sz"><img src="../images/yucheng/uc_icon6.png"></p>
@@ -66,7 +64,7 @@
 				<p class="uc_style" id="logout" target="">退出登录</p>
 			</div>
 		</div>
-		<div class="lg_all login" style="display:none">
+		<div class="lg_all login" style="display:none;background: none;">
 			<div class="lg_logo"><img src="../images/yucheng/register1.png"></div>
 			<div class="lg_con">
 				<p><i><img src="../images/yucheng/register2.png"></i>
@@ -396,8 +394,10 @@
 			function do_binding(){
 				var num  = $('#mobile').val();
 				var code  = $('#code').val();
-				var usid = UserInfo.wxinfo().userinfo.openid; 
-				mui.web_query("userBindWechat.php?act=wechat_bind", {mobile:num,code:code,usid:usid}, function(data){
+				var usid = UserInfo.wxinfo().authResult.openid; 
+				var obj ={mobile:num,code:code,usid:usid};
+				console.log(JSON.stringify(obj));
+				mui.web_query("userBindWechat.php?act=wechat_bind", obj, function(data){
 					 //{"status":1,"info":"登录成功","user_id":"7","session_id":"d01f844b9f2e58ee07f47095bbcb2e23","auto_code":324354,"bind":"1"} at js/mui_ajax.js:40
 					//todo: save autocode
 					//UserInfo.

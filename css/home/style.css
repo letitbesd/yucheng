@@ -2002,8 +2002,8 @@ a {
 }
 
 .lg_con input {
-	border: none;
-	background: none;
+	border: none !important;
+	background: none !important;
 	outline: none;
 	line-height: 35px;
 	height: 35px;

@@ -44,7 +44,8 @@
 								var service = services[i];
 								console.log("service : "+service.id)
 								auths[service.id] = service;//
-								if (~authBtns.indexOf(service.id)) {
+								var hasButton = oauthArea.querySelector('.oauth-btn');
+								if (~authBtns.indexOf(service.id) && hasButton == null) {
 									var isInstalled = app.isInstalled(service.id);
 									var btn = document.createElement('div');
 									//如果微信未安装，则为不启用状态
