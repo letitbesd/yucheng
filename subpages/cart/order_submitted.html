@@ -132,7 +132,17 @@
 						$('.wc_con').find('p').eq(0).html('订单号：<i>' + data.order.order_sn+'</i>');
 						$('.wc_con').find('p').eq(1).html('<p>支付金额：<i>￥' + data.order.order_amount + '</i></p>');
 						pay_data['order_sn'] = data.order.order_sn;
-						pay_data['order_id'] = data.order.order_id;
+						if (data.order.parent_order_id != '0')
+						{
+							pay_data['parent_order_id'] = data.order.parent_order_id;
+							pay_data['sub_order_id'] = data.order.order_id; 
+						}
+						else
+						{
+							pay_data['order_id'] = data.order.order_id; 
+							pay_data['sub_order_id'] = data.order.order_id; 
+						}
+
 					}
 					else
 					{
@@ -141,14 +151,11 @@
 				})
 			})
 			
-			$('.wc_bun').on('click', function() {
-			 	wxpay.pay({order_id:pay_data.order_id, on_successs:function(){
-			 		//confirm order is payed ?
-			 		mui.web_query('payResult.php', {order_id:pay_data.order_id}, function(data){
+			function checkPayResult(){
+				mui.web_query('payResult.php', {order_id:pay_data.sub_order_id}, function(data){
 			 			if (data.retcode == 1)
 			 			{
 			 				mui.alert('pay success');
-			 				
 			 			}
 			 			else
 			 			{
@@ -156,7 +163,13 @@
 			 			}
 			 			mui.fire(plus.webview.currentWebview().opener(), 'closepage');
 			 		})
-			 	}});
+			}
+			
+			$('.wc_bun').on('click', function() {
+				if (pay_data.order_id)
+			 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
+			 	else
+			 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
 //			 	wxpay.pay({order_id:207}); 
 				//todo: 请求支付结果 http://yucheng.chebank.com/mapi/payResult.php
 			});

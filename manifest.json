@@ -217,12 +217,14 @@
 					"js/wxpay.js",
 					"js/app.js",
 					"js/user_info.js",
- 
 					"images/icon/icon7.png",
 					"images/icon/icon10.png",
 					"images/icon/icon8.png",
 					"images/icon/icon9.png",
-					"css/home/reset.css" 
+					"css/home/reset.css",
+					"js/jQuery.md5.js",
+					"js/mui_ajax.js",
+					"js/jquery-1.7.1.js"
 				],
 				"refer": [
 					"guide.html",
