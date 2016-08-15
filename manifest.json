@@ -401,8 +401,7 @@
 					"css/home/style.css",
 					"css/mui.min.css",
 					"js/mui_ajax.js",
-					"css/home/loader.png",
-					"css/home/reset.css"
+					"css/home/loader.png"
 				],
 				"refer": [
 					"subpages/goods_attr/goods_list_filter.html",
@@ -437,8 +436,7 @@
 					"fonts/mui.ttf",
 					"css/mui.min.css",
 					"js/mui_ajax.js",
-					"js/mui_utils.js",
-					"subpages/home/supplier_list.html"
+					"js/mui_utils.js"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -526,8 +524,7 @@
 					"js/mui_utils.js",
 					"images/in_3.jpg",
 					"fonts/mui.ttf",
-					"css/mui.min.css",
-					"subpages/home/goods_list_new.html"
+					"css/mui.min.css"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -654,8 +651,7 @@
 					"js/mui_ajax.js"
 				],
 				"refer": [
-					"subpages/home/goods_detail.html",
-					"subpages/home/goods_list_time.html"
+					"subpages/home/goods_detail.html"
 				],
 				"priority": 0
 			},
@@ -735,8 +731,7 @@
 					"css/home/style.css",
 					"css/home/reset.css",
 					"js/mui_ajax.js",
-					"js/mui_utils.js",
-					"subpages/home/goods_list_bought.html"
+					"js/mui_utils.js"
 				],
 				"refer": [
 					"subpages/home/goods_detail.html"
@@ -924,8 +919,7 @@
 					"css/home/reset.css",
 					"js/mui_ajax.js",
 					"css/home/loader.png",
-					"js/utils.js",
-					"images/icon/yc-17.png"
+					"js/utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -979,7 +973,8 @@
 					"subpages/user/orderlist2.html",
 					"subpages/user/orderlist3.html",
 					"subpages/user/order_detail.html",
-					"subpages/user/orderlist4.html"
+					"subpages/user/orderlist4.html",
+					"subpages/user/order_detail_local.html"
 				],
 				"priority": 0
 			},
@@ -993,8 +988,7 @@
 					"js/mui_ajax.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/mui_utils.js",
-					"css/reset.css"
+					"js/mui_utils.js"
 				],
 				"refer": [
 					"subpages/user/do_comment.html"
@@ -1117,8 +1111,25 @@
 			},
 			"template_sub.html": {
 				"resources": [
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpages/user/order_detail_local.html": {
+				"resources": [
+					"js/zepto.min.js",
+					"images/in_2.jpg",
+					"images/yucheng/icon4.png",
+					"images/icon/addr.png",
+					"images/icon/cart_1.png",
 					"js/mui.min.js",
-					"subpages/home/goods_list_new.html"
+					"css/home/style.css",
+					"css/mui.min.css",
+					"css/home/reset.css",
+					"js/mui_ajax.js",
+					"images/yucheng/yc-55.png",
+					"js/wxpay.js"
 				],
 				"refer": [],
 				"priority": 0
