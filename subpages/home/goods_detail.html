@@ -467,6 +467,13 @@
 									$(".for_type_1").hide();
 									$(".for_type_0").hide();
 									$(".for_type_2").show();
+										
+									console.log(data.goods.remain_second)
+									if (data.goods.remain_second > 0)
+										$(".mui-bar-tab.for_type_2").hide();
+									 
+										
+									
 									updateValues(data);
 									$(".in_willbegin_time").each(function(idx) {
 										$(this).downCount(parseInt(data.goods.remain_second));
