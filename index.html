@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>index</title>
-    <link href="css/mui.css" rel="stylesheet"/>
-    <!--<link rel="stylesheet" href="css/home/style.css" />-->
+    <link href="css/mui.css" rel="stylesheet"/> 
     <style type="text/css">
     
     .in_bottom{
@@ -74,11 +73,13 @@
 			<img src="images/640x960.png" />
 		</div>
 </body>
-<script src="js/mui.js"></script>
-<script type="text/javascript" src="js/user_info.js" ></script>
-<script type="text/javascript" src="js/app.js" ></script>
-<script type="text/javascript" src="js/zepto.min.js" ></script>
+<script type="text/javascript" src="js/mui.min.js" ></script> 
+<script type="text/javascript" src="js/jquery-1.7.1.js" ></script>
+<script type="text/javascript" src="js/mui_ajax.js" ></script>
+<script type="text/javascript" src="js/jQuery.md5.js" ></script>
+<script type="text/javascript" src="js/user_info.js" ></script> 
 <script type="text/javascript" src="js/update.js" ></script>
+
 <script type="text/javascript" charset="utf-8">
       mui.init({
 			swipeBack:true, //启用右滑关闭功能
@@ -99,7 +100,31 @@
 			top: '45px',
 			bottom: '51px'
 		};
-			
+			function autologin(){
+				var str = UserInfo.autologinstr();
+				console.log('autologin:auto_code:' + str);
+				if (str)
+				{
+					str = $.md5(str);				 
+					mui.web_query("mobileAutoLogin.php", {auto_code:str}, function(data){
+						console.log('here');
+							if (data.status == 1)
+							{
+								//UserInfo.autocode(String(data.auto_code));
+								mui.toast('autologin success!');  
+								mui.need_login = false;
+							}else
+							{
+								mui.toast('autologin fail!'); 
+								mui.need_login = true;
+							}
+					})
+				}
+				else
+				{
+					mui.toast('autologin fail!--no autologinstr'); 
+				}
+			}
 			//var aniShow = {};//记录子页面是否首次显示			
 			 //创建子页面，首个选项卡页面显示，其它均隐藏；
 			var currentView = null;
@@ -108,7 +133,7 @@
 				
 				//----do autologin. 
 				console.log("AutoLogin ....");
-				app.autologin();
+				autologin();
 				var self = plus.webview.currentWebview();
 				currentView = self;
 				for (var i = 0; i < 4; i++) {
@@ -157,14 +182,20 @@
 							}
 						}); 
 					}					
-				}
-				mui.later(function() {
-					$('.loadingcover').remove();
-					homeTabWV.show();//
-				}, 350); 
+				} 
 				//preload_template('default', '../template.html');//why i load here will fail??
 				
 			});//end of plus ready
+			
+			function onhomeready(){
+				setTimeout(function(){
+					$('.loadingcover').remove();
+					homeTabWV.show();
+				}, 1000);
+				
+			}
+			
+			window.addEventListener('homeready', onhomeready);
 			 //当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");

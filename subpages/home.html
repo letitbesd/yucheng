@@ -212,46 +212,20 @@
 				
 				preload_template('default2', '../template.html');
 				refresh();
-				mui.web_query("index.php", {}, function(data) {
-					
-					console.log(data.wap_index_ads);
-					$.each(data.wap_index_ads,function(idx, goods){
-					
-					console.log(idx);
-					console.log(goods);
-					console.log(goods.image);
-	
-						var lunBoImg =
-						"<div class='swiper-slide' data='"+idx+"'><img src='"+baseurl+""+goods.image+"'></div> ";
-						$(".slide_ad").append(lunBoImg);							
-					
-						
-					})//end each
-					initSwipers();
-				});				
+				
 			});
 			
 			function refresh(){
 				console.log("refresh ----------------");
-				mui.web_query('index.php', {}, function(data){
-					plus.nativeUI.closeWaiting();
+				mui.web_query('index.php', {}, function(data){ 
 					var baseurl = 'http://yucheng.chebank.com/';
 					if (data.wap_index_ads)
-					{
-						var list = $('.slide_ad');
-						var tpl = list.children()[0];
-						//console.log(tpl);
-						list.empty(); 
-						
-						for (var idx in data.wap_index_ads)
-						{
-							var obj = data.wap_index_ads[idx];
-							var newItem = $(tpl).clone();
-							newItem.find('img').attr('src', baseurl + obj.image);
-							newItem.appendTo(list);
-//							console.log(baseurl + obj.image);							
-						}
-						
+					{						 
+						$.each(data.wap_index_ads,function(idx, goods){
+						 
+							var lunBoImg = "<div class='swiper-slide' data='"+idx+"'><img src='"+baseurl+""+goods.image+"'></div> ";
+							$(".slide_ad").append(lunBoImg);
+						})//end each
 					}
 					if (data.is_best)
 					{
@@ -300,7 +274,8 @@
 							tpl.appendTo(attchnode);							
 						}
 					}
-					
+					initSwipers(); 
+					mui.fire(plus.webview.currentWebview().opener(), 'homeready')
 				})
 			}
 		var tpl ; 

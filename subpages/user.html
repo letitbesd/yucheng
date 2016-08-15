@@ -93,8 +93,7 @@
 	      </div>
 	        
 	    </div>
-	    <script type="text/javascript" src="../css/jquery-1.7.1.js" ></script>
-	    <script type="text/javascript" src="../js/jQuery.md5.js" ></script>
+	    <script type="text/javascript" src="../js/jquery-1.7.1.js" ></script>
     	<script type="text/javascript" src="../js/cropper.min.js" ></script>
 		<script type="text/javascript" src="../js/user_info.js" ></script>
 		<script type="text/javascript" src="../js/mui.min.js"></script>
@@ -149,25 +148,37 @@
 			window.addEventListener('refresh', refresh);
 			
 			function refresh(){
-				mui.web_query('userCenter.php', {}, function(data){
-					if (data.login_status == 1)
-					{
-						$(".uc_all").show();
-						$(".login").hide();
-						console.log("usercenter result.");
-						$(".uc_name").find('i').html(data.user_info.user_name);
-						$(".uc_name").find('img').attr('src', data.user_info.headimg);
-						if (data.wechat_nickname_app)
+				if (mui.need_login)
+				{
+					mui.web_query('userCenter.php', {}, function(data){
+						if (data.login_status == 1)
 						{
-							$(".uc_name").find('i').html(data.wechat_nickname_app);
-						} 
-					}
-					else
+							$(".uc_all").show();
+							$(".login").hide();
+							console.log("usercenter result.");
+							$(".uc_name").find('i').html(data.user_info.user_name);
+							$(".uc_name").find('img').attr('src', data.user_info.headimg);
+							if (data.wechat_nickname_app)
+							{
+								$(".uc_name").find('i').html(data.wechat_nickname_app);
+							} 
+						}
+						else
+						{
+							//未登录,调出登陆界面
+							onlogout();
+						}
+					}, null,null);
+				}
+				else
+				{
+					if ($(".uc_name").find('i').html() == 'guest')
 					{
-						//未登录,调出登陆界面
-						onlogout();
+						var auth = UserInfo.wxinfo();
+						$(".uc_name").find('i').html(auth.userInfo.nickname);
+						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl); 
 					}
-				}, null,null);
+				}
 			}
 			 
 			
@@ -196,9 +207,23 @@
 				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
 					if (data.status == 1)
 					{	 
-						UserInfo.autologinstr({mobile:num, userid:data_user_id, autocode:data.auto_code});
-						refresh();//refresh icon and nickname
+						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
 						mui.toast('登陆成功');
+						$('.login').hide();
+						$(".uc_all").show();
+						if(usid)
+						{
+							var auth = UserInfo.wxinfo();
+							if (auth.userInfo)
+							{
+								$(".uc_name").find('i').html(auth.userInfo.nickname);
+								$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
+							}
+							else
+							{
+								
+							}
+						}
 					}
 					else
 					{
@@ -387,7 +412,7 @@
 			function onlogout(){
 				$(".uc_all").hide();
 				$(".login").show();
-				//UserInfo.clear(); 
+//				UserInfo.clear(); 
 				app.showThirdPartLogin(do_wechat_login);
 			}
 			
@@ -404,6 +429,15 @@
 					console.log("here");
 					if (data.bind == 1){
 						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
+						var auth = UserInfo.wxinfo();
+						$(".uc_name").find('i').html(auth.userInfo.nickname);
+						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl); 
+						$(".uc_all").show();
+						$(".login").hide();
+					}
+					else
+					{
+						
 					}
 					mui.toast(data.info);
 				})

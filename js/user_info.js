@@ -55,14 +55,15 @@ UserInfo.autologinstr = function(){
         	var str = ds + obj.mobile + obj.userid + obj.autocode;
         	return str;
         }
-        return "";
-        
+        else
+        	return "";
     }
+	
 	var p = arguments[0];
     if (typeof (p) == "object")
     {
     	console.log("saving autologinstr :" + p.mobile + p.userid + p.autocode);
-    	plus.storage.setItem('username', JSON.stringify(p));
+    	plus.storage.setItem('autologinstr', JSON.stringify(p));
     }
     
 }

@@ -147,13 +147,15 @@
 		});
 		mui.plusReady(function(){
 //			preload_template('default2', '../template.html'); 	
-			refresh();
+			
 		}); 
-		//window.addEventListener();
-		//var loaded = false;
+		window.addEventListener('refresh', refresh);
+		var loaded = false;
 		function refresh(){
-			console.log("doing refresh 23");
+			if (loaded)
+				return;
 			mui.web_query('goodsAttr.php', {}, function(data){
+				loaded = true;
 					if(data && data.category_list){
 						var str =  ""
 						for(var i=0; i < data.category_list.length; i ++)

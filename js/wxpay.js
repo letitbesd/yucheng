@@ -5,7 +5,7 @@ wxpay = (function(){
 		plus.payment.getChannels(function(channels){
 			for(var i in channels){
 				var channel=channels[i];
-				console.log(channel.id);
+				//console.log(channel.id);
 				if(channel.id==='wxpay'){
 					iap=channel;
 				}

@@ -1,0 +1,50 @@
+<!doctype html>
+<!--
+	作者：myn0602@163.com
+	时间：2016-07-26
+	描述：加载外部网页地址，加载完成之后 调整不需要显示的内容
+-->
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript">
+			mui.init(
+				{
+					 swipeBack:true, //启用右滑关闭功能
+				}
+			);
+			
+			
+			function showOrder(order_id)
+			{
+				var frame1 =  document.getElementById("f_test");
+				frame1.onload = function(){   
+		        	console.log("iframe load. ");
+		        	var x=document.getElementById("f_test");
+					var y=(x.contentWindow || x.contentDocument);
+					if (y.document) y=y.document;
+					y.querySelector(".ycxx_cancel").style.display = "none";//隐藏可能跳转别的地方的链接
+			    };   
+				
+				var url = "http://yucheng.chebank.com/mobile/user.php?act=order_detail&order_id=" + order_id;
+				frame1.src = url;
+			}
+			
+			window.addEventListener('show_order', function(e){
+				var id = e.detail.order_id;
+				showOrder(id);
+			})
+		</script>
+	</body>
+
+</html>

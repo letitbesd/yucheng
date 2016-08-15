@@ -1,5 +1,6 @@
 
 ;mui.web_sever = "http://yucheng.chebank.com/";
+;mui.need_login = false;
 ;mui.web_query = function(func_url, params, onSuccess, onError, retry){
 	var url = "http://yucheng.chebank.com/mapi/";
     var onSuccess = arguments[2]?arguments[2]:function(){};
@@ -35,7 +36,8 @@
             if(data){
             	if(data.login_status === 0)
             	{
-            		mui.toast('login in please!')
+            		need_login = true;
+            		//mui.toast('login in please!');
 	            }
 	            console.log(JSON.stringify(data));
 	            onSuccess(data); 

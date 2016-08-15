@@ -8,7 +8,7 @@ var wgtVer = null;
 	plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 		wgtVer = inf.version;
 		console.log("当前应用版本：" + wgtVer);
-		plus.nativeUI.toast("当前应用版本：" + wgtVer);
+		//plus.nativeUI.toast("当前应用版本：" + wgtVer);
 		checkUpdate();
 	});
 }
@@ -28,7 +28,7 @@ function checkUpdate() {
 					console.log("检测更新成功：" + xhr.responseText);
 					//alert("检测更新成功：" + xhr.responseText);
 					var obj = JSON.parse(xhr.responseText.trim());
-					alert("新版本" + obj.v + ':\n' + obj.desc);
+					//alert("新版本" + obj.v + ':\n' + obj.desc);
 					var newVer = obj.v;
 					UPDATE_METHOD = obj.method;
 					if(wgtVer && newVer && (wgtVer != newVer)) {
@@ -49,11 +49,11 @@ function checkUpdate() {
 						}, "nativeUI", ["Yes", "No"]);
 
 					} else {
-						plus.nativeUI.alert("无新版本可更新！");
+						//plus.nativeUI.alert("无新版本可更新！");
 					}
 				} else {
 					console.log("检测更新失败！");
-					plus.nativeUI.alert("检测更新失败！");
+					//plus.nativeUI.alert("检测更新失败！");
 				}
 				break;
 			default:

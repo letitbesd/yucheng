@@ -82,29 +82,5 @@
 							oauthArea.style.display = 'none';
 							plus.nativeUI.toast("获取登录认证失败：" + e.message);
 						});
-			 },
-			 
-	owner.autologin = function (){  
-				var str = UserInfo.autologinstr();
-				if (str)
-				{
-					str = $.md5(str);				
-					console.log('autologin:auto_code:' + str);
-					mui.web_query("mobileAutoLogin.php", {auto_code:str}, function(data){
-							if (data.status == 1)
-							{
-								UserInfo.autocode(String(data.auto_code));
-								mui.toast('autologin success!');  
-							}else
-							{
-								mui.toast('autologin fail!'); 
-							}
-					})
-				}
-				else
-				{
-					mui.toast('autologin fail!--no autologinstr'); 
-				}
-				
-			}
-}(mui, window.app = {}))
+			 }  
+})(mui, window.app = {})
