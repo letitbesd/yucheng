@@ -714,7 +714,9 @@
 					"images/yucheng/icon10.png",
 					"images/yucheng/icon7.png",
 					"js/mui_utils.js",
-					"js/wxpay.js"
+					"js/wxpay.js",
+					"images/icon/car_del.png",
+					"images/icon/cart_cr.png"
 				],
 				"refer": [
 					"subpages/cart/flow.html"
