@@ -2093,9 +2093,10 @@ a {
 	outline: none;
 	width: 25%;
 	height: 50px;
-	line-height: 50px;
+	line-height:45px;
 	font-size: 15px;
 	float: left;
+	margin-top: -8px;
 	margin-right: 3%;
 }
 
