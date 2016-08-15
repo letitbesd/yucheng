@@ -197,7 +197,8 @@
 			"css/home/style.css",
 			"css/mui.min.css",
 			"js/mui_ajax.js",
-			"css/home/loader.png"
+			"css/home/loader.png",
+			"css/home/reset.css"
 		],
 		"refer": [
 			"subpages/goods_attr/goods_list_filter.html",
