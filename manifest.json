@@ -714,7 +714,9 @@
 					"images/yucheng/icon10.png",
 					"images/yucheng/icon7.png",
 					"js/mui_utils.js",
-					"js/wxpay.js"
+					"js/wxpay.js",
+					"images/icon/car_del.png",
+					"images/icon/cart_cr.png"
 				],
 				"refer": [
 					"subpages/cart/flow.html"
@@ -968,7 +970,8 @@
 					"subpages/user/orderlist2.html",
 					"subpages/user/orderlist3.html",
 					"subpages/user/order_detail.html",
-					"subpages/user/orderlist4.html"
+					"subpages/user/orderlist4.html",
+					"subpages/user/order_detail_local.html"
 				],
 				"priority": 0
 			},
@@ -1106,6 +1109,22 @@
 			"template_sub.html": {
 				"resources": [
 					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpages/user/order_detail_local.html": {
+				"resources": [
+					"js/zepto.min.js",
+					"images/in_2.jpg",
+					"images/yucheng/icon4.png",
+					"images/icon/addr.png",
+					"images/icon/cart_1.png",
+					"js/mui.min.js",
+					"css/home/style.css",
+					"css/mui.min.css",
+					"css/home/reset.css",
+					"js/mui_ajax.js"
 				],
 				"refer": [],
 				"priority": 0

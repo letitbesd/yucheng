@@ -4,7 +4,9 @@
 			"images/yucheng/delete.png",
 			"images/yucheng/change.png"
 		],
-		"refer": []
+		"refer": [
+			"subpages/user/address_detail.html"
+		]
 	},
 	"index.html": {
 		"resources": [
@@ -36,7 +38,9 @@
 		"refer": [
 			"subpages/user/comments_sub.html"
 		],
-		"resources": []
+		"resources": [
+			"subpages/user/comments_sub.html"
+		]
 	},
 	"subpages/home.html": {
 		"resources": [
@@ -57,7 +61,8 @@
 			"template.html",
 			"subpages/home/goods_detail.html",
 			"subpages/home/supplier_home.html",
-			"subpages/home/supplier_list.html"
+			"subpages/home/supplier_list.html",
+			"subpages/home/goods_list_time.html"
 		]
 	},
 	"subpages/goods_attr.html": {
@@ -85,7 +90,17 @@
 			"images/yucheng/check_1.png",
 			"images/yucheng/check_2.png",
 			"images/yucheng/cart_cr.png",
-			"images/yucheng/cart_2.png"
+			"images/yucheng/cart_2.png",
+			"js/mui_utils.js",
+			"css/home/style.css",
+			"images/icon/car_del.png",
+			"images/icon/cart_cr.png",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"css/mui.min.css",
+			"css/swiper.min.css",
+			"css/home/reset.css",
+			"js/mui_ajax.js"
 		],
 		"refer": [
 			"subpages/cart/flow.html"
@@ -113,7 +128,8 @@
 			"subpages/user/fav.html",
 			"subpages/user/support.html",
 			"subpages/user/comments.html",
-			"subpages/user/coupon.html"
+			"subpages/user/coupon.html",
+			"subpages/user/orderlist1.html"
 		]
 	},
 	"subpages/goods_attr/goods_list_filter.html": {
@@ -177,7 +193,8 @@
 			"js/zepto.min.js",
 			"css/mui.min.css",
 			"css/swiper.min.css"
-		]
+		],
+		"refer": []
 	},
 	"subpages/home/supplier_home.html": {
 		"resources": [
@@ -186,8 +203,11 @@
 			"images/shop_credit2_supplier17.jpg",
 			"images/shop_credit1_supplier17.jpg",
 			"css/home/si_down.png",
-			"images/yucheng/yc-22.png"
-		]
+			"images/yucheng/yc-22.png",
+			"images/in_6.jpg",
+			"images/yucheng/yc-20.png"
+		],
+		"refer": []
 	},
 	"subpages/cart/flow.html": {
 		"resources": [
@@ -211,7 +231,8 @@
 			"js/mui.min.js",
 			"js/zepto.min.js",
 			"css/mui.min.css"
-		]
+		],
+		"refer": []
 	},
 	"subpages/home/supplier_list.html": {
 		"resources": [
@@ -227,6 +248,81 @@
 		],
 		"refer": [
 			"subpages/home/goods_detail.html"
+		]
+	},
+	"subpages/user/comments_sub.html": {
+		"resources": [
+			"images/in_5.jpg"
+		]
+	},
+	"subpages/home/goods_list_time.html": {
+		"resources": [
+			"js/mui_utils.js",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"js/time.js",
+			"css/home/style.css",
+			"css/home/reset.css",
+			"js/mui_ajax.js"
+		]
+	},
+	"subpages/user/orderlist1.html": {
+		"resources": [
+			"images/yucheng/cart_1.png",
+			"images/in_4.jpg",
+			"js/mui.min.js",
+			"js/order_status.js",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"images/yucheng/mc_order.png",
+			"js/zepto.js",
+			"images/yucheng/yc-22.png",
+			"js/mui_ajax.js"
+		],
+		"refer": [
+			"subpages/user/order_detail_local.html",
+			"subpages/user/orderlist2.html"
+		]
+	},
+	"subpages/user/order_detail_local.html": {
+		"resources": [
+			"js/zepto.min.js",
+			"images/in_2.jpg",
+			"images/yucheng/icon4.png",
+			"images/icon/addr.png",
+			"images/icon/cart_1.png",
+			"js/mui.min.js",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"js/mui_ajax.js"
+		]
+	},
+	"subpages/user/orderlist2.html": {
+		"resources": [
+			"images/yucheng/cart_1.png",
+			"js/mui_utils.js",
+			"images/in_4.jpg",
+			"js/mui.min.js",
+			"js/order_status.js",
+			"js/zepto.min.js",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"images/yucheng/mc_order.png",
+			"images/yucheng/yc-22.png",
+			"js/mui_ajax.js"
+		],
+		"refer": [
+			"subpages/user/orderlist1.html"
+		]
+	},
+	"subpages/user/address_detail.html": {
+		"resources": [
+			"js/utils.js",
+			"images/yucheng/button1.png",
+			"images/yucheng/button2.png"
 		]
 	}
 }

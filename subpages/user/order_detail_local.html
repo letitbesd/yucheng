@@ -11,36 +11,106 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
 	</head>
 
 	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+		<div class="ycxx_all">
+			<div class="ycxx_back"><img src="themesmobile/self_themes/img/icon/yc-22.png" class="back"></div>
+			<p class="ycxx_shop"><i class="ycxx_img"><img src="../../images/icon/cart_1.png"></i><i class="ycxx_shop_name">翠钻宫</i></p>
+			<div class="ycxx_c1">  
+			</div>
+			<div class="ycxx_c2">
+				
+			</div>
+
+			<div class="ycxx_c3 wait_goods">
+				<p>订单编号：2016081348706</p>
+				<p>创建时间：2016-08-13 11:57:28</p>  
+			</div> 
+		</div>
+		<script src="../../js/zepto.min.js"></script>  
+		 
+		<script>
+			  
+			$("#cancel_order").click(function() {
+				show_dialog("您确认要取消该订单吗？取消后此订单将视为无效订单", 1, "do_cancel_order");
+			});
+
+			function do_cancel_order() {
+				window.location.href = "/mobile/user.php?act=cancel_order&order_id=255";
+			}
+			$("#extend_receive").click(function() {
+				show_dialog("延长收货只能进行一次，确认执行吗", 1, "do_extend_receive");
+			});
+
+			function do_extend_receive() {
+				var data = new Object();
+				data.order_id = 255;
+				do_ajax(data, '/mobile/user.php?act=extend_receive', 'extend_call_back');
+			}
+
+			function extend_call_back(result) {
+				if(result.status == 0) {
+					show_dialog(result.info);
+				} else {
+					window.location.href = "/mobile/user.php?act=order_detail&order_id=255";
+				}
+			}
+			$("#affirm_received").click(function() {
+				show_dialog("您确认已经收到货物了吗？确认收货后不可再申请退货，请确认收到的货物没有问题。", 1, "do_affirm_received");
+			});
+
+			function do_affirm_received() {
+				window.location.href = "/mobile/user.php?act=affirm_received&order_id=255";
+			}
+			$(function() {
+				$(".ycxx_back").on("click", function() {
+					var backUrl = "";
+					if(backUrl) {
+						window.location.href = backUrl;
+					} else {
+						window.history.go(-1);
+					}
+
+				});
+			});
+		</script>
 		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
 		<script src="../../js/mui.min.js"></script>
-		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
 		<script type="text/javascript">
-			mui.init(
-				{
-					 swipeBack:true, //启用右滑关闭功能
-				}
-			);
-			
-			
-			function showOrder(order_id)
-			{
-				var frame1 =  document.getElementById("f_test");
-				frame1.onload = function(){   
-		        	console.log("iframe load. ");
-		        	var x=document.getElementById("f_test");
-					var y=(x.contentWindow || x.contentDocument);
-					if (y.document) y=y.document;
-					y.querySelector(".ycxx_cancel").style.display = "none";//隐藏可能跳转别的地方的链接
-			    };   
-				
-				var url = "http://yucheng.chebank.com/mobile/user.php?act=order_detail&order_id=" + order_id;
-				frame1.src = url;
+			mui.init({
+				swipeBack: true, //启用右滑关闭功能
+			});
+
+			function showOrder(order_id) {
+				 mui.web_query('userorderdetail.php', {order_id:order_id}, function(data){
+				 	 var str = "";
+					 $.each(data.goods_list, function(idx,item){
+					 	str += '<div class="ycxx_co1"><img src="'+ mui.web_sever +  item.goods_thumb + '"></div>' +
+					 	'<div class="ycxx_co2"><p class="ycxx_name">' + item.goods_name + '</p><p class="ycxx_price">'+item.goods_price
+					 	+ '</p><p class="ycxx_style">状态：待发货</p> </div>';
+					 	
+					 	 
+					 })
+					 $(".ycxx_c1").html(str);
+					 
+					 str = '';
+					 str +='<div class="ycxx_addr"><img src="../../images/icon/addr.png"></div><div class="ycxx_acon"><p class="ycxx_aname">收货人：'
+					 + data.order.consignee + '</p><p class="ycxx_anum">' + data.order.mobile + '</p><p class="ycxx_addres">收货地址：' +data.order.address+ '</p></div>'
+					  
+					  $(".ycxx_c2").html(str);
+					   
+					var str = '<p>订单编号：' + data.order.order_sn + '</p><p>创建时间：' + new Date(parseInt(data.order.add_time)) + '</p>';
+					$(".ycxx_c3").html(str);
+					  
+				 })
 			}
-			
-			window.addEventListener('show_order', function(e){
+
+			window.addEventListener('show_order', function(e) {
 				var id = e.detail.order_id;
 				showOrder(id);
 			})

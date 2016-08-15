@@ -149,7 +149,7 @@
 			function showOrder(ele)
 			{
 				var order_id = $(ele).attr('data');
-				var w = plus.webview.open('./order_detail.html');
+				var w = plus.webview.open('./order_detail_local.html');
 				mui.fire(w, "show_order", {order_id:order_id});
 			}
 			
