@@ -17,7 +17,12 @@
 			"js/update.js",
 			"js/wxpay.js",
 			"js/app.js",
-			"js/user_info.js"
+			"js/user_info.js",
+			"images/icon/icon7.png",
+			"images/icon/icon10.png",
+			"images/icon/icon8.png",
+			"images/icon/icon9.png",
+			"css/home/reset.css"
 		],
 		"refer": [
 			"subpages/home.html",
@@ -447,7 +452,9 @@
 			"js/mui_ajax.js",
 			"css/home/loader.png",
 			"js/mui_utils.js",
-			"images/in_2.jpg"
+			"images/in_2.jpg",
+			"css/home/style_now.css",
+			"css/reset.css"
 		],
 		"refer": [
 			"subpages/home/goods_detail.html"
@@ -853,5 +860,10 @@
 			"js/wxpay.js"
 		],
 		"refer": []
+	},
+	"template_sub.html": {
+		"resources": [
+			"js/mui.min.js"
+		]
 	}
 }
