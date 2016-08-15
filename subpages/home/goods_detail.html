@@ -90,7 +90,7 @@
 						<p class="ne_c1_p1">
 							<b class="ne_c1_b1"><img src="../../images/yucheng/yc-20.png"></b>
 
-							<b class="ne_c1_b2" onclick="addToCart();"><img src="../../images/yucheng/yc-21.png"></b>
+							<b class="ne_c1_b2" onclick="gotoCart();"><img src="../../images/yucheng/yc-21.png"></b>
 							<b class="shop_num">0</b>
 							<b class="ne_c1_b3" onclick="addFav();">
 								<img src="../../images/yucheng/shoucang.png" class='sh_can'>
@@ -113,7 +113,6 @@
 					</div>
 					<div class="ne_c4" style="padding-top:0;">
 						<p>市场价：<del>￥56160.00</del></p>
-						<p style="color:#812e37">支付定金：<i>￥10000.00</i></p>
 					</div>
 					<div class="ne_c5">
 						<p class="ne_ba">支付定金后商家将在30分钟内与您联系配合您完成交易<br/>商家承担关税、运费</p>
@@ -121,11 +120,11 @@
 							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>正品保证</b></a>
 							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>权威鉴定</b></a>
 							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>源头供货</b></a>
-							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>7天退货</b></a>
+							<a><i><img src="../../images/yucheng/yc-100.png"></i><b>3天退货</b></a>
 						</p>
 						<p class="ne_bc">
-							<b><i></i>本商品不支持货到付款</b>
-							<b><i></i>本商品如无质量问题，不支持退换货</b>
+							<b><i></i>本商品支持顺丰代收货款</b>
+							<b><i></i>本商品支持三天无理由退货</b>
 						</p>
 					</div>
 					<div class="ne_c2">
@@ -289,7 +288,7 @@
 					</a>
 					<a class="mui-tab-item" href="tab-webview-subpage-contact.html" style="background:#792b34">
 						<span class="mui-icon mui-icon-contact"></span>
-						<span class="mui-tab-label">支付定金</span>
+						<span class="mui-tab-label" style="color:white;">立即购买</span>
 					</a>
 					<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
 						<span class="mui-icon mui-icon-contact"></span>
@@ -297,9 +296,9 @@
 					</a>
 				</nav>
 				<nav class="mui-bar mui-bar-tab for_type_1 for_type_0">
-					<div class="ne_bun">
+					<div class="ne_bun"> 
 						<p class="add_cart" onclick="addToCart();">加入购物袋</p>
-						<p class="pay_for">支付定金</p>
+						<p class="pay_for">立即购买</p>
 						<p class="sale_over">已售罄</p>
 					</div>
 				</nav>
@@ -309,6 +308,7 @@
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
 		<script src="../../js/zepto.min.js"></script>
 		<script src="../../js/swiper.min.js"></script>
 		<script src="../../js/time.js"></script>
@@ -481,6 +481,10 @@
 		</script>
 
 		<script type="text/javascript">
+		
+			function gotoCart(){
+				mui_utils.openMuiPage("../ho");
+			}
 			//处理页面业务逻辑 
 			function addToCart() {
 

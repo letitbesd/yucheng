@@ -15,12 +15,31 @@
 		<link rel="stylesheet" href="../../css/home/reset.css" />
 	</head>
 
-	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+	<body style="WIDTH: 100%;">
 		<div class="ycxx_all">
 			<div class="ycxx_back"><img src="themesmobile/self_themes/img/icon/yc-22.png" class="back"></div>
 			<p class="ycxx_shop"><i class="ycxx_img"><img src="../../images/icon/cart_1.png"></i><i class="ycxx_shop_name">翠钻宫</i></p>
-			<div class="ycxx_c1">  
+			<div class="goodslist">
+				<div class="ycxx_c1">
+					<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+					<div class="ycxx_co2">
+						<p class="ycxx_name">冰种飘花观音挂件</p>
+						<p class="ycxx_price">￥111600.00</p>
+						<p class="ycxx_style">状态：待发货</p>
+						<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>
+					</div>
+				</div>
+			<div class="ycxx_c1">
+				<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+				<div class="ycxx_co2">
+					<p class="ycxx_name">冰种飘花观音挂件</p>
+					<p class="ycxx_price">￥111600.00</p>
+					<p class="ycxx_style">状态：待发货</p>
+					<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>					
+				</div>
 			</div>
+			</div>
+			
 			<div class="ycxx_c2">
 				
 			</div>
@@ -30,53 +49,13 @@
 				<p>创建时间：2016-08-13 11:57:28</p>  
 			</div> 
 		</div>
+		<div class="mc_wait_pay">
+			<p class="mc_go_pay" id="pay_order" data="277" onclick="dopay();">完成付款</p>
+			<p class="mc_can_pay" id="cancel_order" data="277">取消订单</p>
+		</div>
 		<script src="../../js/zepto.min.js"></script>  
-		 
-		<script>
-			  
-			$("#cancel_order").click(function() {
-				show_dialog("您确认要取消该订单吗？取消后此订单将视为无效订单", 1, "do_cancel_order");
-			});
-
-			function do_cancel_order() {
-				window.location.href = "/mobile/user.php?act=cancel_order&order_id=255";
-			}
-			$("#extend_receive").click(function() {
-				show_dialog("延长收货只能进行一次，确认执行吗", 1, "do_extend_receive");
-			});
-
-			function do_extend_receive() {
-				var data = new Object();
-				data.order_id = 255;
-				do_ajax(data, '/mobile/user.php?act=extend_receive', 'extend_call_back');
-			}
-
-			function extend_call_back(result) {
-				if(result.status == 0) {
-					show_dialog(result.info);
-				} else {
-					window.location.href = "/mobile/user.php?act=order_detail&order_id=255";
-				}
-			}
-			$("#affirm_received").click(function() {
-				show_dialog("您确认已经收到货物了吗？确认收货后不可再申请退货，请确认收到的货物没有问题。", 1, "do_affirm_received");
-			});
-
-			function do_affirm_received() {
-				window.location.href = "/mobile/user.php?act=affirm_received&order_id=255";
-			}
-			$(function() {
-				$(".ycxx_back").on("click", function() {
-					var backUrl = "";
-					if(backUrl) {
-						window.location.href = backUrl;
-					} else {
-						window.history.go(-1);
-					}
-
-				});
-			});
-		</script>
+		<script type="text/javascript" src="../../js/wxpay.js" ></script>		 
+		
 		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
 		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript" src="../../js/zepto.min.js"></script>
@@ -89,31 +68,64 @@
 			function showOrder(order_id) {
 				 mui.web_query('userorderdetail.php', {order_id:order_id}, function(data){
 				 	 var str = "";
+				 	 $(".goodslist").empty();
 					 $.each(data.goods_list, function(idx,item){
-					 	str += '<div class="ycxx_co1"><img src="'+ mui.web_sever +  item.goods_thumb + '"></div>' +
-					 	'<div class="ycxx_co2"><p class="ycxx_name">' + item.goods_name + '</p><p class="ycxx_price">'+item.goods_price
-					 	+ '</p><p class="ycxx_style">状态：待发货</p> </div>';
-					 	
-					 	 
+					 	var newnode = $('<div class="ycxx_c1">\
+							<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>\
+							<div class="ycxx_co2">\
+								<p class="ycxx_name">冰种飘花观音挂件</p>\
+								<p class="ycxx_price">￥111600.00</p>\
+								<p class="ycxx_style">状态：待付款</p>\
+							</div>\
+						</div>'); 
+						newnode.find('.ycxx_name').html(item.goods_name);
+						newnode.find(".ycxx_price").html("￥"+item.goods_price);
+						newnode.find(".ycxx_co1 img").attr('src', mui.server + item.goods_thumb);
+					 	//<div class="ycxx_c1">  </div>
+					 	 $(".goodslist").append(newnode);
 					 })
-					 $(".ycxx_c1").html(str);
 					 
 					 str = '';
 					 str +='<div class="ycxx_addr"><img src="../../images/icon/addr.png"></div><div class="ycxx_acon"><p class="ycxx_aname">收货人：'
 					 + data.order.consignee + '</p><p class="ycxx_anum">' + data.order.mobile + '</p><p class="ycxx_addres">收货地址：' +data.order.address+ '</p></div>'
 					  
 					  $(".ycxx_c2").html(str);
-					   
-					var str = '<p>订单编号：' + data.order.order_sn + '</p><p>创建时间：' + new Date(parseInt(data.order.add_time)) + '</p>';
-					$(".ycxx_c3").html(str);
-					  
+					  var tmp = new Date(parseInt(data.order.add_time));
+						var str = '<p>订单编号：' + data.order.order_sn + '</p><p>创建时间：' + tmp+ '</p>';
+						$(".ycxx_c3").html(str);
+						
+					pay_data['order_id'] = data.order.order_id;
 				 })
 			}
 
 			window.addEventListener('show_order', function(e) {
 				var id = e.detail.order_id;
 				showOrder(id);
+				wxpay.init();	
 			})
+			
+			var postdata = {};
+			var pay_data = {};
+			function dopay(){
+				if (pay_data.order_id)
+			 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
+			 	else
+			 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
+			}
+			
+			function checkPayResult(){
+				mui.web_query('payResult.php', {order_id:pay_data.order_id}, function(data){
+			 			if (data.retcode == 1)
+			 			{
+			 				mui.alert('pay success');
+			 			}
+			 			else
+			 			{
+			 				mui.alert(('pay fail'));
+			 			}
+			 			//mui.fire(plus.webview.currentWebview().opener(), 'closepage');
+			 		})
+			}
 		</script>
 	</body>
 
