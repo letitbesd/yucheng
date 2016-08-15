@@ -44,7 +44,7 @@
 						<input type="hidden" class="remain_time_input" value='{$goods.remain_second}'/>
 					</div>
 					<div class="st_price">
-						<p><b>{$goods.discount}</b>折</p>
+						<p><b>促</b></p>
 						<p>￥<span>{$goods.promote_price}</span></p>
 						<p>原价￥<span>{$goods.shop_price}</span></p>	
 					</div>
@@ -80,7 +80,7 @@
 							<input type="hidden" class="remain_time_input" value='{$goods.remain_second}'/>
 						</div>
 					<div class="st_price">
-						<p><b>{$goods.discount}</b>折</p>
+						<p><b>促</b></p>
 						<p>￥<span>{$goods.promote_price}</span></p>
 						<p>原价￥<span>{$goods.shop_price}</span></p>	
 					</div>
@@ -145,7 +145,7 @@
 						newnode.attr('data', goods.goods_id);
 					 	newnode.find('img').attr('src', url + goods.original_img); 
 					 	newnode.find('.countdown').downCount(goods.remain_second);
-					 	newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
+					 	//newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
 					 	newnode.find('.st_price p').eq(1).find('span').html(goods.promote_price );
 					 	newnode.find('.st_price p').eq(2).find('span').html(goods.shop_price );
 					 	
@@ -157,7 +157,7 @@
 						newnode.attr('data', goods.goods_id);
 					 	newnode.find('img').attr('src', url + goods.original_img); 
 					 	newnode.find('.countdown').downCount(goods.remain_second);
-					 	newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
+					 	//newnode.find('.st_price p').eq(0).find('b').html(goods.discount );
 					 	newnode.find('.st_price p').eq(1).find('span').html(goods.promote_price );
 					 	newnode.find('.st_price p').eq(2).find('span').html(goods.shop_price );
 					 	

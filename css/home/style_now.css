@@ -1529,7 +1529,7 @@ to {
 	float:left;
 	z-index:999;
 	position:fixed;
-	top:0;
+	top:45px;
 	left:0;
 }
 .sx_con_all{

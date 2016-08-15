@@ -897,8 +897,8 @@ a {
 }
 .sc_back {
 	display: block;
-	width: 10px;
-	padding-top: 13px;
+	width: 15px;
+	margin-top: 13px;
 }
 
 .sc_list {
@@ -1348,7 +1348,7 @@ a {
 }
 
 .uc_choose {
-	border-bottom: solid 1px #2d2f30;
+	border-bottom: solid 1px #9fa1a2;
 	padding-bottom: 15px;
 }
 
@@ -1371,7 +1371,7 @@ a {
 }
 
 .uc_style {
-	border-bottom: solid 1px #2d2f30;
+	border-bottom: solid 1px #9fa1a2;
 	line-height: 45px;
 	color: #2d2f30;
 	font-size: 12px;
@@ -2093,9 +2093,10 @@ a {
 	outline: none;
 	width: 25%;
 	height: 50px;
-	line-height: 50px;
+	line-height:45px;
 	font-size: 15px;
 	float: left;
+	margin-top: -8px;
 	margin-right: 3%;
 }
 
@@ -2126,9 +2127,10 @@ a {
 	font-size: 16px;
 	background: #2E2F31;
 	margin-top: 25px;
-	position: fixed;
-	bottom: 100px;
-	left: 5%;
+	float: left;
+	margin-top: 50px;
+	margin-left: 5%;
+	margin-bottom: 100px;
 }
 
 .addr_list p:nth-of-type(1) {
@@ -2676,7 +2678,7 @@ a {
 	width: 96%;
 	float: left;
 	margin-left: 2%;
-	border-bottom: solid 2px #000000;
+	border-bottom: solid 1px #fbf5f5;
 }
 
 .mc_all_price {
