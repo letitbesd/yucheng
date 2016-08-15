@@ -266,7 +266,9 @@
 					"js/mui_ajax.js",
 					"subpages/home/goods_list_new.html",
 					"css/home/loader.png",
-					"js/mui_utils.js"
+					"js/mui_utils.js",
+					"css/home/reset.css",
+					"images/icon/icon2.png"
 				],
 				"refer": [
 					"guide.html",

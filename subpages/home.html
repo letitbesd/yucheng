@@ -9,6 +9,7 @@
 
 		<link rel="stylesheet" href="../css/mui.css">
 		<link rel="stylesheet" href="../css/home/style.css" />
+		<link rel="stylesheet" href="../css/home/reset.css" />
 		<style>
 			html,body {
 				background-color: #efeff4;
@@ -16,7 +17,7 @@
 			.title{
 				margin: 20px 15px 10px;
 				color: #6d6d72;
-				font-size: 15px;
+				font-size: 15px; 
 			}
 		</style>
 		<link rel="stylesheet" href="../css/swiper.min.css" />
@@ -25,32 +26,30 @@
 	<body>
 	<div class="in_header">
 		<div class="in_head">
-			<p><img src="../images/yucheng/icon1.png"></p><p>JADECHINA玉城</p>
-			<p><img src="../images/yucheng/icon2.png" onclick="goSearch();"></p>
+			<p style="display: none;"><img src="../images/yucheng/icon1.png"></p><p>JADECHINA玉城</p>
+			<p><img src="../images/icon/icon2.png" onclick="goSearch();"></p>
 		</div>
 	  </div>
 	<div>
 		<div class="swiper-container slide_1" style="background:#080403;">
 	        <div class="swiper-wrapper  slide_ad"> 
-				<div class="swiper-slide"><img src="../images/in_1.jpg"></div> 
-				<div class="swiper-slide"><img src="../images/in_1.jpg"></div> 
-				<div class="swiper-slide"><img src="../images/in_1.jpg"></div> 
+				
 	        </div>
 	        <!-- Add Pagination -->
 	        <div class="swiper-pagination swiper_1"></div>
 	    </div>		
 	</div> 
-			
-	<div class="in_blo2" style="margin:0;">
-		<p>精品推荐</p>
-		<p>RECOMMEND</p>
-	</div>
+		
 			<div class="in_blo1">
 				<a href="home/goods_list_new.html" ><p><img src="../images/yucheng/icon3.png"><i>新品推荐</i></p></a>
 				<a href="home/supplier_list.html" ><p><img src="../images/yucheng/icon4.png"><i>商家推荐</i></p></a>
 				<a href="home/goods_list_time.html" ><p><img src="../images/yucheng/icon5.png"><i>限时抢购</i></p></a>
 				<a href="home/goods_list_bought.html" ><p><img src="../images/yucheng/icon6.png"><i>已卖鉴赏</i></p></a>
 			</div>
+	<div class="in_blo2" style="margin:0;">
+		<p>精品推荐</p>
+		<p>RECOMMEND</p>
+	</div>
 			<div class="in_blo3">
 			    <div class="swiper-container slide_2">
 			       <div class="swiper-wrapper">
@@ -77,7 +76,7 @@
 			</div>
 			
 			<div class='supplier_tpl'>
-			<div class="in_blo2" style="background:#fefefe;padding:0;">
+			<div class="in_blo2" style="background:#fefefe;margin: 0;">
 				<p>翡色轩</p>
 			</div>
 			<div class="in_blo4"  data="242">
@@ -199,8 +198,8 @@
 					    
 				var swiper2 = new Swiper('.slide_2', {
 								effect : 'slide',
-								slidesPerView : 3,		
-						        paginationClickable: true,
+								slidesPerView : 2.5,		
+						        paginationClickabe: true,
 						        spaceBetween: 3,
 								loop:false,
 								loopAdditionalSlides : 1,
@@ -209,8 +208,27 @@
 			};			
 			
 			mui.plusReady(function(){
+					var baseurl = 'http://yucheng.chebank.com/';
+				
 				preload_template('default2', '../template.html');
 				refresh();
+				mui.web_query("index.php", {}, function(data) {
+					
+					console.log(data.wap_index_ads);
+					$.each(data.wap_index_ads,function(idx, goods){
+					
+					console.log(idx);
+					console.log(goods);
+					console.log(goods.image);
+	
+						var lunBoImg =
+						"<div class='swiper-slide' data='"+idx+"'><img src='"+baseurl+""+goods.image+"'></div> ";
+						$(".slide_ad").append(lunBoImg);							
+					
+						
+					})//end each
+					initSwipers();
+				});				
 			});
 			
 			function refresh(){
@@ -282,7 +300,7 @@
 							tpl.appendTo(attchnode);							
 						}
 					}
-					initSwipers();
+					
 				})
 			}
 		var tpl ; 
