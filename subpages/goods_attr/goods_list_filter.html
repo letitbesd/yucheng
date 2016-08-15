@@ -281,7 +281,7 @@
 			//order_by = p_order_by ? p_order_by : '';
 			var params = {page:page, cat_id:info.cat_id, attr_key:attr_key,  orderby:order_by, is_ajax:p_is_ajax};
 			console.log($.param(params));
-			//var url = "http://yucheng.chebank.com/mapi/goodsList.php?act=filter"; 				
+			//var url = "http://www.jadechina.cn/mapi/goodsList.php?act=filter"; 				
 			mui.web_query("goodsList.php?act=filter",params,function(data){
 				if (data){
 					try{	

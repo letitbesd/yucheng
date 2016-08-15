@@ -189,8 +189,8 @@
 					<img src="../images/yucheng/check_2.png" class="sc_ch2" style="display: none;"><i>全选</i>
 					</b>
 				<b><span>支付方式：</span>
-				<select style="    width: 43%; margin-top: 10px;">
-					<option>微信支付</option>
+				<select class='pay_method' style="width: 43%; margin-top: 10px;">
+					<option value="7">微信支付</option> 
 				</select>
 				</b>
 				</p>
@@ -258,7 +258,7 @@
 					//wxpay.pay({order_id:'202'});
 				//	return;
 				console.log('refresh'); 
-				var url = 'http://yucheng.chebank.com/';
+				var url = 'http://www.jadechina.cn/';
 				mui.web_query('shoppingCart.php?act=list', {}, function(data){
 					//console.log(data.cart_goods); 
 					if(data.cart_goods){
@@ -279,7 +279,12 @@
 							})
 							//return false; //only do one.
 							$(".sc_list").append(newnode);
-						});						
+						});		
+						var str = '';
+						$.each(data.payment_list, function(idx, item){
+							str += '<option value="' + item.pay_id + '">'+item.pay_name + '</option>';
+						})
+						$(".pay_method").html(str);
 					}
 				});
 			}			
@@ -458,22 +463,13 @@
 					var rec_id = $(item).children(".rec_id").val();
 					$(item).children(".sel_rec_id").val(rec_id);
 				}
-				var url = "http://yucheng.chebank.com/mobile/flow.php?step=checkout";
-				document.formCart.action='http://yucheng.chebank.com/mobile/flow.php?step=checkout';
+				var url = "http://www.jadechina.cn/mobile/flow.php?step=checkout";
+				document.formCart.action='http://www.jadechina.cn/mobile/flow.php?step=checkout';
 				document.formCart.elements['step'].value='checkout'; 
 				var formstr = document.formCart.parentElement.innerHTML;  
-				mui_utils.openMuiPage('./cart/flow.html', 'init', {formstr:formstr});
-				/*var res = $('form').serializeArray();
-				var i=0, cartGoods = [];				
-				$.each(res, function(idx, item){
-					console.log(item.name + ': ' + item.value);
-					if (item.name == 'sel_cartgoods[]')
-					{
-						cartGoods[i++] = item.value;
-					}
-				});
-				
-				mui_utils.openMuiPage('./cart/order_confirm.html', 'init', {cart_goods:cartGoods});*/
+				var pay_id = $(".pay_method").val();
+				console.log(pay_id);
+				mui_utils.openMuiPage('./cart/flow.html', 'init', {formstr:formstr, pay_id:pay_id});
 				return true;
 			}else{
 				//show_dialog('请选择要结算的商品！');

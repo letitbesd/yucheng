@@ -132,7 +132,7 @@
 			
 			function goSearch(){
 				//open with template and link to website address
-				//var url = "http://yucheng.chebank.com/mobile/goods_list.php?act=search";
+				//var url = "http://www.jadechina.cn/mobile/goods_list.php?act=search";
 				//mui_utils.openMuiPage('./link.html','openURL', {'openURL':url});
 				//open local web page
 				mui_utils.openMuiPage('./home/search.html');
@@ -208,7 +208,7 @@
 			};			
 			
 			mui.plusReady(function(){
-					var baseurl = 'http://yucheng.chebank.com/';
+					var baseurl = 'http://www.jadechina.cn/';
 				
 				preload_template('default2', '../template.html');
 				refresh();
@@ -218,7 +218,7 @@
 			function refresh(){
 				console.log("refresh ----------------");
 				mui.web_query('index.php', {}, function(data){ 
-					var baseurl = 'http://yucheng.chebank.com/';
+					var baseurl = 'http://www.jadechina.cn/';
 					if (data.wap_index_ads)
 					{						 
 						$.each(data.wap_index_ads,function(idx, goods){

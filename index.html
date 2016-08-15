@@ -62,7 +62,7 @@
 				<p><img src="images/icon/icon8.png" /></p>
 				<p style='display:none' class="mui-tab-label">商品筛选</p>
 			</a>
-			<a class="mui-tab-item" href="subpages/shopping_cart.html">
+			<a id="carttab"  class="mui-tab-item" href="subpages/shopping_cart.html">
 				<p><img src="images/icon/icon9.png" /></p>
 				<p style='display:none' class="mui-tab-label">购物车</p>
 			</a>
@@ -124,7 +124,7 @@
 				}
 				else
 				{
-					mui.toast('autologin fail!--no autologinstr'); 
+					//mui.toast('autologin fail!'); 
 				}
 			}
 			//var aniShow = {};//记录子页面是否首次显示			
@@ -198,6 +198,10 @@
 			}
 			
 			window.addEventListener('homeready', onhomeready);
+			window.addEventListener('showcart', function(){
+				var tab = document.getElementById("carttab"); 
+				mui.trigger(tab, 'tap');
+			})
 			 //当前激活选项
 			var activeTab = subpages[0];
 			var title = document.getElementById("title");

@@ -24,7 +24,7 @@ wxpay = (function(){
             success_cb = data.on_success || null;
             if (!iap )
             	return console.log('no valid paychannel yet');
-        	var basic_url='http://yucheng.chebank.com/mapi/apppay.php';
+        	var basic_url='http://www.jadechina.cn/mapi/apppay.php';
             mui.ajax(basic_url,{
                 data:data,
                 dataType:"json",

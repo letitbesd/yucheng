@@ -366,7 +366,7 @@
 						
 						$.each(data.item_list, function(idx, item){
 							var newnode = item.comment_status == "1" ? getAlreadyComment() :getToComment(); 
-							newnode.find('.as_c1 img').attr('src', 'http://yucheng.chebank.com/'+item.goods_thumb);
+							newnode.find('.as_c1 img').attr('src', 'http://www.jadechina.cn/'+item.goods_thumb);
 							newnode.find('.as_name').html(item.goods_name);
 							newnode.find(".as_red").html('￥' + item.goods_price);
 							newnode.find(".as_dnum").html('订单号:' + item.order_sn); 

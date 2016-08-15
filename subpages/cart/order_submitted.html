@@ -102,8 +102,10 @@
 		<script type="text/javascript">
 			mui.init();
 			var post_data = {};
+			var pay_id = 0;
 			window.addEventListener('init', function(e){
 				var res = e.detail.data;
+				pay_id = e.detail.pay_id;
 				$.each(res, function(idx, item){
 								console.log(item.name + '=' + item.value);
 								if (item.name.indexOf('payment') == 0){
@@ -123,25 +125,41 @@
 				//请求orderconfirm.php 接口
 				console.log('orderGenerate:' + JSON.stringify(post_data));
 				post_data['data_type'] = 'text';
+				post_data['payment'] = pay_id;
 				mui.web_query('orderGenerate.php', post_data, function(data){ 
 					if (data.status == 1)
 					{
-						//console.log(JSON.stringify(data.order));
-						$('.success').show();
-						$('.wc_red').html(data.order.shipping_name); 
-						$('.wc_con').find('p').eq(0).html('订单号：<i>' + data.order.order_sn+'</i>');
-						$('.wc_con').find('p').eq(1).html('<p>支付金额：<i>￥' + data.order.order_amount + '</i></p>');
-						pay_data['order_sn'] = data.order.order_sn;
-						if (data.order.parent_order_id != '0')
+						console.log(JSON.stringify(pay_id));
+						if (pay_id == 7)//微信支付
 						{
-							pay_data['parent_order_id'] = data.order.parent_order_id;
-							pay_data['sub_order_id'] = data.order.order_id; 
+							$('.success').show();
+							$('.wc_red').html(data.order.shipping_name);
+							$('.wc_con').find('p').eq(0).html('订单号：<i>' + data.order.order_sn+'</i>');
+							$('.wc_con').find('p').eq(1).html('<p>支付金额：<i>￥' + data.order.order_amount + '</i></p>');
+							pay_data['order_sn'] = data.order.order_sn;
+							if (data.order.parent_order_id != '0')
+							{
+								pay_data['parent_order_id'] = data.order.parent_order_id;
+								pay_data['sub_order_id'] = data.order.order_id; 
+							}
+							else
+							{
+								pay_data['order_id'] = data.order.order_id; 
+								pay_data['sub_order_id'] = data.order.order_id; 
+							}
 						}
 						else
 						{
-							pay_data['order_id'] = data.order.order_id; 
-							pay_data['sub_order_id'] = data.order.order_id; 
+							//console.log("-----");
+							plus.nativeUI.alert( "提交成功!", function(){
+								console.log( "User pressed!" );
+								var v = plus.webview.getWebviewById('subpages/shopping_cart.html');
+								v.parent().show();
+								mui.fire(v.parent(), 'showcart');
+							}, "nativeUI", "返回" );
+							//mui.fire(plus.webview.currentWebview().opener(), 'closepage');
 						}
+						
 					}
 					else
 					{
@@ -170,7 +188,7 @@
 			 	else
 			 		wxpay.pay({parent_order_id:pay_data.parent_order_id, on_success:checkPayResult });
 //			 	wxpay.pay({order_id:207}); 
-				//todo: 请求支付结果 http://yucheng.chebank.com/mapi/payResult.php
+				//todo: 请求支付结果 http://www.jadechina.cn/mapi/payResult.php
 			});
 
 			$(".wc_back").on("click", function() {

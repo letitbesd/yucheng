@@ -20,11 +20,13 @@
 		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
 		<script type="text/javascript" src="../../js/mui_utils.js" ></script>
 		<script type="text/javascript">
-			var formstr;
+			var formstr, pay_id;
 			window.addEventListener('init', function(e){
 				formstr = e.detail.formstr;
-				console.log(formstr)
+				pay_id = e.detail.pay_id;
+				console.log(formstr);
 				console.log("init");
+
 				initPage();
 			})
 			mui.plusReady(function() {
@@ -63,7 +65,7 @@
 					console.log("target_frame onload");
 					var y2=(x2.contentWindow || x2.contentDocument);
 					if (y2.document) y2=y2.document;
-					if (y2.location == "http://yucheng.chebank.com/mobile/flow.php?step=checkout")
+					if (y2.location == "http://www.jadechina.cn/mobile/flow.php?step=checkout")
 					{
 						y2.querySelector(".in_bottom").style.display = "none";//禁止可能跳转的按钮 
 					}
@@ -76,7 +78,7 @@
 					var y2=(x2.contentWindow || x2.contentDocument);
 					if (y2.document) y2=y2.document;
 					//plus.nativeUI.alert('loaded' + y2.location);
-					if (y2.location == "http://yucheng.chebank.com/mobile/flow.php?step=checkout")
+					if (y2.location == "http://www.jadechina.cn/mobile/flow.php?step=checkout")
 					{
 						y2.querySelector('#confirm_form').onsubmit = function(e) {  
 							    var e = e || window.event;  
@@ -87,11 +89,12 @@
 							   	return false;
 						}//阻止网页默认的表单提交跳转功能，我们会自己跳转至本地页面order_submitted.html。
 						var res = $(y2.querySelector('#confirm_form')).serializeArray();
-							
+						console.log(JSON.stringify(res))
 						y2.querySelector(".sc_bun").addEventListener('click', function(e){
 							console.log('here');
 							//表单提交时我们自己跳转至本地页面，本地页面再提交表单数据至接口，建order_submitted.html 
-							mui_utils.openMuiPage('./order_submitted.html','init', {data:res});
+				 
+							mui_utils.openMuiPage('./order_submitted.html','init', {data:res, pay_id:pay_id});
 						})
 						y2.querySelector(".sc_total").addEventListener('click', function(e){
 							console.log("button clicked"); 

@@ -988,7 +988,8 @@
 					"js/mui_ajax.js",
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"js/mui_utils.js"
+					"js/mui_utils.js",
+					"css/reset.css"
 				],
 				"refer": [
 					"subpages/user/do_comment.html"
@@ -1132,7 +1133,9 @@
 					"css/home/reset.css",
 					"js/mui_ajax.js",
 					"images/yucheng/yc-55.png",
-					"js/wxpay.js"
+					"js/wxpay.js",
+					"images/icon/yc-22.png",
+					"images/in_1.jpg"
 				],
 				"refer": [],
 				"priority": 0

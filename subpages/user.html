@@ -78,7 +78,7 @@
 			</div>
 			<!--<div class="lg_reg" onclick="close();">返回</div>-->
 			<div class="lg_go" onclick="do_login();" style="display:block">登录</div> 
-			<div class="lg_go" onclick="do_binding();" style="display:none">bind</div> 
+			<div class="lg_go" onclick="do_binding();" style="display:none">绑定</div> 
 			<div class="mui-content-padded oauth-area">
 
 			</div>
@@ -200,7 +200,7 @@
 			function do_login(){
 				var num  = $('#mobile').val();
 				var code  = $('#code').val();
-				//var url ="http://yucheng.chebank.com/mobile/user.php?ajax_act=login";//wechat
+				//var url ="http://www.jadechina.cn/mobile/user.php?ajax_act=login";//wechat
 				var url =  "userLogin.php"; //jieko
 				var usid = UserInfo.wxinfo().userInfo.openid || "";
 				console.log("wweixin id " + usid);
@@ -427,7 +427,7 @@
 					//todo: save autocode
 					//UserInfo.
 					console.log("here");
-					if (data.bind == 1){
+					if (data.bind == 1 || data.status == 1){
 						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
 						var auth = UserInfo.wxinfo();
 						$(".uc_name").find('i').html(auth.userInfo.nickname);

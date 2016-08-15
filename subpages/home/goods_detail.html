@@ -77,14 +77,14 @@
 						<input type="hidden" class="remain_time_input" value='{$goods.remain_second}' />
 					</div>
 					<div class="st_price">
-						<p><b>{$goods.discount}</b>折</p>
+						<p><b>促</b></p>
 						<p>￥<b>{$goods.promote_price}</b></p>
 						<p>原价￥<b>{$goods.shop_price}</b></p>
 					</div>
 				</div>
 
 			</div>
-			<div class="ne_cont" style="margin-top:400px">
+			<div class="ne_cont" style="margin-top:440px">
 				<div id="scroller">
 					<div class="ne_c1 topbar" style="margin-bottom: 15px;height: 50px;background:#F8F9F9;overflow: hidden;">
 						<p class="ne_c1_p1">
@@ -288,7 +288,7 @@
 					</a>
 					<a class="mui-tab-item" href="tab-webview-subpage-contact.html" style="background:#792b34">
 						<span class="mui-icon mui-icon-contact"></span>
-						<span class="mui-tab-label" style="color:white;">立即购买</span>
+						<span class="mui-tab-label" style="color:white;" onclick="buynow()">立即购买</span>
 					</a>
 					<a class="mui-tab-item" href="tab-webview-subpage-contact.html">
 						<span class="mui-icon mui-icon-contact"></span>
@@ -297,8 +297,8 @@
 				</nav>
 				<nav class="mui-bar mui-bar-tab for_type_1 for_type_0">
 					<div class="ne_bun"> 
-						<p class="add_cart" onclick="addToCart();">加入购物袋</p>
-						<p class="pay_for">立即购买</p>
+						<p class="add_cart" style="color: #fff;" onclick="addToCart();">加入购物袋</p>
+						<p class="pay_for" style="color: #fff;" onclick="buynow()">立即购买</p>
 						<p class="sale_over">已售罄</p>
 					</div>
 				</nav>
@@ -332,7 +332,7 @@
 			function shareWeixinMessage() {
 				sharewx.send({
 					content: shareContent,
-					href: "http://yucheng.chebank.com/mobile/goods_detail.php?goods_id=" + id,
+					href: "http://www.jadechina.cn/mobile/goods_detail.php?goods_id=" + id,
 					extra: {
 						scene: "WXSceneTimeline"
 					}
@@ -354,7 +354,7 @@
 			$(".ne_title").on("click", function() {
 				$(this).siblings(".ne_show").toggle();
 			});
-			var url = "http://yucheng.chebank.com/";
+			var url = "http://www.jadechina.cn/";
 
 			function updateValues(data) {
 				if(data.goods_img_list) {
@@ -449,7 +449,7 @@
 									$(".for_type_2").hide();
 									$(".for_type_0").show();
 									$('.st_time').show();
-									$(".st_price").find("b").eq(0).html(data.goods.discount);
+									//$(".st_price").find("b").eq(0).html(data.goods.discount);
 									$(".st_price").find("b").eq(1).html(data.goods.promote_price);
 									$(".st_price").find("b").eq(2).html(data.goods.shop_price);
 									updateValues(data);
@@ -467,6 +467,13 @@
 									$(".for_type_1").hide();
 									$(".for_type_0").hide();
 									$(".for_type_2").show();
+										
+									console.log(data.goods.remain_second)
+									if (data.goods.remain_second > 0)
+										$(".mui-bar-tab.for_type_2").hide();
+									 
+										
+									
 									updateValues(data);
 									$(".in_willbegin_time").each(function(idx) {
 										$(this).downCount(parseInt(data.goods.remain_second));
@@ -483,7 +490,14 @@
 		<script type="text/javascript">
 		
 			function gotoCart(){
-				mui_utils.openMuiPage("../ho");
+				//plus.webview.getWebviewById('')
+				/*var all = plus.webview.all();
+				for (var i = 0; i < all.length; i ++){
+					console.log(all[i].id);
+				}*/
+				var v = plus.webview.getWebviewById('subpages/shopping_cart.html');
+				v.parent().show();
+				mui.fire(v.parent(), 'showcart');
 			}
 			//处理页面业务逻辑 
 			function addToCart() {
@@ -498,8 +512,27 @@
 						var num = parseInt($(".shop_num").html());
 						$(".shop_num").html(num + 1);
 					} else {
-						mui.toast("添加失败"+data.message);
+						mui.toast("添加失败:商品现在不能购买");
+					}
+
+				});
+			}
+			
+			 
+			function buynow(){
+				mui.web_query('shoppingCart.php?act=add', {
+					goods_id: id
+				}, function(data) {
+					//todo:animat into gouwuche
+					if(data.error == 0) {
+						mui.toast("已添加购物车");
+						var num = parseInt($(".shop_num").html());
+						$(".shop_num").html(num + 1);
 						
+						gotoCart();
+						
+					} else {
+						mui.toast("添加失败:商品现在不能购买");
 					}
 
 				});
@@ -545,7 +578,7 @@
 				return;
 				var _t = encodeURI(document.title); //'${(activity.intro)!}'这是取得Action穿过来的值，如果想取当前标题改为document.title  
 				var _url = encodeURI(document.location);
-				_url = "http://yucheng.chebank.com/mobile/goods_detail.php?goods_id=" + id;
+				_url = "http://www.jadechina.cn/mobile/goods_detail.php?goods_id=" + id;
 				//console.log(_url);
 				var _appkey = encodeURI("appkey"); //你从腾讯获得的appkey  
 				var _pic = encodeURI(''); //（列如：var _pic='图片url1|图片url2|图片url3....）  

@@ -1,8 +1,8 @@
 
-;mui.web_sever = "http://yucheng.chebank.com/";
+;mui.web_sever = "http://www.jadechina.cn/";
 ;mui.need_login = false;
 ;mui.web_query = function(func_url, params, onSuccess, onError, retry){
-	var url = "http://yucheng.chebank.com/mapi/";
+	var url = "http://www.jadechina.cn/mapi/";
     var onSuccess = arguments[2]?arguments[2]:function(){};
     var onError = arguments[3]?arguments[3]:function(){console.log('error');};
     var retry = arguments[4]?arguments[4]:3;

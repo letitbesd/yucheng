@@ -17,25 +17,23 @@
 
 	<body style="WIDTH: 100%;">
 		<div class="ycxx_all">
-			<div class="ycxx_back"><img src="themesmobile/self_themes/img/icon/yc-22.png" class="back"></div>
+			<div class="ycxx_back"><img src="../../images/icon/yc-22.png" class="back"></div>
 			<p class="ycxx_shop"><i class="ycxx_img"><img src="../../images/icon/cart_1.png"></i><i class="ycxx_shop_name">翠钻宫</i></p>
 			<div class="goodslist">
 				<div class="ycxx_c1">
-					<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+					<div class="ycxx_co1"><img src="../../images/in_1.jpg"></div>
 					<div class="ycxx_co2">
 						<p class="ycxx_name">冰种飘花观音挂件</p>
 						<p class="ycxx_price">￥111600.00</p>
-						<p class="ycxx_style">状态：待发货</p>
-						<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>
+						<p class="ycxx_style">状态：待付款</p> 
 					</div>
 				</div>
 			<div class="ycxx_c1">
-				<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>
+				<div class="ycxx_co1"><img src="../../images/in_1.jpg"></div>
 				<div class="ycxx_co2">
 					<p class="ycxx_name">冰种飘花观音挂件</p>
 					<p class="ycxx_price">￥111600.00</p>
-					<p class="ycxx_style">状态：待发货</p>
-					<p class="ycxx_serv"><a href="tel:666-66666"><img src="themesmobile/self_themes/img/icon/yc-55.png"></a></p>					
+					<p class="ycxx_style">状态：待付款</p> 					
 				</div>
 			</div>
 			</div>
@@ -51,7 +49,7 @@
 		</div>
 		<div class="mc_wait_pay">
 			<p class="mc_go_pay" id="pay_order" data="277" onclick="dopay();">完成付款</p>
-			<p class="mc_can_pay" id="cancel_order" data="277">取消订单</p>
+			<p class="mc_can_pay" id="cancel_order" data="277" onclick="cancelpay();">取消订单</p>
 		</div>
 		<script src="../../js/zepto.min.js"></script>  
 		<script type="text/javascript" src="../../js/wxpay.js" ></script>		 
@@ -96,7 +94,8 @@
 						$(".ycxx_c3").html(str);
 						
 					pay_data['order_id'] = data.order.order_id;
-					pay_data['pay_code'] = data.payment_list.pay_code;
+					pay_data['pay_code'] = data.payment_list[0].pay_code;
+					pay_data['pay_id'] = data.order.pay_id;
 				 })
 			}
 
@@ -106,10 +105,21 @@
 				wxpay.init();	
 			})
 			
+			function cancelpay(){
+				console.log("DDDD");
+				mui.web_query('userOrderOpera.php?act=cancel', {order_id:pay_data.order_id}, function(data){
+					mui.toast(data.info);
+					if (data.status == "1"){
+						mui.back();
+					}
+				})
+			}
+			
 			var postdata = {};
 			var pay_data = {};
 			function dopay(){
-				if (pay_data['pay_code'] == "weixin")
+				console.log(pay_data['pay_code'] );
+				if (pay_data['pay_id'] == "7")
 				{
 					if (pay_data.order_id)
 				 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
@@ -129,6 +139,7 @@
 			 			{
 			 				mui.alert(('pay fail'));
 			 			} 
+			 			mui.back();
 			 		})
 			}
 		</script>
