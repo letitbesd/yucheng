@@ -259,11 +259,11 @@
 							tpl.find('.in_blo2 p').html(supplier.supplier_name);
 							
 							var goods = supplier.goods_list;
-							$(".in_blo4", tpl).find('img').attr('src', baseurl +goods[0].original_img);
+							$(".in_blo4", tpl).find('img').attr('src', baseurl + data.is_best_suppliers[j].shop_index_img);
 							$(".in_blo4", tpl).attr('data', supplier.supplier_id);
 							var str = ''; 
 							//console.log(goods.length);
-							for (var i = 1; i < goods.length, i < 5; i ++)
+							for (var i = 0; i < goods.length, i < 4; i ++)
 							{
 								str += '<p class="to_goods_detail" data="'+ goods[i].goods_id + '">';
 								str += '<img src="' + baseurl + goods[i].goods_thumb + '">';

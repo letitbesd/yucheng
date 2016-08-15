@@ -1348,7 +1348,7 @@ a {
 }
 
 .uc_choose {
-	border-bottom: solid 1px #2d2f30;
+	border-bottom: solid 1px #9fa1a2;
 	padding-bottom: 15px;
 }
 
@@ -1371,7 +1371,7 @@ a {
 }
 
 .uc_style {
-	border-bottom: solid 1px #2d2f30;
+	border-bottom: solid 1px #9fa1a2;
 	line-height: 45px;
 	color: #2d2f30;
 	font-size: 12px;
@@ -2678,7 +2678,7 @@ a {
 	width: 96%;
 	float: left;
 	margin-left: 2%;
-	border-bottom: solid 2px #000000;
+	border-bottom: solid 1px #fbf5f5;
 }
 
 .mc_all_price {
