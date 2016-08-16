@@ -1,6 +1,5 @@
 
 ;mui.web_sever = "http://www.jadechina.cn/";
-;mui.need_login = false;
 ;mui.web_query = function(func_url, params, onSuccess, onError, retry){
 	var url = "http://www.jadechina.cn/mapi/";
     var onSuccess = arguments[2]?arguments[2]:function(){};
@@ -20,7 +19,8 @@
     ele.style.display = 'block';*/
     //console.log('cookie is '+ JSON.stringify(document.cookie));
 //  var esc_id = plus.storage.getItem('token');
-	plus.nativeUI.showWaiting();
+	if (!(params.waitingUI == false))
+		plus.nativeUI.showWaiting();
     //console.log('esc_id: ' + esc_id);
     mui.ajax(func_url, {
         data:params,

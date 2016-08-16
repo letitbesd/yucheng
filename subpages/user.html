@@ -60,7 +60,10 @@
 				<p class="uc_style" target="./user/addresslist.html">收货地址</p>
 				<p class="uc_style" target="./user/coupon.html">我的优惠券</p>
 				<p class="uc_style" target="./user/comments.html">我的评价</p>
-				<p class="uc_style" target="./user/support.html">玉城客服</p>
+				<p class="uc_style link" data="1">关于玉城</p>
+				<p class="uc_style link" data="2">使用帮助</p>
+				<p class="uc_style link" data="3">鉴定中心</p>
+				<p class="uc_style link" data="4">售后服务</p>
 				<p class="uc_style" id="logout" target="">退出登录</p>
 			</div>
 		</div>
@@ -148,37 +151,25 @@
 			window.addEventListener('refresh', refresh);
 			
 			function refresh(){
-				if (mui.need_login)
-				{
-					mui.web_query('userCenter.php', {}, function(data){
-						if (data.login_status == 1)
-						{
-							$(".uc_all").show();
-							$(".login").hide();
-							console.log("usercenter result.");
-							$(".uc_name").find('i').html(data.user_info.user_name);
-							$(".uc_name").find('img').attr('src', data.user_info.headimg);
-							if (data.wechat_nickname_app)
-							{
-								$(".uc_name").find('i').html(data.wechat_nickname_app);
-							} 
-						}
-						else
-						{
-							//未登录,调出登陆界面
-							onlogout();
-						}
-					}, null,null);
-				}
-				else
-				{
-					if ($(".uc_name").find('i').html() == 'guest')
+				mui.web_query('userCenter.php', {}, function(data){
+					if (data.login_status == 1)
 					{
-						var auth = UserInfo.wxinfo();
-						$(".uc_name").find('i').html(auth.userInfo.nickname);
-						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl); 
+						$(".uc_all").show();
+						$(".login").hide();
+						console.log("usercenter result.");
+						$(".uc_name").find('i').html(data.user_info.user_name);
+						$(".uc_name").find('img').attr('src', data.user_info.headimg);
+						if (data.wechat_nickname_app)
+						{
+							$(".uc_name").find('i').html(data.wechat_nickname_app);
+						} 
 					}
-				}
+					else
+					{
+						//未登录,调出登陆界面
+						onlogout();
+					}
+				}, null,null);				 
 			}
 			 
 			
@@ -202,7 +193,12 @@
 				var code  = $('#code').val();
 				//var url ="http://www.jadechina.cn/mobile/user.php?ajax_act=login";//wechat
 				var url =  "userLogin.php"; //jieko
-				var usid = UserInfo.wxinfo().userInfo.openid || "";
+				var usid = "";
+				var auth = UserInfo.wxinfo();
+				if (auth)
+				{
+					usid = auth.userInfo.openid;
+				}
 				console.log("wweixin id " + usid);
 				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
 					if (data.status == 1)
@@ -210,24 +206,19 @@
 						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
 						mui.toast('登陆成功');
 						$('.login').hide();
-						$(".uc_all").show();
-						if(usid)
+						$(".uc_all").show(); 
+						if (auth.userInfo)
 						{
-							var auth = UserInfo.wxinfo();
-							if (auth.userInfo)
-							{
-								$(".uc_name").find('i').html(auth.userInfo.nickname);
-								$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
-							}
-							else
-							{
-								
-							}
+							$(".uc_name").find('i').html(auth.userInfo.nickname);
+							$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
 						}
+						else
+						{
+							refresh();
+						} 
 					}
 					else
 					{
-						
 						mui.toast(data.info);
 					}
 				})
@@ -394,6 +385,11 @@
 					openSubPage($(this).html(), $(this).attr('target'));					
 				}				
 			})
+			
+			$(".link").on("click", function(e){
+				var idx = $(this).attr('data');
+				mui_utils.openMuiPage('./user/about.html', 'initpage',{typeid:idx})
+			});
 			
 			$("#logout").on('click', function(e){
 //				mui_utils.openMuiPage('./testpayment.html');

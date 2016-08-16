@@ -118,7 +118,7 @@
 				goods_id:goods_id  //扩展参数
 			}
 		});
-		mui.fire(webview, "initGoodId", {id:goods_id});
+		mui.fire(webview, "setid", {id:goods_id});
 	})
 	</script>
 	<script src="../../js/mui.min.js"></script>
@@ -171,7 +171,7 @@
 	function showGoods(ele){
 		var id = $(ele).attr("data");
 		console.log("showing goods " + id);
-		mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id});	
+		mui_utils.openMuiPage('./goods_detail.html', 'setid', {id:id});	
 	}
 	</script>
 </body>

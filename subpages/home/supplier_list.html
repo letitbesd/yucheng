@@ -28,7 +28,7 @@
 			<div class="mui-scroll">
 				<!--数据列表-->
 				<ul id="tpl_hold">
-					<!--<li style="clear:both">
+					<li style="clear:both">
 						<div class="in_blo4" style="position:relative;">
 							<img src="../../images/in_3.jpg" class="to_goods_detail" data="242">
 							<img src="../../images/yucheng/addr.png" class="logo">
@@ -37,23 +37,23 @@
 							<p class="to_goods_detail">
 								<img src="../../images/in_5.jpg">
 								<b>测试商品1</b>
-								<b>￥</b>
+								<b>￥5000</b>
 								<span>30000.00</span>
 							</p>
 							<p class="to_goods_detail">
 								<img src="../../images/in_5.jpg">
 								<b>测试商品1</b>
-								<b>￥</b>
+								<b>￥501</b>
 								<span>30000.00</span>
 							</p>
 							<p class="to_goods_detail">
 								<img src="../../images/in_5.jpg">
 								<b>测试商品1</b>
-								<b>￥</b>
+								<b>￥601</b>
 								<span>30.00</span>
 							</p> 
 						</div>
-					</li>-->
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -85,7 +85,9 @@
 				mui.web_query('supplierList.php', {
 					page: page
 				}, function(data) {
-					console.log(JSON.stringify(data.supplier_list));
+					//console.log(JSON.stringify(data.supplier_list[0]));
+					//console.log(JSON.stringify(data.supplier_list[7]));
+					//console.log(data.supplier_list.length);
 					if (data && data.supplier_list && data.supplier_list.length > 0) {
 							add_list(data.supplier_list);
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); 
@@ -99,7 +101,7 @@
 			function getTemplate(){
 				return $('<li style="clear:both">\
 						<div class="in_blo4" style="position:relative;">\
-							<img src="../../images/in_3.jpg" class="to_goods_detail" data="0" onclick="showGoods(this);">\
+							<img src="../../images/in_2.jpg" class="to_goods_detail" data="0" onclick="showShop(this);">\
 							<img src="../../images/yucheng/addr.png" class="logo">\
 						</div>\
 						<div class="in_blo5" style="float:left">\
@@ -117,6 +119,10 @@
 
 			var url = 'http://www.jadechina.cn/';
 			function add_list(list) {
+				if (page ==1 )
+				{
+					$("#tpl_hold").empty();
+				}
 				page++;				
 				for (var i = 0; i < list.length; i++) {
 					var item = list[i];
@@ -124,19 +130,12 @@
 					var newnode =   getTemplate();  
 					var goods_list = item.goods_list;
 					newnode.find(".logo").attr('src', url + item.shop_logo);
-					newnode.find('.in_blo4').find('img').eq(1).attr('src', url + item.shop_logo);
-					if (goods_list) {
-						$.each(goods_list, function(j, goods) {
-							if (j == 0) {
-								var t  = newnode.find('.in_blo4').find('img').eq(0);
-								t.attr('src', url + goods.original_img);
-								t.attr('data', goods.goods_id)
-								return false;
-							}
-						});
+					newnode.find('.in_blo4').find('img').eq(0).attr('src', url + item.shop_index_img);
+					newnode.find('.in_blo4').find('img').eq(0).attr('data', url + item.supplier_id);
+					if (goods_list && goods_list.length > 0) {
 						//other goods except first one.
-						console.log(goods_list.length);
-						for (var k = 1 ; k < Math.min(goods_list.length, 4); k++)
+						//console.log(goods_list.length);
+						for (var k = 0 ; k < Math.min(goods_list.length, 3); k++)
 						{
 							var goods = goods_list[k];
 							var childnode = getSubTemplate();
@@ -146,15 +145,23 @@
 							childnode.find("b").eq(1).html('￥' +goods.shop_price);
 							newnode.find('.in_blo5').append(childnode); 							 
 						} 
+						$("#tpl_hold").append(newnode);//only show it if it have goods.dddd
 					}
-					$("#tpl_hold").append(newnode);
+					
 				};
+			}
+			
+			function showShop(ele)
+			{
+				var id = ele.getAttribute('data');
+				console.log(id);
+				mui_utils.openMuiPage("./supplier_home.html", 'setid', {id:id});
 			}
 			 
 			function showGoods(ele)
 			{
 				var goods_id = (ele.getAttribute('data'));				 
-				mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:goods_id});	
+				mui_utils.openMuiPage('./goods_detail.html', 'setid', {id:goods_id});	
 				
 			}
 		

@@ -19,10 +19,11 @@
 			}
 			
 			.topbar_fixed {
-				top: 0;
-				width: 96%;
+				
 				overflow: hidden;
-				position: absolute;
+				position: fixed;
+				top: 0px;
+				width: 96%;
 				z-index: 10;
 			}
 			
@@ -346,7 +347,7 @@
 			var swiper;
 
 			var id = 0;
-			window.addEventListener("initGoodId", function(e) {
+			window.addEventListener("setid", function(e) {
 				id = e.detail.id;
 				console.log('showing for goods id ' + id);
 				doAjax();
@@ -510,7 +511,8 @@
 					if(data.error == 0) {
 						mui.toast("已添加购物车");
 						var num = parseInt($(".shop_num").html());
-						$(".shop_num").html(num + 1);
+						if (num == 0)
+							$(".shop_num").html(num + 1);
 					} else {
 						mui.toast("添加失败:商品现在不能购买");
 					}

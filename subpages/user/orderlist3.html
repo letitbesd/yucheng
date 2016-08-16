@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/home/reset.css" />
+		<link rel="stylesheet" href="../../css/home/style.css" />
+	</head>
+
+	<body>
+		<div class="my_yc">
+			<div class="mc_tab">
+				<p onclick="switchTab(1);">待付款</p>
+				<p onclick="switchTab(2);">待收货</p>
+				<p class="mc_select">退款商品</p>
+				<p onclick="switchTab(4);">所有订单</p>
+			</div>
+			<div class='tpl'>
+			<div class="mc_con">
+				<div class="mc_list" data="100" onclick="show">
+					<div class="mc_shop">
+						<img src="../../images/yucheng/cart_1.png" class="mc_sp">盈宝翡翠
+							<img src="../../images/yucheng/mc_order.png" class="mc_ord"  data="100" onclick="showOrder(this);">
+					</div>
+					<div class="mc_li">
+						<p class="mc_li_pic"><img class="goods_img" src="../../images/in_4.jpg"></p>
+						<p class="mc_li_con"><b class="mc_li_name">糯冰种翠色路路通挂件222</b><b class="mc_li_price">￥0</b></p>
+					</div>
+					<div class="mc_blank"></div>
+				</div>
+				<div class="mc_all">
+					<p class="mc_all_price">￥15.00</p>
+					<p class="mc_order_num">订单号：2016070796070</p>
+				</div> 
+			</div>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/zepto.js"></script>
+		<script src="../../js/mui_ajax.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				//console.log("efck doing here" + plus.webview.currentWebview().type);
+				mui.init();
+				var baseurl = 'http://yucheng.chebank.com/';
+				mui.web_query('userOrderList.php', {
+					type: 3
+				}, function(data) {
+					var tpl = $(".tpl")[0].innerHTML;
+					$(".tpl").remove();
+					 
+					if (data && data.back_goods_list)
+					{
+						
+						$.each(data.back_goods_list, function(idx, item) {
+							var newnode = $(tpl); 
+							//console.log(baseurl + goods.goods_thumb);
+							newnode.find('.goods_img').attr('src', baseurl + item.goods_thumb);
+							newnode.find('.shop_name').html(item.supplier_name);
+							newnode.find('.mc_li_name').html(item.goods_name);
+							//newnode.find('i').eq(3).html(item.order_status1);
+							newnode.find('.mc_all_price').html('￥' +item.back_goods_price);
+							newnode.find('.mc_li_price').html('￥' +item.back_goods_price);
+							newnode.find('.mc_order_num').html('订单号:' + item.order_sn);
+							newnode.find('.mc_ord').attr("data", item.order_id);
+							newnode.appendTo($(".my_yc"));
+						});
+					} 
+				});
+			})
+			
+			function switchTab(index) //index 1 2 3 4 
+			{
+				console.log("clicked");
+				var webview = mui.openWindow({
+					url: './orderlist'+index+'.html',
+					show:{
+					    autoShow:true,
+					    aniShow:"none",//页面显示动画，默认为”slide-in-right“；
+	  					duration:600//页面动画持续时间，Android平台默认100毫秒，iOS平台默认200毫秒；
+					} 
+				});
+			}
+			
+			function showOrder(ele)
+			{
+				var order_id = $(ele).attr('data');
+				var w = plus.webview.open('./order_detail.html');
+				mui.fire(w, "show_order", {order_id:order_id});
+			}
+		</script>
+	</body>
+
+</html>

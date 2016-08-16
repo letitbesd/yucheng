@@ -66,7 +66,7 @@
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
-			<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<!--<a id="back" class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 			<a id="menu" class="mui-action-menu mui-icon mui-icon-bars mui-pull-right" style="display: none;"></a>
 			<h1 id="title" class="mui-title"></h1>
 		</header>
@@ -101,7 +101,7 @@
 		var menuElem = document.getElementById("menu")
 
 		window.addEventListener("updateHeader", function(e) {
-			console.log('updateHeader , id:' + e.detail.id)
+			console.log('updateHeader');
 			var title = e.detail.title;
 			var showMenu = e.detail.showMenu;
 			var href = e.detail.target;
@@ -133,12 +133,6 @@
 					self.show(aniShow);
 				},10);
 			} 
-			//if (e.detail.id)
-			{
-				console.log('event fired' +  e.detail.id);
-				mui.fire(contentWebview, 'initGoodId', {id: e.detail.id});
-			
-			}
 		});
 		
 		

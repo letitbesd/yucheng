@@ -74,14 +74,13 @@
 				background: #7B2B36;
 			}
 			.success{
-				/*display: none;*/
+				display: block;
 			}
 		</style>
 	</head>
 
 	<body>
 		<div class="yc_wc">
-			<div class="wc_back"><img src="../../images/yucheng/yc-22.png"></div>
 			<div class='success'>
 				<div class="wc_style"><img src="../../images/yucheng/tk_2.png"><i>订单已提交成功</i></div>
 				<div class="wc_con">
@@ -153,9 +152,7 @@
 							//console.log("-----");
 							plus.nativeUI.alert( "提交成功!", function(){
 								console.log( "User pressed!" );
-								var v = plus.webview.getWebviewById('subpages/shopping_cart.html');
-								v.parent().show();
-								mui.fire(v.parent(), 'showcart');
+								gotoCart();
 							}, "nativeUI", "返回" );
 							//mui.fire(plus.webview.currentWebview().opener(), 'closepage');
 						}
@@ -168,6 +165,12 @@
 				})
 			})
 			
+			function gotoCart(){
+				var v = plus.webview.getWebviewById('subpages/shopping_cart.html');
+				v.parent().show();
+				mui.fire(v.parent(), 'showcart');
+			}
+			
 			function checkPayResult(){
 				mui.web_query('payResult.php', {order_id:pay_data.sub_order_id}, function(data){
 			 			if (data.retcode == 1)
@@ -178,7 +181,7 @@
 			 			{
 			 				mui.alert(('pay fail'));
 			 			}
-			 			mui.fire(plus.webview.currentWebview().opener(), 'closepage');
+						gotoCart(); 
 			 		})
 			}
 			

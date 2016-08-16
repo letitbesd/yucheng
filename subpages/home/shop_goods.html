@@ -14,9 +14,7 @@
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div class="mui-scroll">
 				<ul style="float:left;">
-					<li>
-						<div class="sh_head"><img src="../../images/yucheng/yc-17.png" class="sh_back"></div>
-					</li>
+					
 					<li>
 						<div class="li_header to_goods_detail" data="358">
 							<img src="../../images/in_3.jpg" class="shop_index">
@@ -133,7 +131,7 @@
 			function showgoods(ele){
 				var id = $(ele).attr("data");
 				console.log(id);
-				mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id})
+				mui_utils.openMuiPage('./goods_detail.html', 'setid', {id:id})
 			}
 		</script>
 	</body>

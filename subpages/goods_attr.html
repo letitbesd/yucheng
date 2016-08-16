@@ -206,18 +206,6 @@
 	//业务逻辑
 	function toUrl(cat_id)
 	{		 
-		/*var tpl = plus.webview.getWebviewById('default2-main');
-		var sub = plus.webview.getWebviewById('default2-sub');
-		mui.fire(tpl, 'updateHeader', {
-			title:'商品筛选', 
-			showMenu:false,
-			target:'./goods_attr/goods_list_filter.html',
-			aniShow:'slide-in-right',
-			id:cat_id
-		}); 
-		console.log('toURL ' + cat_id);
-		var str = "set_cat_id("+cat_id +")";
-		sub.evalJS(str);*/
 		var wv = plus.webview.getWebviewById('./goods_attr/goods_list_filter.html');
 		if (wv){
 			wv.show('slide-in-right');
@@ -227,17 +215,6 @@
 	
 	function toUrl2(attr_key)
 	{
-		/*var tpl = plus.webview.getWebviewById('default2-main');
-		var sub = plus.webview.getWebviewById('default2-sub');
-		mui.fire(tpl, 'updateHeader', {
-			title:'商品筛选', 
-			showMenu:false,
-			target:'./goods_attr/goods_list_filter.html',
-			aniShow:'slide-in-right'
-		});
-		 
-		 var str = "set_attr_key('"+attr_key +"')";
-		sub.evalJS(str);*/
 		var wv = plus.webview.getWebviewById('./goods_attr/goods_list_filter.html');
 		if (wv){
 			wv.show('slide-in-right');

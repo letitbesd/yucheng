@@ -207,9 +207,7 @@
 			
 			};			
 			
-			mui.plusReady(function(){
-					var baseurl = 'http://www.jadechina.cn/';
-				
+			mui.plusReady(function(){				
 				preload_template('default2', '../template.html');
 				refresh();
 				
@@ -217,7 +215,7 @@
 			
 			function refresh(){
 				console.log("refresh ----------------");
-				mui.web_query('index.php', {}, function(data){ 
+				mui.web_query('index.php', {waitingUI:false}, function(data){ 
 					var baseurl = 'http://www.jadechina.cn/';
 					if (data.wap_index_ads)
 					{						 
@@ -314,7 +312,7 @@
 					 var wv = plus.webview.getWebviewById('./home/goods_detail.html');
 					if (wv){
 						wv.show('slide-in-right');
-						mui.fire(wv, 'initGoodId', {id:id})
+						mui.fire(wv, 'setid', {id:id})
 					}
 				});
 				
@@ -325,7 +323,7 @@
 					 var wv = plus.webview.getWebviewById('./home/goods_detail.html');
 					if (wv){
 						wv.show('slide-in-right');
-						mui.fire(wv, 'initGoodId', {id:id})
+						mui.fire(wv, 'setid', {id:id})
 					}
 				})
 				

@@ -97,6 +97,10 @@
 								</div>'); 
 							
 							li.data('goods_id', item.goods_id);
+							li.find('img').eq(0).attr('src', mui.web_sever + item.goods_thumb );
+							li.find('.gname').eq(0).html(item.goods_name);
+							li.find(".gprice").html('￥' +item.shop_price);
+							li.find('.gsaletime').html(item.on_sale_time + '上架');
 							$(el).append(li);
 							i ++; 
 						}
@@ -142,10 +146,10 @@
 				if (wv)
 				{
 					wv.show('slide-in-right');
-					mui.fire(wv, "initGoodId", {id:id});					
+					mui.fire(wv, "setid", {id:id});					
 				}
 				else
-					mui_utils.openMuiPage('./goods_detail.html', 'initGoodId', {id:id});
+					mui_utils.openMuiPage('./goods_detail.html', 'setid', {id:id});
 			}
 		</script>
 	</body>
