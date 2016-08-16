@@ -549,8 +549,8 @@
 						mui.toast("点赞成功");
 						$('.zan_1').hide();
 						$('.zan_2').show();
-
-						$(".ne_c1_b6").html()
+						var num = parseInt($(".ne_c1_b6").html());
+						$(".ne_c1_b6").html(num+1);
 					} else {
 						mui.toast('点赞失败 ' + data.info);
 					}
