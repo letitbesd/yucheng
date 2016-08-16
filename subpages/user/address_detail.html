@@ -164,9 +164,12 @@
 				loadCity(document.getElementById('selProvinces'));
 			}
 			function loadCity(ele){
+				 
 				var prov = $(ele).val(); 
+				var sel = document.getElementById('selCities');
+				sel.focus();
 				mui.web_query('region.php', {type:2, parent:prov}, function(result){
-					var sel = document.getElementById('selCities');
+					
 				 	sel.length = 1; 
 					sel.selectedIndex = 0;
 					sel.style.display = '';
@@ -190,8 +193,10 @@
 			
 			function loadDisticts(ele){
 				var city = $(ele).val();
+				var sel = document.getElementById('selDistricts');
+				sel.focus();
 				mui.web_query('region.php', {type:3, parent:city}, function(result){
-					var sel = document.getElementById('selDistricts');
+
 				 	sel.length = 1; 
 					sel.selectedIndex = 0;
 					sel.style.display = '';

@@ -100,6 +100,7 @@
 			top: '0px',
 			bottom: '51px'
 		};
+		var autologin_success = true;
 			function autologin(){
 				var str = UserInfo.autologinstr();
 				console.log('autologin:auto_code:' + str);
@@ -115,11 +116,11 @@
 									UserInfo.autologinstr(data);//save autocode.
 									mui.toast('自动登录成功!'); 
 								}
+								autologin_success = true;
 							}else
 							{
 								mui.toast('自动登录失败!'); 
-								var tab = document.getElementById("usertab"); 
-								mui.trigger(tab, 'tap');
+								autologin_success = false;
 							}
 					})
 				}
@@ -191,11 +192,18 @@
 			});//end of plus ready
 			
 			function onhomeready(){
-				setTimeout(function(){
-					$('.loadingcover').remove();
-					homeTabWV.show();
-				}, 100);
-				
+				if (autologin_success)
+				{
+					setTimeout(function(){
+							$('.loadingcover').remove();
+							homeTabWV.show();
+						}, 100);
+				}else
+				{
+					$('.loadingcover').remove();					
+					var tab = document.getElementById("usertab"); 
+					mui.trigger(tab, 'tap');
+				}
 			}
 			
 			window.addEventListener('homeready', onhomeready);
