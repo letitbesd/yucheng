@@ -210,7 +210,19 @@
 				}
 			});
 			
-		 
+		 	function showGoods(ele)
+			{
+				var id = $(ele).attr('data'); 
+				console.log("showing goods " + id);				
+				var wv = plus.webview.getWebviewById('./home/goods_detail.html');
+				if (wv)
+				{
+					wv.show('slide-in-right');
+					mui.fire(wv, "setid", {id:id});					
+				}
+				else
+					mui_utils.openMuiPage('./goods_detail.html', 'setid', {id:id});
+			}
 			
 			var page = 1;
 			var search_content = "玉佛";
@@ -230,19 +242,17 @@
 							
 							if (page == 1)
 								$(".sl_con").empty();
-							//add_list2(data.goods_list);
 							page ++;
 							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
 							//console.log("");
 							$.each(data.goods_list, function(idx, goods){
-								var newnode = $('<div class="sl_list to_goods_detail" data="263">\
+								var newnode = $('<div class="sl_list to_goods_detail" onclick="showGoods(this)" data="263">\
 									<p><img src="../../images/in_5.jpg"></p>\
 									<p>冰种褐黄翡镶18k金玉佛胸坠</p>\
 									<p>￥43200.00</p>\
 									<p>翠钻宫</p>\
 									<p><img src="../../images/yucheng/yc-18.png"></p>\
 								</div>');
-								//console.log(mui.web_sever + goods.goods_thumb);
 								newnode.find('img').eq(0).attr('src', mui.web_sever + goods.goods_thumb);
 								newnode.find("p").eq(1).html(mui_utils.trimString(goods.goods_name, 10));
 								newnode.find('p').eq(2).html('￥' + goods.shop_price);
