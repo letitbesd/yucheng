@@ -130,8 +130,8 @@
 					var newnode =   getTemplate();  
 					var goods_list = item.goods_list;
 					newnode.find(".logo").attr('src', url + item.shop_logo);
-					newnode.find('.in_blo4').find('img').eq(0).attr('src', url + item.shop_index_img);
-					newnode.find('.in_blo4').find('img').eq(0).attr('data', url + item.supplier_id);
+					newnode.find('.in_blo4').find('img').eq(0).attr('src', url + item.shop_index_img); 
+					newnode.find('.in_blo4').find('img').eq(0).attr('data', item.supplier_id);
 					if (goods_list && goods_list.length > 0) {
 						//other goods except first one.
 						//console.log(goods_list.length);

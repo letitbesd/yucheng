@@ -8,20 +8,8 @@
     if (func_url.indexOf('http') < 0)
     	func_url = url + func_url;
     
-    //console.log('ajax');
-    //before get data. show a loading gif
-    /*var ele =document.getElementById('loading');
-    if (!ele)
-    {
-    	ele = parseDom('<div id="loading" class="loading_all" style="display: none;"><div class="waiting"></div></div>');
-    	document.body.appendChild(ele);
-    };
-    ele.style.display = 'block';*/
-    //console.log('cookie is '+ JSON.stringify(document.cookie));
-//  var esc_id = plus.storage.getItem('token');
 	if (!(params.waitingUI == false))
 		plus.nativeUI.showWaiting();
-    //console.log('esc_id: ' + esc_id);
     mui.ajax(func_url, {
         data:params,
         dataType:params.data_type || 'json',
@@ -37,19 +25,15 @@
             	if(data.login_status === 0)
             	{
             		need_login = true;
-            		//mui.toast('login in please!');
 	            }
 	            console.log(JSON.stringify(data));
 	            onSuccess(data); 
-	             plus.nativeUI.closeWaiting(); //after a small delay
-	            //todo: close nativeUI waiting ; plus.nativeUI.closeWaiting(); after a small delay
             }
             else{
-              	//console.log(JSON.stringify(data));
-            	//console.log(data.Message);
             	mui.toast("无数据");
                 onError(data.code);
             }
+             plus.nativeUI.closeWaiting(); //after a small delay
         },
         error:function(xhr,type,errorThrown){
             retry--;

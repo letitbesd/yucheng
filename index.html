@@ -100,7 +100,7 @@
 			top: '0px',
 			bottom: '51px'
 		};
-		var autologin_success = true;
+		var autologin_success = false;
 			function autologin(){
 				var str = UserInfo.autologinstr();
 				console.log('autologin:auto_code:' + str);
@@ -144,7 +144,7 @@
 					var temp = {};
 					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);//预加载子页面
 					if (i >= 0) {
-						sub.hide(); 
+						sub.hide(); //全部隐藏，当主页面加载完成再显示
 					} 
 					if (i == 0)
 						homeTabWV = sub;
@@ -187,18 +187,18 @@
 						}); 
 					}					
 				} 
-				//preload_template('default', '../template.html');//why i load here will fail??
-				
+				//preload_template('default', '../template.html');//why i load here will fail??				
 			});//end of plus ready
 			
 			function onhomeready(){
-				if (autologin_success)
+				if (autologin_success)//自动登录成功
 				{
 					setTimeout(function(){
 							$('.loadingcover').remove();
 							homeTabWV.show();
 						}, 100);
-				}else
+				}
+				else//自动登录失败，显示用户中心子页面，
 				{
 					$('.loadingcover').remove();					
 					var tab = document.getElementById("usertab"); 
@@ -206,8 +206,9 @@
 				}
 			}
 			
-			window.addEventListener('homeready', onhomeready);
-			window.addEventListener('showcart', function(){
+			window.addEventListener('homeready', onhomeready);//home子页面界面准备完成，通知主页面可以显示home子页面
+			window.addEventListener('showcart', function()//用户购买之后跳回主页面，打开购物车子界面
+			{
 				var tab = document.getElementById("carttab"); 
 				mui.trigger(tab, 'tap');
 			})
@@ -240,7 +241,7 @@
 					console.log('showing ...' + targetTab);					
 				}
 				var wv = plus.webview.getWebviewById(targetTab);
-				mui.fire(wv, 'refresh');
+				mui.fire(wv, 'refresh');//通知子界面去刷新
 				//隐藏当前;
 				plus.webview.hide(activeTab);
 				//更改当前活跃的选项卡

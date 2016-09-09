@@ -333,6 +333,7 @@
 			function shareWeixinMessage() {
 				sharewx.send({
 					content: shareContent,
+					thumbs : ["../../images/yc-97.png"],
 					href: "http://www.jadechina.cn/mobile/goods_detail.php?goods_id=" + id,
 					extra: {
 						scene: "WXSceneTimeline"
@@ -351,12 +352,11 @@
 				id = e.detail.id;
 				console.log('showing for goods id ' + id);
 				doAjax();
-			})
+			});
 			$(".ne_title").on("click", function() {
 				$(this).siblings(".ne_show").toggle();
 			});
 			var url = "http://www.jadechina.cn/";
-
 			function updateValues(data) {
 				if(data.goods_img_list) {
 					var str = "";
@@ -430,7 +430,6 @@
 				}
 			}
 			var shareContent = "";
-
 			function doAjax() {
 				if(id == 0)
 					return;

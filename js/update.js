@@ -7,9 +7,8 @@ var wgtVer = null;
 	// 获取本地应用资源版本号
 	plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 		wgtVer = inf.version;
-		console.log("当前应用版本：" + wgtVer);
-		//plus.nativeUI.toast("当前应用版本：" + wgtVer);
-		checkUpdate();
+		plus.nativeUI.toast("当前应用版本：" + wgtVer);
+		//checkUpdate();
 	});
 }
 

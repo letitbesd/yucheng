@@ -146,9 +146,10 @@
 						      subpages:[{},{}]//预加载页面的子页面
 						    },
 						]});	
+						refresh();
 			}); 	
 			
-			window.addEventListener('refresh', refresh);
+			window.addEventListener('refresh', refresh);//每次刷新页面状态，检查是否为登录状态
 			
 			function refresh(){
 				mui.web_query('userCenter.php', {}, function(data){
@@ -162,7 +163,7 @@
 						if (data.wechat_nickname_app)
 						{
 							$(".uc_name").find('i').html(data.wechat_nickname_app);
-						} 
+						}
 					}
 					else
 					{
@@ -438,7 +439,8 @@
 					mui.toast(data.info);
 				})
 			}
-			function do_wechat_login(auth){
+			function do_wechat_login(auth)//获取到用户微信信息
+			{
 				var name = auth.userInfo.nickname || auth.userInfo.name;										
 				var obj = mui.extend({token:auth.authResult.access_token,
 					username:auth.userInfo.nickname,
@@ -446,26 +448,24 @@
 					 usid:auth.userInfo.openid,
 					}, auth.userInfo);
 				UserInfo.wxinfo(auth);//save to storage. 
-				console.log('do_wechat_login');
+				//请求用户微信登陆
 				mui.web_query("userBindWechat.php?act=wechat_login", obj, function(data){
-					if (data.bind == 0)
+					if (data.bind == 0)//用户还未绑定
 					{
 						console.log('havenot bind');
-						//show binding button.
+						//show binding button.显示绑定按钮
 						$(".lg_go").eq(0).hide();
-						$(".lg_go").eq(1).show(); 
+						$(".lg_go").eq(1).show();
 						$('.oauth-area').hide();
 					}
-					else{
-						console.log('already  bind'); 
+					else{ //用户已经绑定，
 						$(".uc_name").find('i').html(auth.userInfo.nickname);
 						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
 						UserInfo.autologinstr({mobile:data.mobile_phone, userid:data.user_id, autocode:data.auto_code})
 						$(".uc_all").show();
 						$(".login").hide();
 					}
-					
-				})
+				});
 			}
 			
 			$(document).on('click',".uc_name img", galleryImg);

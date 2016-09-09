@@ -290,7 +290,7 @@
 				</div>
 				<div class="as_num">
 					<!--<p class="as_num_red">￥820000</p>-->
-					<p class="as_dnum">订单号：2016071499995</p>
+					<!--<p class="as_dnum">订单号：2016071499995</p>-->
 				</div> 
 				<div class="as_go" onclick="doComment(this);">去评价</div>
 				</div>
@@ -328,8 +328,8 @@
 					<p class="as_c2"><b class="as_name">糯冰种飘翠元宝车挂</b><b class="as_red">￥5220.00</b></p>\
 				</div>\
 				<div class="as_num">\
-					<!--<p class="as_num_red">￥820000</p>-->\
-					<p class="as_dnum">订单号：2016071499995</p>\
+					<!--<p class="as_num_red">￥820000</p>\
+					<p class="as_dnum">订单号：2016071499995</p>-->\
 				</div> \
 				<div class="as_go" onclick="doComment(this);">去评价</div>\
 				</div>');
@@ -354,6 +354,7 @@
 			}
 			function refresh(){
 				console.log('doing coments_sub refresh');
+				//alert("DLLD");
 				mui.web_query('userComment.php?act=list', {}, function(data){
 					
 					//console.log(str1, str2);
@@ -369,7 +370,7 @@
 							newnode.find('.as_c1 img').attr('src', 'http://www.jadechina.cn/'+item.goods_thumb);
 							newnode.find('.as_name').html(item.goods_name);
 							newnode.find(".as_red").html('￥' + item.goods_price);
-							newnode.find(".as_dnum").html('订单号:' + item.order_sn); 
+							//newnode.find(".as_dnum").html('订单号:' + item.order_sn); 
 							newnode.find(".as_con").attr('data', item.rec_id);
 							newnode.find(".as_con").attr('goods_id', item.goods_id);
 							newnode.find(".as_shop_name i").html(item.shopname);
