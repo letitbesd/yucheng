@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">		
+		<link href="../css/home/style.css" rel="stylesheet" /> 
+		<link rel="stylesheet" href="../css/home/reset.css" />
+		<link rel="stylesheet" href="../css/cropper.min.css" /> 
+		<link href="../css/mui.min.css" rel="stylesheet" /> 
+		<title></title>
+		<style>
+			.oauth-area {
+				position: absolute;
+				bottom: 5%;
+				left: 25%;
+				line-height: 30px;
+				text-align: center;
+				width: 50%;
+				border:solid 1px #fff;
+				border-radius:25px;
+				padding: 0px;
+				margin: 0;
+				float: left;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 100%;
+				height: 35px;
+				background:none;
+				margin: 0px;
+				/*-webkit-filter: grayscale(100%); */
+				color: #fff;
+				border-radius: 25px;
+			}
+			
+		
+			
+			
+		#mobile{
+					width: 100%;
+					float: left;
+					margin: 0;
+					padding: 0;
+					text-align: left;
+				}
+		#code{
+					width: 100%;
+					float: left;
+					text-align: left;
+					margin: 0;
+					padding: 0;					
+				}	
+
+			
+				
+		</style>
+	</head>
+	<body>
+		<div class="lg_all login" style="display:block;">
+			<div class="lg_logo"><img src="../images/yucheng/register1.png"></div>
+			<div class="lg_con">
+				<p class="lg_user">
+					<input type="text" id="mobile" class="lg_pass">
+					<i class="phone_num">手机号</i>
+			
+					<!--<p contenteditable="true">这是一段可编辑的段落。请试着编辑该文本。</p>-->
+				</p>
+				<p>
+					<input type="text"  id="code" class="lg_pass">
+					<i class="yz_code">验证码</i>
+					
+					<b onclick="sendSMS();" class="fs_yzm" id="get_code">获取</b><b id="time_count" class="ds" style="display:none;"><i id="CountdownElem"></i>s</b>
+				</p>
+			</div>
+			<!--<div class="lg_reg" onclick="close();">返回</div>-->
+			<div class="lg_go" onclick="do_login();" style="display:block">登录</div> 
+			<div class="lg_go" onclick="do_binding();" style="display:none">绑定</div> 
+			<div class="mui-content-padded oauth-area">
+
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.7.1.js" ></script>
+    	<script type="text/javascript" src="../js/cropper.min.js" ></script>
+		<script type="text/javascript" src="../js/user_info.js" ></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui_utils.js" ></script>
+		<script type="text/javascript" src="../js/mui_ajax.js" ></script> 
+		<script type="text/javascript" src="../js/app.js" ></script>
+		<script> 
+		$(".phone_num").on("click",function(){
+			var c_val = $("#mobile").val();
+			
+			$(this).hide();
+			$("#mobile").focus();
+				if(c_val==""){
+				$(".yz_code").show();
+			}
+		});
+		$(".yz_code").on("click",function(){
+			var u_val = $("#mobile").val();
+			if(u_val==""){
+				$(".phone_num").show();
+			}
+			$(this).hide();
+			$("#code").focus();
+			
+		});		
+		
+			mui.plusReady(function(){
+				app.showThirdPartLogin(do_wechat_login);
+				$(".oauth-btn").html("微信登录"); 
+			})
+			
+			function sendSMS(){
+				var num  = $('#mobile').val();
+				console.log(num);
+				mui.web_query('sendLoginSms.php', {mobile_phone:num}, function(data){
+					if (data.status == 1)
+					{
+						mui.toast("发送成功");
+					}
+					else
+					{
+						mui.toast(data.info);
+					}
+				})
+			} 
+			 
+			
+			function do_login(){
+				var num  = $('#mobile').val();
+				var code  = $('#code').val();
+				//var url ="http://www.jadechina.cn/mobile/user.php?ajax_act=login";//wechat
+				var url =  "userLogin.php"; //jieko
+				var usid = "";
+				var auth = UserInfo.wxinfo();
+				if (auth)
+				{
+					usid = auth.userInfo.openid;
+				}
+				console.log("wweixin id " + usid);
+				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
+					if (data.status == 1)
+					{	 
+						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
+						mui.toast('登陆成功');   
+						showUserPage();
+					}
+					else
+					{
+						mui.toast(data.info);
+					}
+				})
+			}
+			
+			function showUserPage(){
+				 
+				mui_utils.openMuiPage('../index.html'); 
+				//plus.webview.currentWebview().close();
+			}
+			
+			function do_binding(){
+				var num  = $('#mobile').val();
+				var code  = $('#code').val();
+				var usid = UserInfo.wxinfo().authResult.openid; 
+				var obj ={mobile:num,code:code,usid:usid};
+				console.log(JSON.stringify(obj));
+				mui.web_query("userBindWechat.php?act=wechat_bind", obj, function(data){
+					 //{"status":1,"info":"登录成功","user_id":"7","session_id":"d01f844b9f2e58ee07f47095bbcb2e23","auto_code":324354,"bind":"1"} at js/mui_ajax.js:40
+					//todo: save autocode
+					//UserInfo.
+					console.log("here");
+					if (data.bind == 1 || data.status == 1){
+						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
+						showUserPage();
+					}
+					else
+					{
+						
+					}
+					mui.toast(data.info);
+				})
+			}
+			function do_wechat_login(auth)//获取到用户微信信息
+			{
+				var name = auth.userInfo.nickname || auth.userInfo.name;										
+				var obj = mui.extend({token:auth.authResult.access_token,
+					username:auth.userInfo.nickname,
+					iconUrl:auth.userInfo.headimgurl,
+					 usid:auth.userInfo.openid,
+					}, auth.userInfo);
+				UserInfo.wxinfo(auth);//save to storage. 
+				//请求用户微信登陆
+				mui.web_query("userBindWechat.php?act=wechat_login", obj, function(data){
+					if (data.bind == 0)//用户还未绑定
+					{
+						console.log('havenot bind');
+						//show binding button.显示绑定按钮
+						$(".lg_go").eq(0).hide();
+						$(".lg_go").eq(1).show();
+						$('.oauth-area').hide();
+					}
+					else{ //用户已经绑定，
+						$(".uc_name").find('i').html(auth.userInfo.nickname);
+						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
+						UserInfo.autologinstr({mobile:data.mobile_phone, userid:data.user_id, autocode:data.auto_code})
+						$(".uc_all").show(); 
+					}
+				});
+			}
+			
+			
+		</script>
+	</body>
+	
+	 
+</html>

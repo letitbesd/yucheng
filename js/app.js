@@ -49,12 +49,14 @@
 									var isInstalled = app.isInstalled(service.id);
 									var btn = document.createElement('div');
 									//如果微信未安装，则为不启用状态
+									btn.innerHTML = "微信登录";
 									btn.setAttribute('class', 'oauth-btn' + (!isInstalled && service.id === 'weixin' ? (' disabled') : ''));
 									btn.authId = service.id;
-									btn.style.backgroundImage = 'url("../images/thirdpartylogin/' + service.id + '.png")'
+									//btn.html("微信登录");
 									oauthArea.appendChild(btn);
 								}
-							}
+							} 
+							 
 							$(oauthArea).on('tap', '.oauth-btn', function() {
 								if (this.classList.contains('disabled')) {
 									plus.nativeUI.toast('您尚未安装微信客户端');

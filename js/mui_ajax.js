@@ -19,7 +19,8 @@
         success:function(data){  
           	//console.log(typeof(data));
         	if (typeof(data) == 'string'){
-        		data = JSON.parse(data.trim());
+        		console.log(data);
+        		data = JSON.parse(data.trim()); 
         	}
             if(data){
             	if(data.login_status === 0)

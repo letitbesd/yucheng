@@ -1,0 +1,58 @@
+<!doctype html>
+<!--
+	作者：myn0602@163.com
+	时间：2016-07-26
+	描述：加载外部网页地址，加载完成之后 调整不需要显示的内容
+-->
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		
+	</head>
+
+	<body style="WIDTH: 100%; HEIGHT: 100%; ">
+		<IFRAME style="WIDTH: 100%; HEIGHT: 100%;" id="f_test" name="f_test" src="" frameBorder="0" width="100%" scrolling="auto" height="100%" runat="server"></IFRAME>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript" src="../../js/mui_ajax.js" ></script>
+		<script type="text/javascript" src="../../js/zepto.min.js" ></script>
+		<script type="text/javascript">
+			mui.init(
+				{
+					 swipeBack:true, //启用右滑关闭功能
+				}
+			);
+			function dotask(id){
+//				alert(id)
+				 mui.web_query('kefu4android.php', {
+					supplier_id: id,
+					data_type:"text",
+				}, function(data) { 
+					 if (data.status == 1){
+					 	var url = "http://kefu.easemob.com/webim/im.html?tenantId="+data.tenantId;  
+					 	mui.openWindow(url);
+					 	console.log(url)
+					 	/*alert(url)
+					 	var frame1 =  document.getElementById("f_test");
+					 	frame1.onload = function(){  };   
+					 	frame1.src = url;*/
+					 }
+				})
+			}
+			mui.plusReady(function(){
+				
+				
+				 
+			})		
+			
+			var suppiler_id =  0;
+			window.addEventListener('setid', function(e){
+				suppiler_id = e.detail.id; 
+				dotask(suppiler_id);
+			})
+		</script>
+	</body> 
+</html>

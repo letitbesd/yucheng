@@ -26,6 +26,7 @@
 						<p class="ycxx_name">冰种飘花观音挂件</p>
 						<p class="ycxx_price">￥111600.00</p>
 						<p class="ycxx_style">状态：待付款</p> 
+						<p><img src="../../images/yucheng/yc-20.png" class="kefu" onclick="goCustome();"><p>
 					</div>
 				</div>
 			<div class="ycxx_c1">
@@ -33,7 +34,9 @@
 				<div class="ycxx_co2">
 					<p class="ycxx_name">冰种飘花观音挂件</p>
 					<p class="ycxx_price">￥111600.00</p>
-					<p class="ycxx_style">状态：待付款</p> 					
+					<p class="ycxx_style">状态：待付款</p> 		
+					<p><img src="../../images/yucheng/yc-20.png" class="kefu" onclick="goCustome();"><p>
+					
 				</div>
 			</div>
 			</div>
@@ -62,11 +65,20 @@
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
 			});
+			
+			function goCustome(ele)
+			{
+				//var suppiler_id = $(ele).attr('data');  
+				var w = plus.webview.open('../home/custome.html');
+				mui.fire(w, "setid", {id:id});
+			}
 
+			var id = 0;
 			function showOrder(order_id) {
 				 mui.web_query('userorderdetail.php', {order_id:order_id}, function(data){
 				 	 var str = "";
 				 	 $(".goodslist").empty();
+				 	 id = (data.order.supplier_id);
 					 $.each(data.goods_list, function(idx,item){
 					 	var newnode = $('<div class="ycxx_c1">\
 							<div class="ycxx_co1"><img src="/images/201607/thumb_img/252_thumb_G_1467767439072.jpg"></div>\
@@ -74,8 +86,11 @@
 								<p class="ycxx_name">冰种飘花观音挂件</p>\
 								<p class="ycxx_price">￥111600.00</p>\
 								<p class="ycxx_style">状态：待付款</p>\
+								<p><img src="../../images/yucheng/yc-20.png" class="kefu" onclick="goCustome(this);"><p>\
 							</div>\
 						</div>'); 
+						
+						//newnode.find(".kefu").attr("data", item.suppiler_id);
 						newnode.find('.ycxx_name').html(item.goods_name);
 						newnode.find(".ycxx_price").html("￥"+item.goods_price);
 						//console.log(mui.web_sever + item.goods_thumb);

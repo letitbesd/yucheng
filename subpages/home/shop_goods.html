@@ -18,7 +18,7 @@
 					<li>
 						<div class="li_header to_goods_detail" data="358">
 							<img src="../../images/in_3.jpg" class="shop_index">
-							<img src="../../images/yucheng/yc-20.png" class="kefu">
+							<img src="../../images/yucheng/yc-20.png" class="kefu" onclick="goCustome();">
 						</div>
 					</li>
 					<li>
@@ -55,7 +55,14 @@
 					}
 				}
 			});
-			
+			 
+			function goCustome(ele)
+			{
+				var order_id = $(ele).attr('data'); 
+				var w = plus.webview.open('./custome.html');
+				mui.fire(w, "setid", {id:id});
+			}
+
 			mui.plusReady(function() {
 
 			})
@@ -86,8 +93,7 @@
 									<i style="width:100%;display:block;font-size:13px;line-height:12px;">昆明</i>\
 								</p>\
 							</div>');
-							newnode.attr("data", goods.goods_id);
-							console.log(goods.goods_id)
+							newnode.attr("data", goods.goods_id); 
 							newnode.find("img").eq(0).attr("src", mui.web_sever + goods.goods_thumb);
 							newnode.find("p").eq(1).html(goods.goods_name);
 							newnode.find("p").eq(2).html('￥' + goods.shop_price);

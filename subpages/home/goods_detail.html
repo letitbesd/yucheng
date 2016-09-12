@@ -90,7 +90,7 @@
 				<div id="scroller">
 					<div class="ne_c1 topbar" style="margin-bottom: 5px;height: 50px;background:#F8F9F9;overflow: hidden;">
 						<p class="ne_c1_p1">
-							<b class="ne_c1_b1"><img src="../../images/yucheng/yc-20.png"></b>
+							<b class="ne_c1_b1" onclick="goCustome();"><img src="../../images/yucheng/yc-20.png"></b>
 
 							<b class="ne_c1_b2" onclick="gotoCart();"><img src="../../images/yucheng/yc-21.png"></b>
 							<b class="shop_num">0</b>
@@ -430,6 +430,7 @@
 				}
 			}
 			var shareContent = "";
+			var suppiler_id
 			function doAjax() {
 				if(id == 0)
 					return;
@@ -443,6 +444,7 @@
 							$('.update1').find('p').eq(2).html(data.goods.shop_price);
 							$(".shop_num").html(data.cart_goods_number);
 							shareContent = data.goods.goods_name;
+							suppiler_id = data.goods.supplier_id;
 							switch(data.type) {
 								case 0:
 									$(".for_type_1").hide();
@@ -554,6 +556,13 @@
 						mui.toast('点赞失败 ' + data.info);
 					}
 				})
+			}
+			
+			function goCustome(ele)
+			{
+				var order_id = $(ele).attr('data'); 
+				var w = plus.webview.open('./custome.html');
+				mui.fire(w, "setid", {id:suppiler_id});
 			}
 
 			var num = 0;

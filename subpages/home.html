@@ -125,7 +125,36 @@
 		<script type="text/javascript" src="../js/mui_utils.js"></script>
 		<script type="text/javascript" src="../js/mui_ajax.js"></script>
 		<script src="../js/zepto.min.js"></script>
+		<script src="../js/jquery-1.7.1.js"></script>
 		<script type="text/javascript">
+
+//console.log(scroll_top);
+var touch_start = 0;
+$("body").on("touchmove",function(){
+var scroll_top = document.querySelector("body").scrollTop;
+	//console.log(scroll_top);
+	if(scroll_top>150){
+		$(".in_head").css("background","rgba(0,0,0,0.5)");	
+	}
+		
+	if(scroll_top<150){
+		$(".in_head").css("background","rgba(0,0,0,0)");	
+	}	
+});
+    var first = null;
+    mui.back = function() {
+        if (!first) {
+            first = new Date().getTime();
+            mui.toast('再按一次退出应用');
+            setTimeout(function() {
+                first = null;
+            }, 1000);
+        } else {
+            if (new Date().getTime() - first < 1000) {
+                plus.runtime.quit(); 
+            }
+        }      
+    }		
 			mui.init({
 				swipeBack: true, //启用右滑关闭功能
 				preloadPages: [{
@@ -385,7 +414,8 @@
 							wv.show('slide-in-right');
 							mui.fire(wv, 'set_id', {id:cat_id});
 						}
-					}			
+					}	
+			
 		</script>
 	</body>
 

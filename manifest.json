@@ -10,7 +10,7 @@
 	"icons": {
 		"72": "icon.png"
 	},
-	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"launch_path": "subpages/login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
 	"developer": {
 		"name": "",/*开发者名称*/
 		"email": "",/*开发者邮箱地址*/
@@ -185,12 +185,12 @@
 						"landscape-retina7": ""
 					}
 				},
-				"android": {
-					"mdpi": "D:/splashscreen/640x960.png", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "D:/splashscreen/640x960.png", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "D:/splashscreen/640x960.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "D:/splashscreen/750x1334.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "D:/splashscreen/1242x2208.png"
+				"android": {"hdpi":"images/640x960.png","ldpi":"images/640x960.png","mdpi":"images/640x960.png","xhdpi":"images/640x960.png","xxhdpi":"images/640x960.png"
+					 /*普通屏启动图片，分辨率：240x282*/
+					 /*大屏启动图片，分辨率：320x442*/
+					 /*高分屏启动图片，分辨率：480x762*/
+					 /*720P高分屏启动图片，分辨率：720x1242*/
+					
 				}
 			}
 		}
@@ -276,7 +276,9 @@
 					"css/home/loader.png",
 					"js/mui_utils.js",
 					"css/home/reset.css",
-					"images/icon/icon2.png"
+					"images/icon/icon2.png",
+					"images/in_6.jpg",
+					"js/jquery-1.7.1.js"
 				],
 				"refer": [
 					"guide.html",
@@ -374,7 +376,8 @@
 					"subpages/user/orderlist4.html",
 					"subpages/user/orderlist2.html",
 					"subpages/user/orderlist3.html",
-					"subpages/testpayment.html"
+					"subpages/testpayment.html",
+					"subpages/login.html"
 				],
 				"priority": 0
 			},
@@ -633,7 +636,9 @@
 					"images/in_6.jpg",
 					"images/certification.jpg"
 				],
-				"refer": [],
+				"refer": [
+					"subpages/home/custome.html"
+				],
 				"priority": 0
 			},
 			"subpages/home/supplier_list.html": {
@@ -649,10 +654,12 @@
 					"fonts/mui.ttf",
 					"js/mui_utils.js",
 					"js/mui.min.js",
-					"js/mui_ajax.js"
+					"js/mui_ajax.js",
+					"images/in_2.jpg"
 				],
 				"refer": [
-					"subpages/home/goods_detail.html"
+					"subpages/home/goods_detail.html",
+					"subpages/home/supplier_home.html"
 				],
 				"priority": 0
 			},
@@ -808,7 +815,8 @@
 					"css/home/loader.png",
 					"js/zepto.min.js",
 					"images/in_4.jpg",
-					"css/reset.css"
+					"css/reset.css",
+					"js/mui_utils.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -1041,7 +1049,8 @@
 					"js/scale.js"
 				],
 				"refer": [
-					"subpages/home/shop_goods.html"
+					"subpages/home/shop_goods.html",
+					"subpages/home/custome.html"
 				],
 				"priority": 0
 			},
@@ -1061,7 +1070,8 @@
 					"js/mui_utils.js"
 				],
 				"refer": [
-					"subpages/home/goods_detail.html"
+					"subpages/home/goods_detail.html",
+					"subpages/home/custome.html"
 				],
 				"priority": 0
 			},
@@ -1116,7 +1126,8 @@
 			},
 			"template_sub.html": {
 				"resources": [
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"subpages/home/goods_list_new.html"
 				],
 				"refer": [],
 				"priority": 0
@@ -1136,9 +1147,13 @@
 					"images/yucheng/yc-55.png",
 					"js/wxpay.js",
 					"images/icon/yc-22.png",
-					"images/in_1.jpg"
+					"images/in_1.jpg",
+					"css/home/style_now.css",
+					"images/yucheng/yc-20.png"
 				],
-				"refer": [],
+				"refer": [
+					"subpages/home/custome.html"
+				],
 				"priority": 0
 			},
 			"yucheng/index.html": {
@@ -1459,6 +1474,41 @@
 					"yucheng/js/mui_utils.js",
 					"yucheng/js/mui.min.js",
 					"yucheng/css/home/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"subpages/login.html": {
+				"resources": [
+					"images/yucheng/register2.png",
+					"images/yucheng/register1.png",
+					"images/thirdpartylogin/weixin.png",
+					"images/yucheng/register3.png",
+					"js/jquery-1.7.1.js",
+					"js/app.js",
+					"js/mui_utils.js",
+					"js/user_info.js",
+					"css/home/style.css",
+					"css/cropper.min.css",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/home/reset.css",
+					"js/cropper.min.js",
+					"js/mui_ajax.js",
+					"images/user_bk.jpg"
+				],
+				"refer": [
+					"subpages/user.html",
+					"index.html"
+				],
+				"priority": 0
+			},
+			"subpages/home/custome.html": {
+				"resources": [
+					"js/mui.min.js",
+					"js/zepto.min.js",
+					"css/mui.min.css",
+					"js/mui_ajax.js"
 				],
 				"refer": [],
 				"priority": 0

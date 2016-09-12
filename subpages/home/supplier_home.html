@@ -313,7 +313,7 @@
 			<div class="si_back"><b>翠钻宫</b></div>
 			<div class="si_b1">
 				<img src="../../images/in_6.jpg" class="si_in">
-				<a href="tel:666-666666"><img src="../../images/yucheng/yc-20.png" class="si_kf"></a>
+				<a  onclick="goCustome()"><img src="../../images/yucheng/yc-20.png" class="si_kf"></a>
 			</div>
 			<div class="si_b2">
 				<p><b>20x</b><i>商品数量</i></p>
@@ -465,6 +465,11 @@
 					id: id,
 					name: sdata.shop_name
 				});
+			}
+			function goCustome()
+			{ 
+				var w = plus.webview.open('./custome.html');
+				mui.fire(w, "setid", {id:id});
 			}
 		</script>
 		<script type="text/javascript">

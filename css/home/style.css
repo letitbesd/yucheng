@@ -19,11 +19,10 @@ a {
 .in_head {
 	width: 100%;
 	height: 50px;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 999;
-	padding-top: 16px;
 }
 
 .in_head p {
@@ -2046,18 +2045,19 @@ a {
 
 .lg_all {
 	width: 100%;
-	background: #000000;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 0;
+	background: url(../../images/user_bk.jpg) no-repeat;
+	background-size: 100% 100%;
 }
 
 .lg_logo {
 	width: 100%;
 	text-align: center;
 	margin-top: 15px;
-	margin-bottom: 60px;
+	margin-bottom: 100px;
 }
 
 .lg_logo img {
@@ -2069,18 +2069,23 @@ a {
 }
 
 .lg_con p {
-	width: 70%;
-	margin-left: 15%;
-	border-bottom: solid 1px #fff;
-	line-height: 50px;
-	float: left;
-	height: 50px;
-	position: relative;
+    width: 90%;
+    margin-left: 5%;
+    border-bottom: solid 1px #fff;
+    line-height: 50px;
+    float: left;
+    height: 50px;
+    position: relative;
 }
-
-.lg_con i {
-	width: 20px;
-	float: left;
+.lg_con i{
+    width: 100%;
+    float: left;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size:16px ;	
 }
 
 .lg_con img {
@@ -2105,11 +2110,12 @@ a {
 	position: absolute;
 	bottom: 5px;
 	right: 0%;
-	font-size: 15px;
+	font-size: 14px;
 	color: #fff;
 	height: 20px;
 	line-height: 20px;
-	padding: 0 3px 0 3px;
+	padding: 0 4px 0 4px;
+	border-radius: 4px;
 }
 
 .lg_con input::-webkit-input-placeholder {
@@ -2127,15 +2133,18 @@ a {
 }
 
 .lg_go {
-	width: 70%;
-	text-align: center;
-	margin-top: 45px;
-	margin-left: 15%;
-	font-size: 16px;
-	line-height: 45px;
-	float: left;
-	background: #66C6DC;
-	color: #fff;
+    width: 50%;
+    text-align: center;
+    margin-top: 45px;
+    font-size: 16px;
+    line-height: 40px;
+    border-radius: 34px;
+    float: left;
+    background: #66C6DC;
+    position: absolute;
+    bottom: 12%;
+    left: 25%;
+    color: #fff;
 }
 
 
