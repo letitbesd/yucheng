@@ -148,6 +148,7 @@ a {
 .in_blo4 {
 	width: 100%;
 	background: #fefefe;
+	float: left;
 }
 
 .in_blo4 img {
@@ -229,8 +230,87 @@ a {
 	width: 30%;
 	margin-top: 18px;
 }
-
-
+.in_new_block{
+	width:100%;background:#000;height:170px;
+}
+.in_change_block{
+	width:100%;background:#000;
+}
+.in_block_img{
+	width:50%;text-align:center;float:left;
+}
+.in_block_img img{
+	width:80%;display:block;margin-left:10%;margin-top:22px;
+}
+.in_block_cont{
+	width:50%;float:left;color:#fff;
+}
+.in_block_cont p{
+	width:100%;
+	float:left;
+}
+.in_block_cont b{
+	width:100%;
+	float:left;
+	font-weight:normal;
+	text-align:left;
+	padding-left:5%;
+}
+.in_block_cont b:nth-of-type(1){
+	margin-top:55px;font-size:16px;height:16px;overflow:hidden;
+}
+.in_block_cont b:nth-of-type(2){
+	line-height:30px;font-size:18px;
+}
+.in_block_cont b:nth-of-type(3){
+	font-size:12px;
+}
+.in_blo{
+	width: 100%;float: left;margin-top: 15px;
+}
+.in_change_img{
+	width: 100%;float: left;
+}
+.in_change_img a{
+	width: 100%;float: left;
+}
+.in_change_img img{
+	width: 100%;display: block;
+}
+.in_change_cont{
+	width: 100%;float: left;
+}
+.in_change_cont b{
+	width: 100%;float: left;
+}
+.in_change_cont b:nth-of-type(1){
+    display: block;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    color: #333;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;	
+   
+}
+.in_change_cont b:nth-of-type(2){
+	   color: #792b34;
+    font-size: 13px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+}
+.sty_name{
+	position: absolute;
+	bottom: 0;left: 15%;
+	width: 70%;background: rgba(255,255,255,0.6);
+	line-height: 45px;
+	text-align: center;
+	color: #000000;
+	font-size: 16px;
+}
 /*新品页*/
 
 .ne_all {
