@@ -145,6 +145,7 @@
 				mui.web_query(url, {mobile:num, code:code, usid:usid}, function(data){
 					if (data.status == 1)
 					{	 
+						alert("here")
 						UserInfo.autologinstr({mobile:num, userid:data.user_id, autocode:data.auto_code});
 						mui.toast('登陆成功');   
 						showUserPage();
@@ -207,7 +208,7 @@
 						$(".uc_name").find('i').html(auth.userInfo.nickname);
 						$(".uc_name").find('img').attr('src', auth.userInfo.headimgurl);
 						UserInfo.autologinstr({mobile:data.mobile_phone, userid:data.user_id, autocode:data.auto_code})
-						$(".uc_all").show(); 
+						showUserPage();
 					}
 				});
 			}

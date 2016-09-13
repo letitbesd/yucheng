@@ -50,7 +50,8 @@
 			"subpages/home/supplier_home.html",
 			"template.html",
 			"subpages/home/goods_list_new.html",
-			"subpages/home/supplier_list.html"
+			"subpages/home/supplier_list.html",
+			"subpages/home/goods_list_time.html"
 		]
 	},
 	"subpages/goods_attr.html": {
@@ -86,7 +87,9 @@
 			"css/home/reset.css",
 			"js/mui_utils.js"
 		],
-		"refer": []
+		"refer": [
+			"subpages/cart/flow.html"
+		]
 	},
 	"subpages/user.html": {
 		"resources": [
@@ -332,10 +335,18 @@
 			"images/yucheng/addr.png",
 			"images/in_2.jpg",
 			"images/in_3.jpg",
-			"images/in_5.jpg"
+			"images/in_5.jpg",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"fonts/mui.ttf",
+			"css/home/style.css",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"js/mui_ajax.js"
 		],
 		"refer": [
-			"subpages/home/supplier_home.html"
+			"subpages/home/supplier_home.html",
+			"subpages/home/goods_detail.html"
 		]
 	},
 	"subpages/home/shop_goods.html": {
@@ -418,6 +429,28 @@
 		],
 		"refer": [
 			"subpages/user/order_detail.html"
+		]
+	},
+	"subpages/cart/flow.html": {
+		"refer": [
+			"subpages/cart/order_submitted.html"
+		],
+		"resources": [
+			"js/mui_utils.js",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"subpages/cart/order_submitted.html": {
+		"resources": [
+			"js/wxpay.js",
+			"images/yucheng/tk_2.png",
+			"js/mui.min.js",
+			"js/zepto.min.js",
+			"css/mui.min.css",
+			"css/home/reset.css",
+			"js/mui_ajax.js"
 		]
 	}
 }

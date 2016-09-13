@@ -186,6 +186,8 @@
 			}
 			
 			$('.wc_bun').on('click', function() {
+				//gotoCart();
+				//return;
 				if (pay_data.order_id)
 			 		wxpay.pay({order_id:pay_data.order_id, on_success:checkPayResult });
 			 	else

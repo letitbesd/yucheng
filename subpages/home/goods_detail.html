@@ -498,6 +498,7 @@
 					console.log(all[i].id);
 				}*/
 				var v = plus.webview.getWebviewById('subpages/shopping_cart.html');
+				mui.fire(v, "refresh");
 				v.parent().show();
 				mui.fire(v.parent(), 'showcart');
 			}
@@ -514,8 +515,12 @@
 						var num = parseInt($(".shop_num").html());
 						if (num == 0)
 							$(".shop_num").html(num + 1);
-					} else {
-						mui.toast("添加失败:商品现在不能购买");
+					} else if(data.error==2){
+						mui.toast("对不起，该商品已经库存不足暂停销售");
+					}
+					else
+					{
+						mui.toast(data.message[0]);
 					}
 
 				});
